@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KwikLearn Blog | WAEC, BECE & Study Tips</title>
+  <meta name="description" content="Read KwikLearn blog posts on WAEC, BECE, WASSCE study tips, exam updates, revision strategies, and student success in Ghana." />
+  <style>
+    :root {
+      --primary: #155eef;
+      --primary-dark: #0f4bcc;
+      --accent: #f97316;
+      --text: #101828;
+      --muted: #475467;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --border: #e4e7ec;
+      --card-shadow: 0 16px 40px rgba(16, 24, 40, 0.08);
+      --radius: 18px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      background: var(--text);
+      color: #fff;
+      font-size: 0.92rem;
+      padding: 0.7rem 0;
+      text-align: center;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(16,24,40,0.06);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.1rem;
+      align-items: center;
+      color: var(--muted);
+      font-weight: 600;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0.9rem 1.25rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .hero {
+      padding: 4rem 0 2rem;
+      background: linear-gradient(180deg, #eef4ff 0%, #f8fafc 100%);
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .section {
+      padding: 3rem 0 5rem;
+    }
+
+    .section-title {
+      margin-bottom: 1.6rem;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title p {
+      color: var(--muted);
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+    }
+
+    .blog-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.3rem;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 45px rgba(16, 24, 40, 0.12);
+    }
+
+    .blog-tag {
+      display: inline-block;
+      background: #eef4ff;
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    .blog-card h3 {
+      font-size: 1.18rem;
+      margin-bottom: 0.7rem;
+      line-height: 1.35;
+    }
+
+    .blog-card p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 0.97rem;
+    }
+
+    .blog-meta {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 0.85rem;
+    }
+
+    .read-more {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    footer {
+      background: #0b1220;
+      color: #d0d5dd;
+      padding: 3rem 0 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    footer h4 {
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer li {
+      margin-bottom: 0.55rem;
+    }
+
+    .copyright {
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.2rem;
+      font-size: 0.92rem;
+      color: #98a2b3;
+    }
+
+    @media (max-width: 980px) {
+      .blog-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .blog-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        gap: 0.8rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">KwikLearn is building smarter digital exam preparation tools for students in Ghana and beyond.</div>
+
+  <header>
+    <div class="container navbar">
+      <a href="/" class="logo">
+        <img src="/kwiklearn logo.jpg" alt="KwikLearn logo" style="height:46px; width:auto; border-radius:10px;" />
+        <span style="font-size:1.5rem; font-weight:800;">
+          <span style="color:#1e3a8a;">Kwik</span><span style="color:#f97316;">Learn</span>
+        </span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#about">About</a>
+        <a href="/#features">Features</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+
+      <a href="/#waitlist" class="btn btn-primary">Join Waitlist</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>KwikLearn Blog</h1>
+        <p>
+          Updates, exam tips, WAEC guidance, BECE and WASSCE study strategies, and helpful articles for students, parents, and schools.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Latest Posts</h2>
+          <p>Start with these sample blog posts. Later, each one can link to its own full article page.</p>
+        </div>
+
+        <div class="blog-grid">
+          <article class="blog-card">
+            <span class="blog-tag">WAEC Tips</span>
+            <div class="blog-meta">March 2026 • 5 min read</div>
+            <h3>How to Prepare for WAEC Without Last-Minute Panic</h3>
+            <p>
+              Simple steps students can use to revise better, stay calm, and improve performance before the exams.
+            </p>
+            <a class="read-more" href="#">Read article →</a>
+          </article>
+
+          <article class="blog-card">
+            <span class="blog-tag">BECE Success</span>
+            <div class="blog-meta">March 2026 • 4 min read</div>
+            <h3>7 Common Mistakes BECE Students Make During Revision</h3>
+            <p>
+              Learn the habits that slow students down and what to do instead for more effective study sessions.
+            </p>
+            <a class="read-more" href="#">Read article →</a>
+          </article>
+
+          <article class="blog-card">
+            <span class="blog-tag">Parents</span>
+            <div class="blog-meta">March 2026 • 4 min read</div>
+            <h3>How Parents Can Support Children During Exam Season</h3>
+            <p>
+              Practical ways parents can encourage learning at home without putting too much pressure on the child.
+            </p>
+            <a class="read-more" href="#">Read article →</a>
+          </article>
+
+          <article class="blog-card">
+            <span class="blog-tag">Study Skills</span>
+            <div class="blog-meta">March 2026 • 6 min read</div>
+            <h3>Best Daily Study Timetable for JHS and SHS Students</h3>
+            <p>
+              A simple timetable idea students can follow to balance school work, revision, rest, and confidence building.
+            </p>
+            <a class="read-more" href="#">Read article →</a>
+          </article>
+
+          <article class="blog-card">
+            <span class="blog-tag">WASSCE</span>
+            <div class="blog-meta">March 2026 • 5 min read</div>
+            <h3>How to Answer Objective Questions Faster in WASSCE</h3>
+            <p>
+              Smart exam techniques to save time, avoid careless mistakes, and improve scores in multiple-choice sections.
+            </p>
+            <a class="read-more" href="#">Read article →</a>
+          </article>
+
+          <article class="blog-card">
+            <span class="blog-tag">KwikLearn News</span>
+            <div class="blog-meta">March 2026 • 3 min read</div>
+            <h3>Why KwikLearn Is Building for Ghanaian Learners First</h3>
+            <p>
+              A quick look at the mission behind KwikLearn and why local context matters in digital learning.
+            </p>
+            <a class="read-more" href="#">Read article →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>KwikLearn</h4>
+          <p>Smarter digital learning support for students, schools, and families preparing for success.</p>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/#about">About</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:info@kwiklearn.app">info@kwiklearn.app</a></li>
+            <li><a href="mailto:support@kwiklearn.app">support@kwiklearn.app</a></li>
+            <li><a href="https://wa.me/233244272204" target="_blank" rel="noopener noreferrer">WhatsApp: +233 24 427 2204</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Follow</h4>
+          <ul>
+            <li><a href="https://www.facebook.com/Kwiklearnapp/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+            <li><a href="https://youtube.com/@tinotechacks?si=74PSz-Q0nm8_qezH" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">© 2026 KwikLearn. All rights reserved.</div>
+    </div>
+  </footer>
+</body>
+</html>
