@@ -1,0 +1,2450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KwikLearn | Smart Learning for BECE &amp; WASSCE Students in Ghana</title>
+  <meta name="description"
+    content="KwikLearn helps students prepare smarter for BECE, WASSCE, and other exams with quizzes, mock tests, progress tracking, and affordable digital learning tools.">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #1E3A8A;
+      --primary-light: #3B5CB8;
+      --primary-dark: #152A66;
+      --secondary: #F97316;
+      --secondary-light: #FB923C;
+      --secondary-dark: #EA580C;
+      --text-dark: #1F2937;
+      /* --text-muted: #6B7280; */
+      --text-muted: black;
+      --text-light: #9CA3AF;
+      --bg-light: #F8FAFC;
+      --bg-cream: #FFFBF5;
+      --white: #FFFFFF;
+      --border: #E5E7EB;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text-dark);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text-dark);
+    }
+
+    p {
+      color: var(--text-muted);
+    }
+
+    a {
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    /* Announcement Bar */
+    .announcement-bar {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+      padding: 10px 0;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .announcement-bar i {
+      margin-right: 8px;
+      color: var(--secondary);
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      padding: 16px 0;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid transparent;
+      margin-top: 50px;
+    }
+
+    .navbar.scrolled {
+      padding: 12px 0;
+      box-shadow: var(--shadow-md);
+      border-bottom: 1px solid var(--border);
+      margin-top: 0px;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .navbar-brand img {
+      height: 44px;
+      width: auto;
+      border-radius: 10px;
+    }
+
+    .brand-kwik {
+      color: var(--primary);
+    }
+
+    .brand-learn {
+      color: var(--secondary);
+    }
+
+    .navbar-nav .nav-link {
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 8px 16px !important;
+      border-radius: var(--radius-sm);
+      transition: all 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: var(--primary);
+      background: var(--bg-light);
+    }
+
+    .navbar-nav .nav-link.active {
+      color: var(--primary);
+    }
+
+    .btn-waitlist {
+      background: var(--secondary);
+      color: var(--white);
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 50px;
+      border: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.3);
+    }
+
+    .btn-waitlist:hover {
+      background: var(--secondary-dark);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+    }
+
+    .navbar-toggler {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(180deg, #EFF6FF 0%, #FFFFFF 100%);
+      padding: 80px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+      color: #92400E;
+      padding: 10px 18px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      border: 1px solid #FCD34D;
+      animation: pulse-badge 2s infinite;
+    }
+
+    @keyframes pulse-badge {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.02);
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-description {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .btn-primary-hero {
+      background: var(--primary);
+      color: var(--white);
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 50px;
+      border: none;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(30, 58, 138, 0.3);
+    }
+
+    .btn-primary-hero:hover {
+      background: var(--primary-dark);
+      color: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
+    }
+
+    .btn-secondary-hero {
+      background: var(--white);
+      color: var(--text-dark);
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 50px;
+      border: 2px solid var(--border);
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary-hero:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .btn-coming-soon {
+      background: var(--bg-light);
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 16px 28px;
+      border-radius: 50px;
+      border: 1px dashed var(--border);
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: default;
+    }
+
+    .hero-trust-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .trust-point {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .trust-point i {
+      color: #10B981;
+      font-size: 18px;
+    }
+
+    /* Hero Card / Dashboard Preview */
+    .hero-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 16px;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      position: relative;
+    }
+
+    .dashboard-preview {
+      background: linear-gradient(160deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      color: var(--white);
+      min-height: 480px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dashboard-preview::before {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      right: -80px;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .dashboard-title {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .live-badge {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .dashboard-card {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(10px);
+    }
+
+    .progress-bar-custom {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #10B981;
+      border-radius: 50px;
+      transition: width 1s ease;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    .subject-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .subject-pill {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Section Styles */
+    section {
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-light);
+      color: var(--primary);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-header p {
+      font-size: 18px;
+      color: var(--text-muted);
+    }
+
+    /* Wave Dividers */
+    .wave-divider {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .wave-divider.top {
+      top: 0;
+      transform: rotate(180deg);
+    }
+
+    .wave-divider.bottom {
+      bottom: 0;
+    }
+
+    .wave-divider svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 60px;
+    }
+
+    /* Floating Decorative Elements */
+    .floating-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floating-shape.circle-1 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.1) 0%, transparent 70%);
+      top: 10%;
+      right: -100px;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .floating-shape.circle-2 {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.08) 0%, transparent 70%);
+      bottom: 20%;
+      left: -50px;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    .floating-shape.dots-pattern {
+      width: 150px;
+      height: 150px;
+      background-image: radial-gradient(circle, var(--primary) 2px, transparent 2px);
+      background-size: 20px 20px;
+      opacity: 0.15;
+      border-radius: 0;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+    }
+
+    /* About Section */
+    #about {
+      background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+      position: relative;
+    }
+
+    #about::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--primary) 100%);
+    }
+
+    #about::after {
+      content: '';
+      position: absolute;
+      top: 60px;
+      right: 5%;
+      width: 100px;
+      height: 100px;
+      background-image: radial-gradient(circle, var(--secondary) 2px, transparent 2px);
+      background-size: 15px 15px;
+      opacity: 0.2;
+      border-radius: 0;
+    }
+
+    .about-card {
+      background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFF 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      height: 100%;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .about-card::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      right: -80px;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.05) 0%, transparent 70%);
+      border-radius: 50%;
+      transition: transform 0.4s ease;
+    }
+
+    .about-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px -12px rgba(30, 58, 138, 0.2);
+      border-color: rgba(30, 58, 138, 0.15);
+    }
+
+    .about-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .about-card:hover::after {
+      transform: scale(1.5);
+    }
+
+    .about-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--white);
+      box-shadow: 0 8px 16px -4px rgba(30, 58, 138, 0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .about-card p {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* Features Section */
+    #features {
+      background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 50%, #C7D2FE 100%);
+      position: relative;
+    }
+
+    #features::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(180deg, transparent 0%, #EEF2FF 100%);
+      pointer-events: none;
+    }
+
+    #features .floating-accent {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.12) 0%, transparent 60%);
+      border-radius: 50%;
+      bottom: -100px;
+      left: -100px;
+      pointer-events: none;
+    }
+
+    #features .floating-accent-2 {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.1) 0%, transparent 60%);
+      border-radius: 50%;
+      top: 50px;
+      right: -50px;
+      pointer-events: none;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      height: 100%;
+      position: relative;
+      border: 2px solid transparent;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 25px 50px -12px rgba(30, 58, 138, 0.25);
+      border-color: rgba(30, 58, 138, 0.1);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-image {
+      background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 220px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-image::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.1) 0%, transparent 50%);
+      border-radius: 50%;
+    }
+
+    .feature-image img {
+      max-width: 100%;
+      /* max-height: 180px; */
+      max-height: 480px;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-md);
+    }
+
+    .feature-placeholder {
+      width: 100%;
+      max-width: 200px;
+      height: 160px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 48px;
+    }
+
+    .feature-content {
+      padding: 28px;
+    }
+
+    .feature-content h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .feature-content p {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* Why Section */
+    #why {
+      background: linear-gradient(180deg, #FFFFFF 0%, #FFF7ED 50%, #FFEDD5 100%);
+      position: relative;
+    }
+
+    #why::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--secondary) 0%, #FBBF24 50%, var(--secondary) 100%);
+    }
+
+    #why .section-accent {
+      position: absolute;
+      top: 100px;
+      left: 5%;
+      width: 80px;
+      height: 80px;
+      background-image: radial-gradient(circle, var(--primary) 3px, transparent 3px);
+      background-size: 16px 16px;
+      opacity: 0.15;
+    }
+
+    .why-content h2 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      margin-bottom: 20px;
+      line-height: 1.15;
+    }
+
+    .why-content p {
+      font-size: 17px;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .checklist li:last-child {
+      border-bottom: none;
+    }
+
+    .checklist li i {
+      color: #10B981;
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .phone-mockup {
+      max-width: 340px;
+      margin: 0 auto;
+      background: #1F2937;
+      border-radius: 40px;
+      padding: 12px;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .phone-screen {
+      background: linear-gradient(180deg, #EFF6FF 0%, #FFFFFF 100%);
+      border-radius: 32px;
+      padding: 20px;
+      min-height: 580px;
+    }
+
+    .phone-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .phone-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .phone-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text-dark);
+    }
+
+    .phone-card p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* How It Works Section */
+    #how-it-works {
+      background: linear-gradient(180deg, #F0FDF4 0%, #DCFCE7 50%, #D1FAE5 100%);
+      position: relative;
+    }
+
+    #how-it-works::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%23FFFFFF' opacity='.5'/%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' fill='%23FFFFFF' opacity='.6'/%3E%3C/svg%3E") no-repeat center top;
+      background-size: 100% 80px;
+      pointer-events: none;
+    }
+
+    #how-it-works .step-connector {
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, #10B981 0%, transparent 100%);
+      transform: translateY(-50%);
+    }
+
+    @media (max-width: 991px) {
+      #how-it-works .step-connector {
+        display: none;
+      }
+    }
+
+    .step-card {
+      background: linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 100%);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      text-align: center;
+      height: 100%;
+      box-shadow: var(--shadow-md);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      border: 2px solid transparent;
+    }
+
+    .step-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-lg);
+      padding: 2px;
+      background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.25);
+    }
+
+    .step-card:hover::before {
+      opacity: 1;
+    }
+
+    .step-number {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--white);
+      box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4);
+      position: relative;
+    }
+
+    .step-number::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px dashed rgba(16, 185, 129, 0.3);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .step-card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .step-card p {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* Trust Section */
+    #trust {
+      background: linear-gradient(135deg, #FEFCE8 0%, #FEF9C3 50%, #FEF08A 100%);
+      position: relative;
+    }
+
+    #trust::after {
+      display: none;
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z' fill='%23FFFBF5'/%3E%3C/svg%3E") no-repeat center bottom;
+      background-size: 100% 100px;
+      pointer-events: none;
+    }
+
+    #trust .floating-star {
+      position: absolute;
+      font-size: 24px;
+      color: var(--secondary);
+      opacity: 0.3;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    #trust .floating-star:nth-child(1) {
+      top: 15%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    #trust .floating-star:nth-child(2) {
+      top: 25%;
+      right: 15%;
+      animation-delay: 1s;
+    }
+
+    #trust .floating-star:nth-child(3) {
+      bottom: 30%;
+      left: 5%;
+      animation-delay: 2s;
+    }
+
+    @keyframes twinkle {
+
+      0%,
+      100% {
+        opacity: 0.3;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.6;
+        transform: scale(1.2);
+      }
+    }
+
+    .trust-card {
+      background: linear-gradient(180deg, #FFFFFF 0%, #FEFCE8 100%);
+      border: 2px solid rgba(234, 179, 8, 0.2);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      text-align: center;
+      height: 100%;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .trust-card::before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: -100%;
+      width: 300%;
+      height: 300%;
+      background: radial-gradient(circle, rgba(234, 179, 8, 0.1) 0%, transparent 50%);
+      transition: transform 0.6s ease;
+    }
+
+    .trust-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px -12px rgba(234, 179, 8, 0.25);
+      border-color: rgba(234, 179, 8, 0.4);
+    }
+
+    .trust-card:hover::before {
+      transform: translate(30%, 30%);
+    }
+
+    .trust-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #FEF08A 0%, #FDE047 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: #B45309;
+      font-size: 26px;
+      box-shadow: 0 8px 16px -4px rgba(234, 179, 8, 0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .trust-card h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .trust-card p {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* Vision Section */
+    #vision {
+      background: linear-gradient(180deg, #FFFBF5 0%, #FEF3E2 50%, #FDE2BB 100%);
+      position: relative;
+    }
+
+    #vision::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23FEFCE8'/%3E%3C/svg%3E") no-repeat center top;
+      background-size: 100% 100px;
+      pointer-events: none;
+    }
+
+    #vision .decorative-line {
+      position: absolute;
+      right: 10%;
+      top: 50%;
+      width: 150px;
+      height: 150px;
+      border: 3px solid rgba(249, 115, 22, 0.15);
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
+
+    #vision .decorative-line::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: -30px;
+      right: -30px;
+      bottom: -30px;
+      border: 2px dashed rgba(30, 58, 138, 0.1);
+      border-radius: 50%;
+    }
+
+    .vision-image {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--border);
+    }
+
+    .vision-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .vision-placeholder {
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 64px;
+    }
+
+    /* Blog Section */
+    #blog {
+      background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 50%, #DDD6FE 100%);
+      position: relative;
+    }
+
+    #blog::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 5%;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      border-radius: 12px;
+      transform: translateY(-50%) rotate(45deg);
+      opacity: 0.15;
+    }
+
+    #blog::after {
+      content: '';
+      position: absolute;
+      bottom: 20%;
+      right: 8%;
+      width: 40px;
+      height: 40px;
+      background: var(--secondary);
+      border-radius: 50%;
+      opacity: 0.2;
+    }
+
+    .blog-cta {
+      background: linear-gradient(135deg, #FFFFFF 0%, #F5F3FF 50%, #EDE9FE 100%);
+      border-radius: var(--radius-xl);
+      padding: 60px;
+      text-align: center;
+      border: 2px solid rgba(139, 92, 246, 0.15);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -12px rgba(139, 92, 246, 0.15);
+    }
+
+    .blog-cta::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+      animation: float 15s ease-in-out infinite;
+    }
+
+    .blog-cta h3 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin-bottom: 16px;
+    }
+
+    .blog-cta p {
+      font-size: 17px;
+      max-width: 500px;
+      margin: 0 auto 28px;
+    }
+
+    .btn-blog {
+      background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+      color: var(--white);
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 20px -4px rgba(139, 92, 246, 0.4);
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-blog:hover {
+      background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
+      color: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px -4px rgba(139, 92, 246, 0.5);
+    }
+
+    /* CTA Section */
+    #cta {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, #0F172A 100%);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #cta::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cta-content {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-content h2 {
+      color: var(--white);
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-content p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto 36px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .btn-cta-primary {
+      background: var(--secondary);
+      color: var(--white);
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.4);
+    }
+
+    .btn-cta-primary:hover {
+      background: var(--secondary-dark);
+      color: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(249, 115, 22, 0.5);
+    }
+
+    .btn-cta-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 50px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-cta-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* FAQ Section */
+    #faq {
+      background: linear-gradient(180deg, #ECFEFF 0%, #CFFAFE 50%, #A5F3FC 100%);
+      padding: 100px 0;
+      position: relative;
+    }
+
+
+
+    #faq .question-bubble {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: rgba(6, 182, 212, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #0891B2;
+    }
+
+    #faq .question-bubble:nth-child(1) {
+      top: 15%;
+      left: 8%;
+    }
+
+    #faq .question-bubble:nth-child(2) {
+      top: 40%;
+      right: 5%;
+    }
+
+    #faq .question-bubble:nth-child(3) {
+      bottom: 20%;
+      left: 3%;
+    }
+
+    .accordion-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md) !important;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .accordion-button {
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--text-dark);
+      padding: 20px 24px;
+      background: var(--white);
+    }
+
+    .accordion-button:not(.collapsed) {
+      background: var(--bg-light);
+      color: var(--primary);
+      box-shadow: none;
+    }
+
+    .accordion-button:focus {
+      box-shadow: none;
+      border-color: var(--border);
+    }
+
+    .accordion-body {
+      padding: 20px 24px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    footer {
+      background: #0F172A;
+      color: #94A3B8;
+      padding: 80px 0 40px;
+    }
+
+    .footer-brand {
+      margin-bottom: 20px;
+    }
+
+    .footer-brand .navbar-brand {
+      font-size: 22px;
+    }
+
+    .footer-description {
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 300px;
+      color: #94A3B8;
+    }
+
+    footer h5 {
+      color: var(--white);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #94A3B8;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+      padding-left: 5px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94A3B8;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: var(--primary);
+      color: var(--white);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 30px;
+      margin-top: 60px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+      .hero {
+        padding: 60px 0 80px;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .navbar-collapse {
+        background: var(--white);
+        padding: 20px;
+        border-radius: var(--radius-md);
+        margin-top: 16px;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border);
+      }
+
+      .navbar-nav .nav-link {
+        padding: 12px 16px !important;
+      }
+
+      .btn-waitlist-nav {
+        width: 100%;
+        text-align: center;
+        margin-top: 12px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hero {
+        padding: 40px 0 60px;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .hero-buttons a,
+      .hero-buttons span {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .hero-trust-points {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .blog-cta {
+        padding: 40px 24px;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .cta-buttons a {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* Loading animation for dashboard preview */
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    .shimmer {
+      background: linear-gradient(90deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0.2) 50%,
+          rgba(255, 255, 255, 0.1) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+
+
+    /* More CSS  */
+    .footer-bottom p {
+      color: #94A3B8;
+    }
+
+
+    @media only screen and (max-width:500px) {
+      .navbar {
+        padding: 8px 0px;
+        margin-top: 60px;
+
+      }
+
+      .announcement-bar {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container">
+      <i class="bi bi-rocket-takeoff-fill"></i>
+      KwikLearn is building smarter digital exam preparation tools for students in Ghana and beyond.
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="kwiklearn logo.jpg" alt="KwikLearn Logo">
+        <span><span class="brand-kwik">Kwik</span><span class="brand-learn">Learn</span></span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#features">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/blog/">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#faq">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+        <a href="https://forms.gle/cU6HZAS9DRoSg6kbA" class="btn btn-waitlist btn-waitlist-nav" target="_blank"
+          rel="noopener noreferrer">
+          <i class="bi bi-person-plus-fill"></i> Join Waitlist
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" style="margin-top: 76px;">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="hero-badge">
+              <i class="bi bi-stars"></i>
+              Future-ready learning for BECE, WASSCE &amp; beyond
+            </div>
+
+            <h1>Smarter exam prep for <span class="highlight">students, parents &amp; schools.</span></h1>
+
+            <p class="hero-description">
+              KwikLearn is a digital learning platform designed to help students learn faster, practice better, and
+              prepare with confidence through quizzes, mock exams, revision tools, and progress tracking.
+            </p>
+
+            <div class="hero-buttons">
+              <a href="https://forms.gle/cU6HZAS9DRoSg6kbA" class="btn-primary-hero" target="_blank"
+                rel="noopener noreferrer">
+                <i class="bi bi-rocket-takeoff"></i> Get Early Access
+              </a>
+              <a href="#features" class="btn-secondary-hero">
+                <i class="bi bi-grid-3x3-gap"></i> Explore Features
+              </a>
+              <span class="btn-coming-soon">
+                <i class="bi bi-google-play"></i> Coming Soon on Google Play
+              </span>
+            </div>
+
+            <div class="hero-trust-points">
+              <div class="trust-point">
+                <i class="bi bi-check-circle-fill"></i>
+                <span>Affordable learning support</span>
+              </div>
+              <div class="trust-point">
+                <i class="bi bi-check-circle-fill"></i>
+                <span>Mobile-first design</span>
+              </div>
+              <div class="trust-point">
+                <i class="bi bi-check-circle-fill"></i>
+                <span>Built for Ghanaian learners</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="hero-card fade-in">
+              <div class="dashboard-preview">
+                <div class="dashboard-header">
+                  <span class="dashboard-title">KwikLearn Student Dashboard</span>
+                  <span class="live-badge"><i class="bi bi-circle-fill text-success me-1" style="font-size: 8px;"></i>
+                    Live Preview</span>
+                </div>
+
+                <div class="dashboard-card">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                      <small style="opacity: 0.85;">Today&apos;s Revision Goal</small>
+                      <h5 class="mb-0 mt-1" style="font-size: 18px;color:white">Science Mock Test</h5>
+                    </div>
+                    <span class="live-badge" style="font-size: 12px;">25 Questions</span>
+                  </div>
+                  <div class="progress-bar-custom">
+                    <div class="progress-fill" style="width: 72%;"></div>
+                  </div>
+                  <small style="opacity: 0.85;" class="mt-2 d-block">72% completed</small>
+                </div>
+
+                <div class="dashboard-card">
+                  <div class="stats-row">
+                    <div class="stat-item">
+                      <div class="stat-value">84%</div>
+                      <div class="stat-label">Average Score</div>
+                    </div>
+                    <div class="stat-item">
+                      <div class="stat-value">6</div>
+                      <div class="stat-label">Day Streak</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="dashboard-card">
+                  <small style="opacity: 0.85;">Subjects</small>
+                  <div class="subject-pills">
+                    <span class="subject-pill">Mathematics</span>
+                    <span class="subject-pill">English</span>
+                    <span class="subject-pill">Science</span>
+                    <span class="subject-pill">ICT</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="section-badge">
+            <i class="bi bi-info-circle"></i> About Us
+          </span>
+          <h2>What is KwikLearn?</h2>
+          <p>KwikLearn is an education technology platform focused on helping students prepare for examinations through
+            engaging, practical, and accessible digital learning tools.</p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6">
+            <div class="about-card fade-in">
+              <div class="about-icon">01</div>
+              <h3>Exam-focused learning</h3>
+              <p>Designed to support preparation for key school and national examinations with targeted practice.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="about-card fade-in">
+              <div class="about-icon">02</div>
+              <h3>Accessible anywhere</h3>
+              <p>Built for mobile-friendly learning so students can revise conveniently on the go.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="about-card fade-in">
+              <div class="about-icon">03</div>
+              <h3>Progress tracking</h3>
+              <p>Students and parents can see improvement over time through simple performance insights.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="about-card fade-in">
+              <div class="about-icon">04</div>
+              <h3>Scalable vision</h3>
+              <p>Starting with Ghana-focused exam support and growing into a broader digital learning ecosystem.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+
+      <div class="floating-accent"></div>
+      <div class="floating-accent-2"></div>
+      <div class="container" style="position: relative; z-index: 2;">
+        <div class="section-header fade-in">
+          <span class="section-badge">
+            <i class="bi bi-grid-3x3-gap-fill"></i> Features
+          </span>
+          <h2>A preview of the KwikLearn experience</h2>
+          <p>A simple look at the kind of learning experience KwikLearn is building for students, parents, and schools.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-card fade-in">
+              <div class="feature-image">
+                <img src="student-dashboard.png" alt="KwikLearn student dashboard screen"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="feature-placeholder" style="display: none;">
+                  <i class="bi bi-speedometer2"></i>
+                </div>
+              </div>
+              <div class="feature-content">
+                <h3>Student Dashboard</h3>
+                <p>Quick access to subjects, learning activity, performance summary, and ongoing progress in one place.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-card fade-in">
+              <div class="feature-image">
+                <img src="practice-quiz-screen.png" alt="KwikLearn practice quiz screen"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="feature-placeholder" style="display: none;">
+                  <i class="bi bi-question-circle"></i>
+                </div>
+              </div>
+              <div class="feature-content">
+                <h3>Practice &amp; Quizzes</h3>
+                <p>Interactive quiz screens designed to make practice simple, focused, and engaging for learners.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-card fade-in">
+              <div class="feature-image">
+                <img src="progress-report-screen.png" alt="KwikLearn progress report screen"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="feature-placeholder" style="display: none;">
+                  <i class="bi bi-graph-up-arrow"></i>
+                </div>
+              </div>
+              <div class="feature-content">
+                <h3>Progress Insights</h3>
+                <p>Clear progress tracking to help learners and families understand improvement, strengths, and support
+                  areas.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why KwikLearn Section -->
+    <section id="why">
+      <!-- Decorative dot pattern -->
+      <div class="section-accent"></div>
+      <div class="container" style="position: relative; z-index: 2;">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="why-content fade-in">
+              <span class="section-badge">
+                <i class="bi bi-heart-fill"></i> Why KwikLearn
+              </span>
+              <h2>Built with local relevance and a bigger future in mind.</h2>
+              <p>KwikLearn aims to make quality exam preparation more accessible, engaging, and affordable while
+                creating a trusted digital education brand for schools, students, and families.</p>
+
+              <ul class="checklist">
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Focused on real student needs and exam outcomes</span>
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Simple, practical, and easy to understand</span>
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Designed to scale into a wider learning platform</span>
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Strong brand potential for schools and communities</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="phone-mockup fade-in">
+              <div class="phone-screen">
+                <div class="phone-header">
+                  <span>KwikLearn</span>
+                  <span style="color: var(--primary);">Student View</span>
+                </div>
+
+                <div class="phone-card">
+                  <strong>Welcome back, Student <span style="font-size: 18px;">&#128075;</span></strong>
+                  <p>Continue your revision and stay on track for your next exam.</p>
+                </div>
+
+                <div class="phone-card">
+                  <strong>Mathematics Practice</strong>
+                  <p>12 questions - Beginner to advanced</p>
+                </div>
+
+                <div class="phone-card">
+                  <strong>English Language Revision</strong>
+                  <p>Vocabulary, grammar, and comprehension drills</p>
+                </div>
+
+                <div class="phone-card">
+                  <strong>Integrated Science</strong>
+                  <p>Mock test and revision challenge</p>
+                </div>
+
+                <div class="phone-card">
+                  <strong>Progress this week</strong>
+                  <div class="progress-bar-custom" style="background: #DBEAFE; margin-top: 12px;">
+                    <div class="progress-fill" style="width: 78%;"></div>
+                  </div>
+                  <p class="mt-2 mb-0">You are doing better than last week. Keep going!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="section-badge">
+            <i class="bi bi-diagram-3"></i> How It Works
+          </span>
+          <h2>How KwikLearn works</h2>
+          <p>Simple, guided, and effective learning support for exam preparation.</p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="step-card fade-in">
+              <div class="step-number">1</div>
+              <h3>Choose your level</h3>
+              <p>Select your class, exam path, or subject area to begin focused learning.</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="step-card fade-in">
+              <div class="step-number">2</div>
+              <h3>Practice consistently</h3>
+              <p>Use quizzes, mock tests, and revision materials to strengthen weak areas.</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="step-card fade-in">
+              <div class="step-number">3</div>
+              <h3>Track improvement</h3>
+              <p>Monitor scores, progress, and learning habits over time with simple reports.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section id="trust">
+      <!-- Decorative floating stars -->
+      <i class="bi bi-star-fill floating-star"></i>
+      <i class="bi bi-star-fill floating-star"></i>
+      <i class="bi bi-star-fill floating-star"></i>
+      <div class="container" style="position: relative; z-index: 2;">
+        <div class="section-header fade-in">
+          <span class="section-badge">
+            <i class="bi bi-shield-check"></i> Trust
+          </span>
+          <h2>Why families and schools can trust KwikLearn</h2>
+          <p>KwikLearn is being built with a clear purpose: to make learning support more accessible, practical, and
+            meaningful for students.</p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6">
+            <div class="trust-card fade-in">
+              <div class="trust-icon">
+                <i class="bi bi-mortarboard-fill"></i>
+              </div>
+              <h3>Clear academic focus</h3>
+              <p>Every feature is designed around learning improvement, revision quality, and exam preparation.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="trust-card fade-in">
+              <div class="trust-icon">
+                <i class="bi bi-hand-thumbs-up-fill"></i>
+              </div>
+              <h3>Student-friendly</h3>
+              <p>KwikLearn aims to be easy to use for students, parents, teachers, and school partners.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="trust-card fade-in">
+              <div class="trust-icon">
+                <i class="bi bi-graph-up"></i>
+              </div>
+              <h3>Built for growth</h3>
+              <p>The platform starts focused and practical, with room to expand into a wider learning ecosystem.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="trust-card fade-in">
+              <div class="trust-icon">
+                <i class="bi bi-bullseye"></i>
+              </div>
+              <h3>Made with purpose</h3>
+              <p>KwikLearn is not just another app idea. It is being developed as a serious education brand.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section id="vision">
+      <!-- Decorative circle element -->
+      <div class="decorative-line"></div>
+      <div class="container" style="position: relative; z-index: 2;">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="why-content fade-in">
+              <span class="section-badge">
+                <i class="bi bi-eye-fill"></i> Our Vision
+              </span>
+              <h2>A bold long-term vision for the KwikLearn brand.</h2>
+              <p>KwikLearn is being built with ambition. This visual represents the scale, structure, and impact we hope
+                to create in the future as the brand grows across education, technology, and student support.</p>
+
+              <ul class="checklist">
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Aspiring to build a trusted education brand</span>
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Focused on long-term impact in learning</span>
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Designed with growth, structure, and innovation in mind</span>
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Committed to supporting students, schools, and families</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="vision-image fade-in">
+              <img src="KWIKLEARN BUILDING.png" alt="KwikLearn future vision building concept"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="vision-placeholder" style="display: none;">
+                <i class="bi bi-building"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog">
+      <div class="container">
+        <div class="blog-cta fade-in">
+          <i class="bi bi-journal-richtext"
+            style="font-size: 48px; color: var(--primary); display: block; margin-bottom: 20px;"></i>
+          <h3>Explore our Blog</h3>
+          <p>Discover study tips, exam preparation guides, and educational insights to help you succeed.</p>
+          <a href="/blog/" class="btn-blog">
+            <i class="bi bi-arrow-right-circle"></i> Visit the Blog
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+      <!-- Decorative question bubbles -->
+      <div class="question-bubble"><i class="bi bi-question"></i></div>
+      <div class="question-bubble"><i class="bi bi-question"></i></div>
+      <div class="question-bubble"><i class="bi bi-question"></i></div>
+      <div class="container" style="position: relative; z-index: 2;">
+        <div class="section-header fade-in">
+          <span class="section-badge">
+            <i class="bi bi-question-circle"></i> FAQ
+          </span>
+          <h2>Frequently Asked Questions</h2>
+          <p>Find answers to common questions about KwikLearn.</p>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="accordion" id="faqAccordion">
+              <div class="accordion-item fade-in">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1"
+                    aria-expanded="true" aria-controls="faq1">
+                    What is KwikLearn?
+                  </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    KwikLearn is a digital learning platform designed to help students in Ghana prepare for BECE,
+                    WASSCE, and other examinations through quizzes, mock tests, revision tools, and progress tracking.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item fade-in">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                    Who can use KwikLearn?
+                  </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    KwikLearn is designed for students preparing for national exams, parents who want to support their
+                    children&apos;s learning, teachers looking for digital teaching tools, and schools seeking to
+                    enhance their educational offerings.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item fade-in">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                    When will KwikLearn launch?
+                  </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    KwikLearn is currently in development. Join our waitlist to be among the first to know when we
+                    launch and get early access to the platform.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item fade-in">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                    Is KwikLearn free to use?
+                  </button>
+                </h2>
+                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    KwikLearn aims to be affordable and accessible. We will offer various pricing options to ensure
+                    students from all backgrounds can benefit from our platform. More details will be shared closer to
+                    launch.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item fade-in">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                    How can I get in touch with KwikLearn?
+                  </button>
+                </h2>
+                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    You can reach us via email at info@kwiklearn.app or through WhatsApp at +233 24 427 2204. We
+                    typically respond within 24-48 hours.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta">
+      <div class="container">
+        <div class="cta-content fade-in">
+          <h2>Be among the first to know when KwikLearn launches.</h2>
+          <p>For inquiries, partnerships, or early access, reach out to us by email or WhatsApp.</p>
+          <div class="cta-buttons">
+            <a href="mailto:info@kwiklearn.app" class="btn-cta-primary">
+              <i class="bi bi-envelope-fill"></i> Email Us
+            </a>
+            <a href="https://wa.me/233244272204" class="btn-cta-secondary" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-whatsapp"></i> Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand">
+            <a class="navbar-brand" href="index.html">
+              <span><span class="brand-kwik" style="color: white;">Kwik</span><span
+                  class="brand-learn">Learn</span></span>
+            </a>
+          </div>
+          <p class="footer-description">
+            Smarter digital learning support for students, schools, and families preparing for success.
+          </p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/Kwiklearnapp/" target="_blank" rel="noopener noreferrer"
+              aria-label="Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://youtube.com/@tinotechacks?si=74PSz-Q0nm8_qezH" target="_blank" rel="noopener noreferrer"
+              aria-label="YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4">
+          <h5>Company</h5>
+          <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#why">Why KwikLearn</a></li>
+            <li><a href="/blog/">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+          <h5>Contact</h5>
+          <ul class="footer-links">
+            <li><a href="mailto:info@kwiklearn.app"><i class="bi bi-envelope me-2"></i>info@kwiklearn.app</a></li>
+            <li><a href="mailto:support@kwiklearn.app"><i class="bi bi-envelope me-2"></i>support@kwiklearn.app</a></li>
+            <li><a href="https://wa.me/233244272204" target="_blank" rel="noopener noreferrer"><i
+                  class="bi bi-whatsapp me-2"></i>+233 24 427 2204</a></li>
+            <li><small>Response time: Within 24-48 hours</small></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+          <h5>Legal</h5>
+          <ul class="footer-links">
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms &amp; Conditions</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 KwikLearn. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- Custom JS -->
+  <script>
+    $(document).ready(function () {
+      // Navbar scroll effect
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > 50) {
+          $('#mainNav').addClass('scrolled');
+        } else {
+          $('#mainNav').removeClass('scrolled');
+        }
+      });
+
+      // Smooth scroll for anchor links
+      $('a[href^="#"]').on('click', function (e) {
+        e.preventDefault();
+        var target = $(this.hash);
+        if (target.length) {
+          $('html, body').animate({
+            scrollTop: target.offset().top - 80
+          }, 600);
+        }
+
+        // Close mobile menu on link click
+        $('.navbar-collapse').collapse('hide');
+      });
+
+      // Fade in animation on scroll
+      function checkFadeIn() {
+        $('.fade-in').each(function () {
+          var elementTop = $(this).offset().top;
+          var viewportBottom = $(window).scrollTop() + $(window).height();
+
+          if (elementTop < viewportBottom - 100) {
+            $(this).addClass('visible');
+          }
+        });
+      }
+
+      // Initial check
+      checkFadeIn();
+
+      // Check on scroll
+      $(window).scroll(function () {
+        checkFadeIn();
+      });
+
+      // Animate progress bars when visible
+      function animateProgressBars() {
+        $('.progress-fill').each(function () {
+          var elementTop = $(this).offset().top;
+          var viewportBottom = $(window).scrollTop() + $(window).height();
+
+          if (elementTop < viewportBottom - 50) {
+            var width = $(this).css('width');
+            $(this).css('width', '0').animate({ width: width }, 1500);
+          }
+        });
+      }
+
+      // Run once
+      var progressAnimated = false;
+      $(window).scroll(function () {
+        if (!progressAnimated) {
+          animateProgressBars();
+          progressAnimated = true;
+        }
+      });
+
+      // Active nav link highlighting
+      $(window).scroll(function () {
+        var scrollPos = $(document).scrollTop() + 100;
+
+        $('section[id]').each(function () {
+          var currLink = $(this);
+          var currId = currLink.attr('id');
+          var refElement = $('a[href="#' + currId + '"]');
+
+          if (currLink.offset().top <= scrollPos &&
+            currLink.offset().top + currLink.height() > scrollPos) {
+            $('.nav-link').removeClass('active');
+            refElement.addClass('active');
+          }
+        });
+      });
+
+      // Add hover effect to cards
+      $('.about-card, .feature-card, .step-card, .trust-card').hover(
+        function () {
+          $(this).css('cursor', 'pointer');
+        }
+      );
+    });
+  </script>
+</body>
+
+</html>
