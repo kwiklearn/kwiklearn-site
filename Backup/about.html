@@ -23,7 +23,7 @@
       --secondary: #F97316;
       --secondary-light: #FB923C;
       --secondary-dark: #EA580C;
-      --text-dark: #0F172A;
+      --text-dark: #1F2937;
       --text-muted: #6B7280;
       --text-light: #9CA3AF;
       --bg-light: #F8FAFC;
@@ -102,7 +102,6 @@
       padding: 12px 0;
       box-shadow: var(--shadow-md);
       border-bottom: 1px solid var(--border);
-      margin-top: 0px;
     }
 
     .navbar-brand {
@@ -649,7 +648,7 @@
     footer {
       background: var(--text-dark);
       color: rgba(255, 255, 255, 0.8);
-      padding: 80px 0 40px;
+      padding: 60px 0 30px;
     }
 
     .footer-brand {
@@ -666,18 +665,12 @@
       color: var(--secondary);
     }
 
-.footer-description {
-    font-size: 15px;
-    line-height: 1.7;
-    max-width: 300px;
-    color: #94A3B8;
-}
-
-.footer-links small{
-    font-size: 14px;
-    line-height: 1.7;
-    color: #94A3B8;
-}
+    .footer-description {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 300px;
+    }
 
     .footer-title {
       color: var(--white);
@@ -696,66 +689,52 @@
       margin-bottom: 12px;
     }
 
-.footer-links a {
-    color: #94A3B8;
-    font-size: 15px;
-    transition: all 0.3s ease;
-}
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
 
     .footer-links a:hover {
       color: var(--secondary);
       padding-left: 5px;
     }
 
-    footer h5 {
-    color: var(--white);
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
     .social-links {
       display: flex;
       gap: 12px;
     }
 
-.social-links a {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #94A3B8;
-    font-size: 18px;
-    transition: all 0.3s ease;
-}
+    .social-link {
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
 
-    .social-links a:hover {
+    .social-link:hover {
       background: var(--secondary);
       color: var(--white);
       transform: translateY(-3px);
     }
 
-.footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 30px;
-    margin-top: 60px;
-    text-align: center;
-    font-size: 14px;
-}
-
-    .footer-bottom p {
-     color: #94A3B8;
-      font-size: 14px;
-      margin: 0;
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 40px;
+      padding-top: 24px;
+      text-align: center;
     }
 
-
-    footer .navbar-brand
-    {
-      font-size: 22px;
+    .footer-bottom p {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      margin: 0;
     }
 
     /* Animations */
@@ -830,17 +809,15 @@
 <body>
 
   <!-- Announcement Bar -->
-  <!-- <div class="announcement-bar">
-    <div class="container">
-      <i class="bi bi-rocket-takeoff-fill"></i>
-      KwikLearn is building smarter digital exam preparation tools for students in Ghana and beyond.
-    </div>
-  </div> -->
+  <div class="announcement-bar">
+    <i class="bi bi-megaphone-fill"></i>
+    KwikLearn is building smarter digital exam preparation tools for students in Ghana and beyond.
+  </div>
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
-      <a class="navbar-brand" href="./index.html">
+      <a class="navbar-brand" href="index.html">
         <img src="kwiklearn logo.jpg" alt="KwikLearn Logo">
         <span><span class="brand-kwik">Kwik</span><span class="brand-learn">Learn</span></span>
       </a>
@@ -853,22 +830,22 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="./index.html">Home</a>
+            <a class="nav-link active" href="index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./about.html">About Us</a>
+            <a class="nav-link" href="#about">About Us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./#features">Features</a>
+            <a class="nav-link" href="#features">Features</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://blog.kwiklearn.app/">Blog</a>
+            <a class="nav-link" href="/blog/">Blog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./#faq">FAQ</a>
+            <a class="nav-link" href="#faq">FAQ</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://blog.kwiklearn.app/contact">Contact</a>
+            <a class="nav-link" href="contact.html">Contact</a>
           </li>
         </ul>
         <a href="https://forms.gle/cU6HZAS9DRoSg6kbA" class="btn btn-waitlist btn-waitlist-nav" target="_blank"
@@ -889,7 +866,7 @@
         <h1>Empowering <span class="highlight">Ghanaian Students</span></h1>
         <p>Discover how KwikLearn is transforming education through accessible, engaging, and affordable digital learning tools.</p>
         <div class="breadcrumb-custom">
-          <a href="./index.html">Home</a>
+          <a href="index.html">Home</a>
           <span>/</span>
           <span>About Us</span>
         </div>
@@ -974,7 +951,7 @@
       <div class="cta-content fade-in">
         <h2>Ready to Start Your Learning Journey?</h2>
         <p>Join thousands of students preparing smarter with KwikLearn.</p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeklVkjjMAgZyPPdTalvhvpH6fND9SrSBzmBD9Ulha7E6B_pA/viewform" class="btn-cta">
+        <a href="#" class="btn-cta">
           <i class="bi bi-lightning-charge-fill"></i> Join the Waitlist
         </a>
       </div>
@@ -982,63 +959,48 @@
   </section>
 
   <!-- Footer -->
-  <footer id="contact">
+  <footer>
     <div class="container">
       <div class="row g-4">
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-md-6">
           <div class="footer-brand">
-            <a class="navbar-brand" href="./index.html">
-              <span><span class="brand-kwik" style="color: white;">Kwik</span><span
-                  class="brand-learn">Learn</span></span>
-            </a>
+            <span class="brand-kwik">Kwik</span><span class="brand-learn">Learn</span>
           </div>
           <p class="footer-description">
-            Smarter digital learning support for students, schools, and families preparing for success.
+            Empowering Ghanaian students with smart, accessible, and affordable digital learning tools.
           </p>
-          <div class="social-links">
-            <a href="https://www.facebook.com/Kwiklearnapp/" target="_blank" rel="noopener noreferrer"
-              aria-label="Facebook">
-              <i class="bi bi-facebook"></i>
-            </a>
-            <a href="https://youtube.com/@tinotechacks?si=74PSz-Q0nm8_qezH" target="_blank" rel="noopener noreferrer"
-              aria-label="YouTube">
-              <i class="bi bi-youtube"></i>
-            </a>
+          <div class="social-links mt-4">
+            <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
           </div>
         </div>
-
-        <div class="col-lg-2 col-md-4">
-          <h5>Company</h5>
+        <div class="col-lg-2 col-md-6">
+          <h6 class="footer-title">Quick Links</h6>
           <ul class="footer-links">
-            <li><a href="./about.html">About Us</a></li>
-            <li><a href="./#features">Features</a></li>
-            <li><a href="./#why">Why KwikLearn</a></li>
-            <li><a href="https://blog.kwiklearn.app/">Blog</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="#">Blog</a></li>
           </ul>
         </div>
-
-        <div class="col-lg-3 col-md-4">
-          <h5>Contact</h5>
+        <div class="col-lg-2 col-md-6">
+          <h6 class="footer-title">Support</h6>
           <ul class="footer-links">
-            <li><a href="mailto:info@kwiklearn.app"><i class="bi bi-envelope me-2"></i>info@kwiklearn.app</a></li>
-            <li><a href="mailto:support@kwiklearn.app"><i class="bi bi-envelope me-2"></i>support@kwiklearn.app</a></li>
-            <li><a href="https://wa.me/233244272204" target="_blank" rel="noopener noreferrer"><i
-                  class="bi bi-whatsapp me-2"></i>+233 24 427 2204</a></li>
-            <li><small>Response time: Within 24-48 hours</small></li>
+            <li><a href="index.html#faq">FAQs</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Help Center</a></li>
           </ul>
         </div>
-
-        <div class="col-lg-3 col-md-4">
-          <h5>Legal</h5>
+        <div class="col-lg-4 col-md-6">
+          <h6 class="footer-title">Contact</h6>
           <ul class="footer-links">
-            <li><a href="./privacy.html">Privacy Policy</a></li>
-            <li><a href="./terms.html">Terms &amp; Conditions</a></li>
-            <li><a href="./#faq">FAQ</a></li>
-            <li><a href="https://blog.kwiklearn.app/contact">Contact Us</a></li>
+            <li><i class="bi bi-envelope me-2"></i> hello@kwiklearn.com</li>
+            <li><i class="bi bi-geo-alt me-2"></i> Accra, Ghana</li>
           </ul>
         </div>
       </div>
-
       <div class="footer-bottom">
         <p>&copy; 2026 KwikLearn. All rights reserved.</p>
       </div>
