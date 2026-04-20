@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KwikLearn | Smart Learning for BECE & WASSCE Students in Ghana</title>
+  <meta name="description" content="KwikLearn helps students prepare smarter for BECE, WASSCE, and other exams with quizzes, mock tests, progress tracking, and affordable digital learning tools." />
+  <style>
+    :root {
+      --primary: #155eef;
+      --primary-dark: #0f4bcc;
+      --accent: #12b76a;
+      --text: #101828;
+      --muted: #475467;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --border: #e4e7ec;
+      --card-shadow: 0 16px 40px rgba(16, 24, 40, 0.08);
+      --radius: 18px;
+      --max-width: 1180px;
+    }
+.menu-toggle {
+  display: none;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+@media (max-width: 980px) {
+  .navbar {
+    position: relative;
+    flex-wrap: wrap;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .desktop-waitlist {
+    display: none;
+  }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+    padding: 1rem 0 0.4rem;
+    background: #fff;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    width: 100%;
+  }
+
+  .mobile-waitlist {
+    width: 100%;
+    margin-top: 0.4rem;
+  }
+
+  .mobile-waitlist .btn {
+    width: 100%;
+  }
+}
+
+@media (min-width: 981px) {
+  .mobile-waitlist {
+    display: none;
+  }
+}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      background: var(--text);
+      color: #fff;
+      font-size: 0.92rem;
+      padding: 0.7rem 0;
+      text-align: center;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(16,24,40,0.06);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--text);
+    }
+
+    .nav-links {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  color: var(--muted);
+  font-weight: 600;
+  flex-wrap: wrap;
+}
+
+.menu-toggle {
+  display: none;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.desktop-waitlist {
+  display: inline-flex;
+}
+    .btn,
+a.btn,
+.btn.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.95rem 1.35rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.btn-primary,
+a.btn.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #f9fafb;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, #eef4ff 0%, #ffffff 100%);
+      padding: 5rem 0 4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: #ecfdf3;
+      color: #027a48;
+      border: 1px solid #abefc6;
+      border-radius: 999px;
+      padding: 0.45rem 0.8rem;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 5vw, 4.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 680px;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-actions {
+    margin-top: 30px;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.5rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .hero-card {
+      background: var(--white);
+      border: 1px solid #dbe4ff;
+      border-radius: 28px;
+      padding: 1.2rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .screen {
+      border-radius: 22px;
+      background: linear-gradient(160deg, #155eef, #0f4bcc);
+      color: white;
+      padding: 1.3rem;
+      min-height: 450px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .screen::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -70px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .screen-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.1rem;
+    }
+
+    .mini-pill {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .mock-card, .stats-card {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 18px;
+      padding: 1rem;
+      margin-top: 0.9rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      overflow: hidden;
+      margin-top: 0.7rem;
+    }
+
+    .progress-fill {
+      width: 72%;
+      height: 100%;
+      background: #12b76a;
+      border-radius: 999px;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 3rem;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.03em;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .features-grid,
+    .audience-grid,
+    .stats-grid,
+    .steps-grid,
+    .footer-grid {
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    .features-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .audience-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .steps-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: 0 8px 24px rgba(16, 24, 40, 0.04);
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    .icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: #eef4ff;
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .why {
+      background: var(--bg);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .check-list {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .check-list li {
+      padding: 0.7rem 0;
+      border-bottom: 1px solid #eaecf0;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .check-list li::before {
+      content: "✔ ";
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .phone-frame {
+      max-width: 340px;
+      margin: 0 auto;
+      background: #111827;
+      border-radius: 36px;
+      padding: 0.85rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .phone-screen {
+      background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+      border-radius: 28px;
+      min-height: 570px;
+      padding: 1rem;
+    }
+
+    .app-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .subject-row,
+    .score-box {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 1rem;
+      margin-bottom: 0.9rem;
+      box-shadow: 0 4px 12px rgba(16,24,40,0.04);
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #101828 0%, #155eef 100%);
+      color: white;
+    }
+
+    .cta-box {
+      text-align: center;
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    .cta-box h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 0.9rem;
+      letter-spacing: -0.03em;
+    }
+
+    .cta-box p {
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      color: rgba(255,255,255,0.88);
+    }
+
+    footer {
+      background: #0b1220;
+      color: #d0d5dd;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1.25fr 1fr 1fr 1fr;
+      margin-bottom: 2rem;
+    }
+
+    footer h4 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    footer p,
+    footer li,
+    footer a {
+      color: #98a2b3;
+      font-size: 0.96rem;
+    }
+
+    footer ul {
+      list-style: none;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .copyright {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.25rem;
+      text-align: center;
+      color: #98a2b3;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+  .hero-grid,
+  .split,
+  .features-grid,
+  .audience-grid,
+  .stats-grid,
+  .steps-grid,
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-grid,
+  .split {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar {
+    position: relative;
+    flex-wrap: wrap;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .desktop-waitlist {
+    display: none;
+  }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+    padding: 1rem 0 0.4rem;
+    background: #fff;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    width: 100%;
+  }
+
+  .mobile-waitlist {
+    width: 100%;
+    margin-top: 0.4rem;
+  }
+
+  .mobile-waitlist .btn {
+    width: 100%;
+  }
+}
+
+@media (min-width: 981px) {
+  .mobile-waitlist {
+    display: none;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="topbar">KwikLearn is building smarter digital exam preparation tools for students in Ghana and beyond.</div>
+
+  <header>
+  <div class="container navbar">
+    <a href="index.html" class="logo" style="display:flex; align-items:center; gap:0.7rem;">
+      <img src="kwiklearn logo.jpg" alt="KwikLearn logo" style="height:46px; width:auto; border-radius:10px;" />
+      <span style="font-size:1.5rem; font-weight:800;">
+        <span style="color:#1e3a8a;">Kwik</span><span style="color:#f97316;">Learn</span>
+      </span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">&#9776;</button>
+
+    <nav class="nav-links" id="mobileNav">
+      <a href="index.html">Home</a>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="/blog/">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <a href="https://forms.gle/cU6HZAS9DRoSg6kbA" class="btn btn-primary desktop-waitlist" target="_blank" rel="noopener noreferrer">Join Waitlist</a>
+  </div>
+</header>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge">🚀 Future-ready learning for BECE, WASSCE & beyond</div>
+          
+          <h1>Smarter exam prep for students, parents, and schools.</h1>
+          <p>
+            KwikLearn is a digital learning platform designed to help students learn faster, practice better, and prepare with confidence through quizzes, mock exams, revision tools, and progress tracking.
+          </p>
+          <div class="hero-actions">
+            <a href="https://forms.gle/cU6HZAS9DRoSg6kbA" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Get Early Access</a>
+            <a href="#features" class="btn btn-secondary">Explore Features</a>
+            <a href="#" class="btn btn-secondary" style="pointer-events:none; opacity:0.78;">Coming Soon on Google Play</a>
+          </div>
+          <div class="hero-points">
+            <span>✔ Affordable learning support</span>
+            <span>✔ Mobile-first design</span>
+            <span>✔ Built for Ghanaian learners</span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="screen">
+            <div>
+              <div class="screen-header">
+                <strong>KwikLearn Student Dashboard</strong>
+                <span class="mini-pill">Live Preview</span>
+              </div>
+              <div class="mock-card">
+                <div style="display:flex; justify-content:space-between; gap:1rem; align-items:center;">
+                  <div>
+                    <div style="font-size:0.9rem; opacity:0.9;">Today’s Revision Goal</div>
+                    <strong style="font-size:1.25rem;">Science Mock Test</strong>
+                  </div>
+                  <span class="mini-pill">25 Questions</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <div style="margin-top:0.65rem; font-size:0.92rem; opacity:0.9;">72% completed</div>
+              </div>
+              <div class="stats-card">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.85rem;">
+                  <div>
+                    <div style="font-size:0.9rem; opacity:0.9;">Average Score</div>
+                    <strong style="font-size:1.45rem;">84%</strong>
+                  </div>
+                  <div>
+                    <div style="font-size:0.9rem; opacity:0.9;">Weekly Streak</div>
+                    <strong style="font-size:1.45rem;">6 Days</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="mock-card">
+                <div style="font-size:0.92rem; opacity:0.9;">Subjects</div>
+                <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:0.7rem;">
+                  <span class="mini-pill">Mathematics</span>
+                  <span class="mini-pill">English</span>
+                  <span class="mini-pill">Science</span>
+                  <span class="mini-pill">ICT</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-title">
+          <h2>What is KwikLearn?</h2>
+          <p>
+            KwikLearn is an education technology platform focused on helping students prepare for examinations through engaging, practical, and accessible digital learning tools.
+          </p>
+        </div>
+        <div class="stats-grid">
+          <div class="card">
+            <div class="icon-box">01</div>
+            <h3>Exam-focused learning</h3>
+            <p>Designed to support preparation for key school and national examinations with targeted practice.</p>
+          </div>
+          <div class="card">
+            <div class="icon-box">02</div>
+            <h3>Accessible anywhere</h3>
+            <p>Built for mobile-friendly learning so students can revise conveniently on the go.</p>
+          </div>
+          <div class="card">
+            <div class="icon-box">03</div>
+            <h3>Progress tracking</h3>
+            <p>Students and parents can see improvement over time through simple performance insights.</p>
+          </div>
+          <div class="card">
+            <div class="icon-box">04</div>
+            <h3>Scalable vision</h3>
+            <p>Starting with Ghana-focused exam support and growing into a broader digital learning ecosystem.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   <section id="preview">
+  <div class="container">
+    <div class="section-title">
+      <h2>A preview of the KwikLearn experience</h2>
+      <p>
+        A simple look at the kind of learning experience KwikLearn is building for students, parents, and schools.
+      </p>
+    </div>
+
+    <div class="features-grid">
+  <div class="card" style="padding:0; overflow:hidden;">
+    <div style="padding:1rem; background:#f8fafc; display:flex; justify-content:center;">
+      <img src="student-dashboard.png" alt="KwikLearn student dashboard screen" style="width:100%; max-width:280px; height:auto; display:block;" />
+    </div>
+    <div style="padding:1.4rem;">
+      <h3>Student dashboard</h3>
+      <p>Quick access to subjects, learning activity, performance summary, and ongoing progress in one place.</p>
+    </div>
+  </div>
+
+  <div class="card" style="padding:0; overflow:hidden;">
+    <div style="padding:1rem; background:#f8fafc; display:flex; justify-content:center;">
+      <img src="practice-quiz-screen.png" alt="KwikLearn practice quiz screen" style="width:100%; max-width:280px; height:auto; display:block;" />
+    </div>
+    <div style="padding:1.4rem;">
+      <h3>Practice and quizzes</h3>
+      <p>Interactive quiz screens designed to make practice simple, focused, and engaging for learners.</p>
+    </div>
+  </div>
+
+  <div class="card" style="padding:0; overflow:hidden;">
+    <div style="padding:1rem; background:#f8fafc; display:flex; justify-content:center;">
+      <img src="progress-report-screen.png" alt="KwikLearn progress report screen" style="width:100%; max-width:280px; height:auto; display:block;" />
+    </div>
+    <div style="padding:1.4rem;">
+      <h3>Progress insights</h3>
+      <p>Clear progress tracking to help learners and families understand improvement, strengths, and support areas.</p>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+    <section id="why" class="why">
+      <div class="container split">
+        <div>
+          <div class="badge">Why KwikLearn</div>
+          <h2 style="font-size:clamp(2rem,4vw,3rem); line-height:1.12; margin-bottom:1rem;">Built with local relevance and a bigger future in mind.</h2>
+          <p style="color:var(--muted); margin-bottom:1rem;">
+            KwikLearn aims to make quality exam preparation more accessible, engaging, and affordable while creating a trusted digital education brand for schools, students, and families.
+          </p>
+          <ul class="check-list">
+            <li>Focused on real student needs and exam outcomes</li>
+            <li>Simple, practical, and easy to understand</li>
+            <li>Designed to scale into a wider learning platform</li>
+            <li>Strong brand potential for schools and communities</li>
+          </ul>
+        </div>
+        <div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="app-top">
+                <span>KwikLearn</span>
+                <span style="color:#155eef;">Student View</span>
+              </div>
+              <div class="score-box">
+                <strong>Welcome back, Student 👋</strong>
+                <p style="color:var(--muted); margin-top:0.35rem;">Continue your revision and stay on track for your next exam.</p>
+              </div>
+              <div class="subject-row">
+                <strong>Mathematics Practice</strong>
+                <p style="color:var(--muted); margin-top:0.35rem;">12 questions • Beginner to advanced</p>
+              </div>
+              <div class="subject-row">
+                <strong>English Language Revision</strong>
+                <p style="color:var(--muted); margin-top:0.35rem;">Vocabulary, grammar, and comprehension drills</p>
+              </div>
+              <div class="subject-row">
+                <strong>Integrated Science</strong>
+                <p style="color:var(--muted); margin-top:0.35rem;">Mock test and revision challenge</p>
+              </div>
+              <div class="score-box">
+                <strong>Progress this week</strong>
+                <div class="progress-bar" style="margin-top:0.8rem; background:#dbeafe;"><div class="progress-fill" style="width:78%;"></div></div>
+                <p style="margin-top:0.5rem; color:var(--muted);">You are doing better than last week. Keep going.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <h2>How KwikLearn works</h2>
+          <p>Simple, guided, and effective learning support for exam preparation.</p>
+        </div>
+        <div class="steps-grid">
+          <div class="card">
+            <div class="icon-box">1</div>
+            <h3>Choose your level</h3>
+            <p>Select your class, exam path, or subject area to begin focused learning.</p>
+          </div>
+          <div class="card">
+            <div class="icon-box">2</div>
+            <h3>Practice consistently</h3>
+            <p>Use quizzes, mock tests, and revision materials to strengthen weak areas.</p>
+          </div>
+          <div class="card">
+            <div class="icon-box">3</div>
+            <h3>Track improvement</h3>
+            <p>Monitor scores, progress, and learning habits over time with simple reports.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <h2>Why families and schools can trust KwikLearn</h2>
+          <p>
+            KwikLearn is being built with a clear purpose: to make learning support more accessible, practical, and meaningful for students.
+          </p>
+        </div>
+        <div class="stats-grid">
+          <div class="card">
+            <div class="icon-box">✓</div>
+            <h3>Clear academic focus</h3>
+            <p>Every feature is designed around learning improvement, revision quality, and exam preparation.</p>
+          </div>
+          <div class="card">
+            <div class="icon-box">✓</div>
+            <h3>Simple and student-friendly</h3>
+            <p>KwikLearn aims to be easy to use for students, parents, teachers, and school partners.</p>
+          </div>
+          <div class="card">
+            <div class="icon-box">✓</div>
+            <h3>Built for growth</h3>
+            <p>The platform starts focused and practical, with room to expand into a wider learning ecosystem.</p>
+          </div>
+          <div class="card">
+            <div class="icon-box">✓</div>
+            <h3>Made with purpose</h3>
+            <p>KwikLearn is not just another app idea. It is being developed as a serious education brand.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container split">
+        <div>
+          <div class="badge">Our future vision</div>
+          <h2 style="font-size:clamp(2rem,4vw,3rem); line-height:1.12; margin-bottom:1rem;">A bold long-term vision for the KwikLearn brand.</h2>
+          <p style="color:var(--muted); margin-bottom:1rem;">
+            KwikLearn is being built with ambition. This visual represents the scale, structure, and impact we hope to create in the future as the brand grows across education, technology, and student support.
+          </p>
+          <ul class="check-list">
+            <li>Aspiring to build a trusted education brand</li>
+            <li>Focused on long-term impact in learning</li>
+            <li>Designed with growth, structure, and innovation in mind</li>
+            <li>Committed to supporting students, schools, and families</li>
+          </ul>
+        </div>
+        <div>
+          <img src="KWIKLEARN BUILDING.png" alt="KwikLearn future vision building concept" style="width:100%; height:auto; border-radius:24px; box-shadow:var(--card-shadow); border:1px solid var(--border);" />
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="waitlist">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Be among the first to know when KwikLearn launches.</h2>
+          <p>
+            For inquiries, partnerships, or early access, reach out to us by email or WhatsApp.
+          </p>
+          <div class="hero-actions" style="justify-content:center; margin-bottom:0;">
+            <a href="mailto:info@kwiklearn.app" class="btn btn-primary">Email Us</a>
+            <a href="https://wa.me/233244272204" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>KwikLearn</h4>
+          <p>
+            Smarter digital learning support for students, schools, and families preparing for success.
+          </p>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="#students">Who It Helps</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:info@kwiklearn.app">info@kwiklearn.app</a></li>
+            <li><a href="mailto:support@kwiklearn.app">support@kwiklearn.app</a></li>
+            <li><a href="https://wa.me/233244272204" target="_blank" rel="noopener noreferrer">WhatsApp: +233 24 427 2204</a></li>
+            <li>Response time: Within 24–48 hours</li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Follow the journey</h4>
+          <ul>
+            <li><a href="https://www.facebook.com/Kwiklearnapp/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+            <li><a href="https://youtube.com/@tinotechacks?si=74PSz-Q0nm8_qezH" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        © 2026 KwikLearn. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+<script>
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileNav = document.getElementById("mobileNav");
+  const mobileLinks = mobileNav.querySelectorAll("a");
+
+  menuToggle.addEventListener("click", function () {
+    mobileNav.classList.toggle("active");
+  });
+
+  mobileLinks.forEach(link => {
+    link.addEventListener("click", function () {
+      mobileNav.classList.remove("active");
+    });
+  });
+</script>
+</body>
+</html>
