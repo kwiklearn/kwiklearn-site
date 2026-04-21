@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KwikLearn Blog | Education Tips, Exam Prep & Student Success Stories</title>
+
+<meta name="description"
+  content="Explore the KwikLearn Blog for expert tips on BECE & WASSCE preparation, scholarship opportunities, study strategies, and success stories from Ghanaian students.">
+
+<meta name="keywords"
+  content="KwikLearn blog, BECE tips, WASSCE preparation, Ghana scholarships, study tips, exam success, student guides, education Ghana">
+
+<meta name="author" content="KwikLearn">
+<meta name="robots" content="index, follow">
+<meta name="language" content="English">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://www.kwiklearn.com/blog.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="KwikLearn Blog | Education Tips & Student Success">
+<meta property="og:description"
+  content="Expert tips on BECE & WASSCE preparation, scholarships, and study strategies for Ghanaian students.">
+<meta property="og:url" content="https://www.kwiklearn.com/blog.html">
+<meta property="og:site_name" content="KwikLearn">
+<meta property="og:image" content="./kwiklearn logo.jpg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KwikLearn Blog">
+<meta name="twitter:description"
+  content="Expert tips on BECE & WASSCE preparation, scholarships, and study strategies.">
+<meta name="twitter:image" content="./kwiklearn logo.jpg">
+
+<!-- Favicon -->
+<link rel="icon" href="./favicon.png" type="image/x-icon">
+
+<!-- Theme Color -->
+<meta name="theme-color" content="#1E3A8A">
+
+<!-- Preconnect for performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #1E3A8A;
+      --primary-light: #3B5CB8;
+      --primary-dark: #152A66;
+      --secondary: #F97316;
+      --secondary-light: #FB923C;
+      --secondary-dark: #EA580C;
+      --text-dark: #0F172A;
+      --text-muted: #475569;
+      --text-light: #94A3B8;
+      --bg-light: #F8FAFC;
+      --bg-cream: #FFFBF5;
+      --white: #FFFFFF;
+      --border: #E2E8F0;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text-dark);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text-dark);
+    }
+
+    p {
+      color: var(--text-muted);
+    }
+
+    a {
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    /* Announcement Bar */
+    .announcement-bar {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+      padding: 10px 0;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .announcement-bar i {
+      margin-right: 8px;
+      color: var(--secondary);
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      padding: 12px 0;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .navbar.scrolled {
+      padding: 12px 0;
+      box-shadow: var(--shadow-md);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .navbar-brand img {
+      height: 44px;
+      width: auto;
+      border-radius: 10px;
+    }
+
+    .brand-kwik {
+      color: var(--primary);
+    }
+
+    .brand-learn {
+      color: var(--secondary);
+    }
+
+    .navbar-nav .nav-link {
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 8px 16px !important;
+      border-radius: var(--radius-sm);
+      transition: all 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .navbar-nav .nav-link.active {
+      color: var(--primary);
+    }
+
+    .btn-waitlist {
+      background: var(--secondary);
+      color: var(--white);
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 50px;
+      border: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.3);
+    }
+
+    .btn-waitlist:hover {
+      background: var(--secondary-dark);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+    }
+
+    .navbar-toggler {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(180deg, #EFF6FF 0%, #FFFFFF 100%);
+      padding: 100px 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 12s ease-in-out infinite;
+    }
+
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -5%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+
+    .page-header-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .page-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+      color: #92400E;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      border: 1px solid #FCD34D;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .page-header h1 .highlight {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-header p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb-custom {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 24px;
+      font-size: 14px;
+    }
+
+    .breadcrumb-custom a {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .breadcrumb-custom a:hover {
+      color: var(--secondary);
+    }
+
+    .breadcrumb-custom span {
+      color: var(--text-light);
+    }
+
+    /* Blog Section */
+    .blog-section {
+      padding: 80px 0 100px;
+      background: var(--white);
+    }
+
+    /* Category Filter */
+    .category-filter {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 50px;
+    }
+
+    .category-btn {
+      background: var(--white);
+      color: var(--text-dark);
+      border: 2px solid var(--border);
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .category-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: #EEF2FF;
+    }
+
+    .category-btn.active {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+
+    .category-btn i {
+      font-size: 16px;
+    }
+
+    /* Blog Grid */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    @media (max-width: 991px) {
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Blog Card */
+    .blog-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid var(--border);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px -12px rgba(30, 58, 138, 0.2);
+      border-color: rgba(30, 58, 138, 0.15);
+    }
+
+    .blog-card-image {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .blog-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .blog-card:hover .blog-card-image img {
+      transform: scale(1.08);
+    }
+
+    .blog-category-tag {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--white);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .blog-category-tag.bece-wassce {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--white);
+    }
+
+    .blog-category-tag.scholarships {
+      background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+      color: var(--white);
+    }
+
+    .blog-category-tag.study-tips {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
+      color: var(--white);
+    }
+
+    .blog-category-tag.parent-guides {
+      background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%);
+      color: var(--white);
+    }
+
+    .blog-category-tag.ict {
+      background: linear-gradient(135deg, #0891B2 0%, #22D3EE 100%);
+      color: var(--white);
+    }
+
+    .blog-category-tag.career {
+      background: linear-gradient(135deg, #DC2626 0%, #F87171 100%);
+      color: var(--white);
+    }
+
+    .blog-card-content {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .blog-card-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .blog-card-meta i {
+      font-size: 14px;
+    }
+
+    .blog-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.4;
+      color: var(--text-dark);
+      transition: color 0.3s ease;
+    }
+
+    .blog-card:hover h3 {
+      color: var(--primary);
+    }
+
+    .blog-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    .blog-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .blog-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .blog-author-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .blog-author-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .read-more-btn {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .read-more-btn:hover {
+      color: var(--secondary);
+      gap: 10px;
+    }
+
+    /* Featured Article */
+    .featured-article {
+      background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      margin-bottom: 60px;
+      border: 2px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .featured-article .row {
+      align-items: stretch;
+    }
+
+    .featured-image {
+      height: 100%;
+      min-height: 350px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: var(--secondary);
+      color: var(--white);
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .featured-content {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .featured-content .blog-category-tag {
+      position: static;
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 16px;
+    }
+
+    .featured-content h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .featured-content p {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .btn-read-article {
+      background: var(--primary);
+      color: var(--white);
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(30, 58, 138, 0.3);
+    }
+
+    .btn-read-article:hover {
+      background: var(--primary-dark);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.15) 0%, transparent 60%);
+      border-radius: 50%;
+    }
+
+    .newsletter-section::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+      border-radius: 50%;
+    }
+
+    .newsletter-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--white);
+    }
+
+    .newsletter-content h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .newsletter-content p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      min-width: 250px;
+      padding: 16px 24px;
+      border-radius: 50px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-form input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .newsletter-form input:focus {
+      outline: none;
+      border-color: var(--secondary);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .newsletter-form button {
+      background: var(--secondary);
+      color: var(--white);
+      padding: 16px 32px;
+      border-radius: 50px;
+      border: none;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.4);
+    }
+
+    .newsletter-form button:hover {
+      background: var(--secondary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+    }
+
+    /* Pagination */
+    .pagination-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 60px;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 8px;
+    }
+
+    .pagination .page-link {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      color: var(--text-dark);
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .pagination .page-link:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: #EEF2FF;
+    }
+
+    .pagination .page-item.active .page-link {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--white);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--text-dark);
+      color: rgba(255, 255, 255, 0.8);
+      padding: 80px 0 40px;
+    }
+
+    .footer-brand {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .footer-brand .brand-kwik {
+      color: var(--white);
+    }
+
+    .footer-brand .brand-learn {
+      color: var(--secondary);
+    }
+
+    .footer-description {
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 300px;
+      color: #94A3B8;
+    }
+
+    .footer-links small {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #94A3B8;
+    }
+
+    .footer-title {
+      color: var(--white);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #94A3B8;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--secondary);
+    }
+
+    footer h5 {
+      color: var(--white);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94A3B8;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: var(--secondary);
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 30px;
+      margin-top: 60px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .footer-bottom p {
+      color: #94A3B8;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    footer .navbar-brand {
+      font-size: 22px;
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+      .featured-content {
+        padding: 30px;
+      }
+
+      .featured-image {
+        min-height: 280px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .page-header {
+        padding: 80px 0 50px;
+      }
+
+      .category-filter {
+        gap: 8px;
+      }
+
+      .category-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+      }
+
+      .featured-content {
+        padding: 24px;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .newsletter-form input {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <i class="bi bi-stars"></i>
+    KwikLearn is launching soon! Join the waitlist for early access.
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="./kwiklearn logo.jpg" alt="KwikLearn Logo">
+        <span class="brand-kwik">Kwik</span><span class="brand-learn">Learn</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+          <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <a href="#waitlist" class="btn btn-waitlist">Join Waitlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <div class="page-header-content">
+        <span class="page-badge">
+          <i class="bi bi-journal-bookmark-fill"></i>
+          Learn & Grow
+        </span>
+        <h1><span class="highlight">KwikLearn</span> Blog</h1>
+        <p>Expert tips, study strategies, and success stories to help you ace your BECE & WASSCE exams and build a brighter future.</p>
+        <div class="breadcrumb-custom">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <span>Blog</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Section -->
+  <section class="blog-section">
+    <div class="container">
+
+      <!-- Category Filter -->
+      <div class="category-filter">
+        <button class="category-btn active">
+          <i class="bi bi-grid-3x3-gap-fill"></i>
+          All Articles
+        </button>
+        <button class="category-btn">
+          <i class="bi bi-mortarboard-fill"></i>
+          BECE & WASSCE
+        </button>
+        <button class="category-btn">
+          <i class="bi bi-award-fill"></i>
+          Scholarships
+        </button>
+        <button class="category-btn">
+          <i class="bi bi-lightbulb-fill"></i>
+          Study Tips
+        </button>
+        <button class="category-btn">
+          <i class="bi bi-people-fill"></i>
+          Parent Guides
+        </button>
+        <button class="category-btn">
+          <i class="bi bi-laptop-fill"></i>
+          ICT / Digital Skills
+        </button>
+        <button class="category-btn">
+          <i class="bi bi-briefcase-fill"></i>
+          Career Guidance
+        </button>
+      </div>
+
+      <!-- Featured Article -->
+      <div class="featured-article">
+        <div class="row g-0">
+          <div class="col-lg-6">
+            <div class="featured-image">
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop" alt="WASSCE Preparation">
+              <span class="featured-badge">
+                <i class="bi bi-star-fill"></i>
+                Featured
+              </span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="featured-content">
+              <span class="blog-category-tag bece-wassce">BECE & WASSCE</span>
+              <h2>Complete Guide to WASSCE 2025: What Every Student Should Know</h2>
+              <p>Get ready for your WASSCE exams with our comprehensive guide covering registration deadlines, exam timetables, study strategies, and tips from top-performing students in Ghana.</p>
+              <div class="blog-card-meta mb-3">
+                <span><i class="bi bi-calendar3"></i> January 15, 2025</span>
+                <span><i class="bi bi-clock"></i> 8 min read</span>
+              </div>
+              <a href="#" class="btn-read-article">
+                Read Full Article
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog Grid -->
+      <div class="blog-grid">
+
+        <!-- Article 1 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop" alt="Study Tips">
+            <span class="blog-category-tag study-tips">Study Tips</span>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">
+              <span><i class="bi bi-calendar3"></i> Jan 12, 2025</span>
+              <span><i class="bi bi-clock"></i> 5 min</span>
+            </div>
+            <h3>10 Proven Study Techniques That Top BECE Students Use</h3>
+            <p>Discover the study methods and habits that helped students score A1s in their BECE exams. From active recall to spaced repetition.</p>
+            <div class="blog-card-footer">
+              <div class="blog-author">
+                <div class="blog-author-avatar">KL</div>
+                <span class="blog-author-name">KwikLearn Team</span>
+              </div>
+              <a href="#" class="read-more-btn">
+                Read <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 2 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=400&fit=crop" alt="Scholarships">
+            <span class="blog-category-tag scholarships">Scholarships</span>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">
+              <span><i class="bi bi-calendar3"></i> Jan 10, 2025</span>
+              <span><i class="bi bi-clock"></i> 6 min</span>
+            </div>
+            <h3>Top 15 Scholarships Available for Ghanaian Students in 2025</h3>
+            <p>A complete list of local and international scholarship opportunities for JHS and SHS students, including deadlines and application tips.</p>
+            <div class="blog-card-footer">
+              <div class="blog-author">
+                <div class="blog-author-avatar">AA</div>
+                <span class="blog-author-name">Ama Asante</span>
+              </div>
+              <a href="#" class="read-more-btn">
+                Read <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 3 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?w=600&h=400&fit=crop" alt="Parent Guide">
+            <span class="blog-category-tag parent-guides">Parent Guides</span>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">
+              <span><i class="bi bi-calendar3"></i> Jan 8, 2025</span>
+              <span><i class="bi bi-clock"></i> 7 min</span>
+            </div>
+            <h3>How Parents Can Support Their Children During Exam Season</h3>
+            <p>Practical advice for parents on creating a supportive home environment, managing exam stress, and helping your child succeed.</p>
+            <div class="blog-card-footer">
+              <div class="blog-author">
+                <div class="blog-author-avatar">EO</div>
+                <span class="blog-author-name">Efua Owusu</span>
+              </div>
+              <a href="#" class="read-more-btn">
+                Read <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 4 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" alt="ICT Skills">
+            <span class="blog-category-tag ict">ICT / Digital Skills</span>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">
+              <span><i class="bi bi-calendar3"></i> Jan 5, 2025</span>
+              <span><i class="bi bi-clock"></i> 6 min</span>
+            </div>
+            <h3>Essential Digital Skills Every Student Needs in 2025</h3>
+            <p>From basic computer literacy to online research skills, learn the digital competencies that will help you succeed in school and beyond.</p>
+            <div class="blog-card-footer">
+              <div class="blog-author">
+                <div class="blog-author-avatar">KM</div>
+                <span class="blog-author-name">Kofi Mensah</span>
+              </div>
+              <a href="#" class="read-more-btn">
+                Read <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 5 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop" alt="Success Story">
+            <span class="blog-category-tag study-tips">Success Stories</span>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">
+              <span><i class="bi bi-calendar3"></i> Jan 3, 2025</span>
+              <span><i class="bi bi-clock"></i> 5 min</span>
+            </div>
+            <h3>From Village School to Top University: Kwame's Inspiring Journey</h3>
+            <p>Read how Kwame overcame challenges to score 8 A1s in his WASSCE and secure a full scholarship to the University of Ghana.</p>
+            <div class="blog-card-footer">
+              <div class="blog-author">
+                <div class="blog-author-avatar">KL</div>
+                <span class="blog-author-name">KwikLearn Team</span>
+              </div>
+              <a href="#" class="read-more-btn">
+                Read <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 6 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop" alt="Career Guidance">
+            <span class="blog-category-tag career">Career Guidance</span>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">
+              <span><i class="bi bi-calendar3"></i> Dec 28, 2024</span>
+              <span><i class="bi bi-clock"></i> 8 min</span>
+            </div>
+            <h3>Choosing the Right SHS Program: Science, Business, or Arts?</h3>
+            <p>A comprehensive guide to help BECE graduates choose the best SHS program based on their interests, strengths, and career goals.</p>
+            <div class="blog-card-footer">
+              <div class="blog-author">
+                <div class="blog-author-avatar">NA</div>
+                <span class="blog-author-name">Nana Adjei</span>
+              </div>
+              <a href="#" class="read-more-btn">
+                Read <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 7 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&h=400&fit=crop" alt="BECE Preparation">
+            <span class="blog-category-tag bece-wassce">BECE & WASSCE</span>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">
+              <span><i class="bi bi-calendar3"></i> Dec 25, 2024</span>
+              <span><i class="bi bi-clock"></i> 6 min</span>
+            </div>
+            <h3>BECE Mathematics: Common Mistakes to Avoid in Your Exams</h3>
+            <p>Learn about the most frequent errors students make in BECE Maths and how to avoid them to boost your scores significantly.</p>
+            <div class="blog-card-footer">
+              <div class="blog-author">
+                <div class="blog-author-avatar">AB</div>
+                <span class="blog-author-name">Akua Boateng</span>
+              </div>
+              <a href="#" class="read-more-btn">
+                Read <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 8 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop" alt="Exam Updates">
+            <span class="blog-category-tag career">Exam Updates</span>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">
+              <span><i class="bi bi-calendar3"></i> Dec 20, 2024</span>
+              <span><i class="bi bi-clock"></i> 4 min</span>
+            </div>
+            <h3>WAEC Announces New Changes to 2025 Examination Format</h3>
+            <p>Important updates from WAEC regarding the 2025 WASSCE examination structure, marking scheme, and new subject requirements.</p>
+            <div class="blog-card-footer">
+              <div class="blog-author">
+                <div class="blog-author-avatar">KL</div>
+                <span class="blog-author-name">KwikLearn Team</span>
+              </div>
+              <a href="#" class="read-more-btn">
+                Read <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 9 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&h=400&fit=crop" alt="Scholarships">
+            <span class="blog-category-tag scholarships">Scholarships</span>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">
+              <span><i class="bi bi-calendar3"></i> Dec 18, 2024</span>
+              <span><i class="bi bi-clock"></i> 7 min</span>
+            </div>
+            <h3>How to Write a Winning Scholarship Essay: Step-by-Step Guide</h3>
+            <p>Master the art of writing compelling scholarship essays with tips on structure, content, and common pitfalls to avoid.</p>
+            <div class="blog-card-footer">
+              <div class="blog-author">
+                <div class="blog-author-avatar">AA</div>
+                <span class="blog-author-name">Ama Asante</span>
+              </div>
+              <a href="#" class="read-more-btn">
+                Read <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Pagination -->
+      <nav class="pagination-wrapper">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-content">
+        <h2>Stay Updated with KwikLearn</h2>
+        <p>Get the latest study tips, exam updates, and scholarship opportunities delivered straight to your inbox.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Enter your email address" required>
+          <button type="submit">
+            Subscribe
+            <i class="bi bi-send-fill"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <a class="navbar-brand mb-3" href="index.html">
+            <span class="brand-kwik" style="color: #fff;">Kwik</span><span class="brand-learn">Learn</span>
+          </a>
+          <p class="footer-description mt-3">Empowering Ghanaian students to achieve academic excellence through smart, accessible digital learning tools.</p>
+          <div class="social-links mt-4">
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-twitter-x"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+            <a href="#"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h5>Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h5>Resources</h5>
+          <ul class="footer-links">
+            <li><a href="#">BECE Prep</a></li>
+            <li><a href="#">WASSCE Prep</a></li>
+            <li><a href="#">Mock Exams</a></li>
+            <li><a href="#">Study Guides</a></li>
+            <li><a href="#">FAQs</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h5>Contact Us</h5>
+          <ul class="footer-links">
+            <li>
+              <small><i class="bi bi-envelope me-2"></i> hello@kwiklearn.com</small>
+            </li>
+            <li>
+              <small><i class="bi bi-telephone me-2"></i> +233 XX XXX XXXX</small>
+            </li>
+            <li>
+              <small><i class="bi bi-geo-alt me-2"></i> Accra, Ghana</small>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 KwikLearn. All rights reserved. Empowering Students Across Ghana.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Navbar Scroll Effect -->
+  <script>
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Category Filter (for demo purposes)
+    document.querySelectorAll('.category-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
+</content>
+</invoke>
