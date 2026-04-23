@@ -64,7 +64,8 @@
       --secondary: #F97316;
       --secondary-light: #FB923C;
       --secondary-dark: #EA580C;
-      --text-dark: #1F2937;
+   /*   --text-dark: #1F2937; */
+   --text-dark: black;
       /* --text-muted: #6B7280; */
       --text-muted: black;
       --text-light: #9CA3AF;
@@ -99,6 +100,13 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
+
+    a:focus{
+    outline: 2px solid #F97316 !important;
+  outline-offset: 2px !important;
+  box-shadow: none !important;
+}
+
 
     /* Typography */
     h1,
@@ -180,7 +188,7 @@
       font-weight: 600;
       font-size: 15px;
       padding: 8px 16px !important;
-      border-radius: var(--radius-sm);
+      /* border-radius: var(--radius-sm); */
       transition: all 0.3s ease;
     }
 

@@ -63,9 +63,10 @@
       --secondary: #F97316;
       --secondary-light: #FB923C;
       --secondary-dark: #EA580C;
-      --text-dark: #0F172A;
+      /* --text-dark: #0F172A; */
+        --text-dark: black;
       --text-muted: black;
-      --text-light: #9CA3AF;
+      --text-light: black;
       --bg-light: #F8FAFC;
       --bg-cream: #FFFBF5;
       --white: #FFFFFF;
@@ -97,6 +98,13 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
+
+        a:focus{
+    outline: 2px solid #F97316 !important;
+  outline-offset: 2px !important;
+  box-shadow: none !important;
+}
+
 
     /* Typography */
     h1, h2, h3, h4, h5, h6 {
@@ -172,7 +180,7 @@
       font-weight: 600;
       font-size: 15px;
       padding: 8px 16px !important;
-      border-radius: var(--radius-sm);
+      /* border-radius: var(--radius-sm); */
       transition: all 0.3s ease;
     }
 
