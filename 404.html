@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found | KwikLearn</title>
+<meta name="description" content="The page you were looking for could not be found on KwikLearn. Go to the homepage, About page or the KwikLearn Blog.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0d6efd">
+
+<!-- Absolute asset paths: this page is served for any unknown URL, at any depth. -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
+
+<style>
+  :root { --blue: #0d6efd; --navy: #07185b; --ink: #1f2937; --muted: #5b6472; --bg: #f4f8ff; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  header { padding: 20px 16px; text-align: center; background: #fff; border-bottom: 1px solid #e3ebf8; }
+  header img { height: 40px; width: auto; max-width: 70%; }
+  main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 16px; }
+  .card {
+    background: #fff; border-radius: 16px; padding: 40px 28px; max-width: 560px; width: 100%;
+    text-align: center; box-shadow: 0 8px 28px rgba(7, 24, 91, 0.08);
+  }
+  .code { font-size: 64px; font-weight: 800; line-height: 1; color: var(--blue); margin: 0 0 8px; }
+  h1 { font-size: 24px; margin: 0 0 12px; color: var(--navy); }
+  p { margin: 0 0 24px; color: var(--muted); }
+  .links { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .links a {
+    display: inline-block; padding: 12px 22px; border-radius: 999px; text-decoration: none;
+    font-weight: 600; border: 2px solid var(--blue); color: var(--blue); min-width: 120px;
+  }
+  .links a.primary { background: var(--blue); color: #fff; }
+  .links a:hover, .links a:focus-visible { background: var(--navy); border-color: var(--navy); color: #fff; outline: none; }
+  footer { padding: 20px 16px; text-align: center; font-size: 14px; color: var(--muted); }
+  footer a { color: var(--blue); }
+</style>
+</head>
+<body>
+  <header>
+    <a href="/"><img src="/brand/kwiklearn-wordmark.svg" alt="KwikLearn"></a>
+  </header>
+
+  <main>
+    <div class="card">
+      <p class="code" aria-hidden="true">404</p>
+      <h1>We couldn&rsquo;t find that page</h1>
+      <p>The link may be old or mistyped. Try one of these instead.</p>
+      <nav class="links" aria-label="Helpful links">
+        <a class="primary" href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="https://blog.kwiklearn.app/">Blog</a>
+      </nav>
+    </div>
+  </main>
+
+  <footer>
+    <a href="/privacy-policy/">Privacy Policy</a> &middot;
+    <a href="/terms/">Terms of Service</a> &middot;
+    <a href="/account-deletion/">Account Deletion</a>
+  </footer>
+</body>
+</html>
