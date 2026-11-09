@@ -1,8 +1,9 @@
 /*
  * KwikLearn homepage behaviour
  * ----------------------------------------------------------------------------
- * 1) Launch-state configuration: ONE place that controls the primary call to
- *    action, the status label and every launch-dependent line of homepage copy
+ * 1) Site facts (official Play Store URL, current subjects) and the launch-state
+ *    configuration: ONE place each; the launch state controls the primary call to
+ *    action and the few lines of copy that differ before and after launch
  * 2) User-controlled hero carousel (no autoplay)
  * 3) App screenshot slots
  *
@@ -12,56 +13,79 @@
   'use strict';
 
   /* ==========================================================================
-   * 1) LAUNCH STATE  (the single place to change the call to action)
+   * 1a) SITE FACTS  (the single place for facts that appear in several spots)
+   * --------------------------------------------------------------------------
+   * playStoreUrl   The OFFICIAL public Google Play listing URL. Empty until the
+   *                owner confirms the app is publicly available. Paste the
+   *                address copied from the live listing, in the form
+   *                  https://play.google.com/store/apps/details?id=<application id>
+   *                Do not guess it. It is used by the public-launch button and the
+   *                official Google Play badge, and by nothing else.
+   * subjects       Subjects the app covers today. Edit when a subject launches.
+   *   available        shown in the hero label, description, trust point and the
+   *                    "choose your subject" card (homepage text slots data-site=...).
+   *   shownInScreens   what the three app screenshots actually show. Update it only
+   *                    when the screenshots are replaced.
+   *
+   * NOT controlled from here (static HTML, read by search engines and by visitors
+   * without JavaScript, so review them by hand when this changes): meta description,
+   * keywords, og:/twitter: descriptions, structured data, the About page, FAQ answers,
+   * and the wording of the hero description fallback.
+   * ========================================================================== */
+  var KWIKLEARN_SITE = {
+    playStoreUrl: '',   // <<< OWNER: the VERIFIED public Google Play listing URL (do not guess)
+    subjects: {
+      available: ['Mathematics'],
+      shownInScreens: ['Mathematics']
+    }
+  };
+  window.KWIKLEARN_SITE = KWIKLEARN_SITE;
+
+  function joinList(items) {
+    if (items.length <= 1) { return items.join(''); }
+    return items.slice(0, -1).join(', ') + ' and ' + items[items.length - 1];
+  }
+
+  /* ==========================================================================
+   * 1b) LAUNCH STATE  (the single place to change the call to action)
    * --------------------------------------------------------------------------
    * THE ONLY SWITCH IS  state  BELOW.
    *
-   *   'prelaunch' (default)  Status label "Coming soon to Google Play". The primary
-   *                          button is "Explore KwikLearn" and scrolls to the
-   *                          Features section. There is NO link to Google Play and
+   *   'prelaunch' (default)  The primary button is "Explore KwikLearn" and scrolls to
+   *                          the Features section. There is NO link to Google Play and
    *                          no claim that the app can be downloaded.
-   *   'public'               The primary button is “Get KwikLearn on Google Play” and
-   *                          links to the public Google Play listing.
+   *   'public'               The hero shows the official "Get it on Google Play" badge
+   *                          and the navbar button reads "Get KwikLearn on Google Play";
+   *                          both link to KWIKLEARN_SITE.playStoreUrl.
    *
    * TO GO PUBLIC (only after the owner confirms the app is publicly available):
-   *   1. Open the live Google Play listing in a browser and copy its URL, in the form
-   *        https://play.google.com/store/apps/details?id=<application id>
-   *      Paste it into  public.button.href  below. Do not guess it.
+   *   1. Set KWIKLEARN_SITE.playStoreUrl (above) to the verified listing URL.
    *   2. Review the  public  wording below (owner approval).
    *   3. Set  state: 'public'.
+   *   4. Review the static SEO fields listed in the review notes (12-launch-state-guide).
    *
-   * SAFETY: if state is 'public' but public.button.href is empty or is not a Google
-   * Play listing URL, the page stays in 'prelaunch' and writes a console warning,
-   * so a broken or invented link can never go live.
+   * SAFETY: if state is 'public' but playStoreUrl is empty or is not a Google Play
+   * listing URL, the page stays in 'prelaunch' and writes a console warning, so a
+   * broken or invented link can never go live.
    *
-   * The HTML itself contains the pre-launch wording as the no-JavaScript fallback.
+   * Only wording that must differ between the two states lives here. Everything else
+   * on the page is permanent (evergreen) copy. The HTML contains the pre-launch wording
+   * as the no-JavaScript fallback.
    * ========================================================================== */
   var KWIKLEARN_LAUNCH = {
     state: 'prelaunch',   // <<< THE ONLY SWITCH: 'prelaunch' or 'public'
 
     prelaunch: {
-      statusLabel: 'Coming soon to Google Play',
       button: { label: 'Explore KwikLearn', href: '#features', external: false },
-      announcement: 'KwikLearn is coming soon to Google Play, starting with Mathematics.',
-      heroNote: 'KwikLearn is not available to download yet. We will add a Google Play download button here when it launches.',
-      finalHeading: 'KwikLearn is coming soon to Google Play.',
-      faqQuestion: 'When can I download KwikLearn?',
-      faqAnswer: 'KwikLearn is coming soon to Google Play for Android and is not available to download yet. When it launches, this page will show a “Get KwikLearn on Google Play” button.'
+      heroNote: 'KwikLearn is not available to download yet.',
+      faqAnswer: 'KwikLearn is built for Android and is not available to download yet. This page will link to the official Google Play listing when it is available.'
     },
 
     // Prepared but INACTIVE. Owner to approve the wording and supply the verified listing URL.
     public: {
-      statusLabel: 'Available on Google Play',
-      button: {
-        label: 'Get KwikLearn on Google Play',
-        href: '',          // <<< OWNER: paste the VERIFIED public Google Play listing URL here (do not guess)
-        external: true
-      },
-      announcement: 'KwikLearn is now on Google Play, starting with Mathematics.',
-      heroNote: 'Available for Android on Google Play in Ghana.',
-      finalHeading: 'Get KwikLearn on Google Play.',
-      faqQuestion: 'How can I download KwikLearn?',
-      faqAnswer: 'KwikLearn is available on Google Play for Android. Use the “Get KwikLearn on Google Play” button on this page.'
+      button: { label: 'Get KwikLearn on Google Play', href: KWIKLEARN_SITE.playStoreUrl, external: true },
+      heroNote: '',
+      faqAnswer: 'KwikLearn is available for Android on Google Play. Use the Google Play badge on this page to get the app.'
     }
   };
   window.KWIKLEARN_LAUNCH = KWIKLEARN_LAUNCH;
@@ -79,16 +103,32 @@
     return 'prelaunch';
   }
 
+  function applySite() {
+    var list = joinList(KWIKLEARN_SITE.subjects.available);
+    var shown = joinList(KWIKLEARN_SITE.subjects.shownInScreens);
+    var text = {
+      subjects: list,
+      subjectsStart: 'Starting with ' + list,
+      subjectsFocus: KWIKLEARN_SITE.subjects.available.length === 1 ? list + '-focused practice' : list + ' practice'
+    };
+    var els = document.querySelectorAll('[data-site]');
+    for (var i = 0; i < els.length; i++) {
+      var key = els[i].getAttribute('data-site');
+      if (Object.prototype.hasOwnProperty.call(text, key)) { els[i].textContent = text[key]; }
+    }
+    KWIKLEARN_APP_SCREENS.shownSubjects = shown;
+  }
+
   function applyLaunch() {
     var name = activeState();
     var s = KWIKLEARN_LAUNCH[name];
     document.documentElement.setAttribute('data-launch-state', name);
 
-    // Text slots: <el data-launch="statusLabel|announcement|heroNote|finalHeading|faqQuestion|faqAnswer">
-    var keys = ['statusLabel', 'announcement', 'heroNote', 'finalHeading', 'faqQuestion', 'faqAnswer'];
+    // Text slots: <el data-launch="heroNote|faqAnswer">  (an empty string hides the element)
+    var keys = ['heroNote', 'faqAnswer'];
     for (var k = 0; k < keys.length; k++) {
       var els = document.querySelectorAll('[data-launch="' + keys[k] + '"]');
-      for (var e = 0; e < els.length; e++) { els[e].textContent = s[keys[k]]; }
+      for (var e = 0; e < els.length; e++) { els[e].textContent = s[keys[k]]; els[e].hidden = !s[keys[k]]; }
     }
 
     // Primary call to action: <a data-cta="primary"> with an optional <span data-cta-label>
@@ -107,7 +147,21 @@
       if (label) { label.textContent = s.button.label; }
     }
 
-    // Elements that exist in one state only: <el data-show-in="public">
+    // Official Google Play badge links (only ever visible in the public state)
+    var badges = document.querySelectorAll('[data-play-link]');
+    for (var b = 0; b < badges.length; b++) {
+      if (name === 'public') {
+        badges[b].setAttribute('href', KWIKLEARN_SITE.playStoreUrl);
+        badges[b].setAttribute('target', '_blank');
+        badges[b].setAttribute('rel', 'noopener noreferrer');
+      } else {
+        badges[b].removeAttribute('href');
+        badges[b].removeAttribute('target');
+        badges[b].removeAttribute('rel');
+      }
+    }
+
+    // Elements that exist in one state only: <el data-show-in="public"> or "prelaunch"
     var only = document.querySelectorAll('[data-show-in]');
     for (var o = 0; o < only.length; o++) { only[o].hidden = only[o].getAttribute('data-show-in') !== name; }
   }
@@ -221,15 +275,20 @@
   var KWIKLEARN_APP_SCREENS = {
     genuine: true,
     illustrativeNote: 'Illustrative app screens with sample data. They are not real learner statistics, and they do not show every subject that is available today.',
-    genuineNote: 'Screens captured on an Android test device with sample data. They are not real learner statistics, and the app currently covers Mathematics only.'
+    genuineNote: 'Screens captured on an Android test device with sample data. They are not real learner statistics.',
+    shownSubjects: 'Mathematics'
   };
   window.KWIKLEARN_APP_SCREENS = KWIKLEARN_APP_SCREENS;
 
   function applyAppScreens() {
     var note = document.getElementById('appScreensNote');
-    if (note) { note.textContent = KWIKLEARN_APP_SCREENS.genuine ? KWIKLEARN_APP_SCREENS.genuineNote : KWIKLEARN_APP_SCREENS.illustrativeNote; }
+    if (note) {
+      note.textContent = KWIKLEARN_APP_SCREENS.genuine
+        ? KWIKLEARN_APP_SCREENS.genuineNote + ' The screens show ' + KWIKLEARN_APP_SCREENS.shownSubjects + ' only.'
+        : KWIKLEARN_APP_SCREENS.illustrativeNote;
+    }
   }
 
-  function ready() { applyLaunch(); applyAppScreens(); initCarousel(); }
+  function ready() { applySite(); applyLaunch(); applyAppScreens(); initCarousel(); }
   if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', ready); } else { ready(); }
 }());

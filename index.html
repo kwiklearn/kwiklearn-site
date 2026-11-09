@@ -188,20 +188,8 @@
       transition: all 0.3s ease;
     }
 
-    /* Announcement Bar */
-    .announcement-bar {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: var(--white);
-      padding: 10px 0;
-      font-size: 14px;
-      font-weight: 500;
-      text-align: center;
-    }
-
-    .announcement-bar i {
-      margin-right: 8px;
-      color: var(--secondary);
-    }
+    /* Elements toggled by js/home.js must really disappear even when a class sets display */
+    [hidden] { display: none !important; }
 
     /* Navbar */
     .navbar {
@@ -210,14 +198,12 @@
       padding: 12px 0;
       transition: all 0.3s ease;
       border-bottom: 1px solid transparent;
-      margin-top: 50px;
     }
 
     .navbar.scrolled {
       padding: 12px 0;
       box-shadow: var(--shadow-md);
       border-bottom: 1px solid var(--border);
-      margin-top: 0px;
     }
 
     .navbar-brand {
@@ -1738,6 +1724,9 @@
     .hero-v2 .hero-description { font-size: 17px; margin-bottom: 26px; }
     .hero-v2 .hero-buttons { margin-bottom: 14px; }
     .hero-v2 .beta-note { margin: 0 0 24px; }
+    /* Official Google Play badge (public state only). Artwork is used unmodified; its own transparent margin is the required clear space. */
+    .play-badge a { display: inline-block; line-height: 0; }
+    .play-badge img { display: block; width: 190px; max-width: 100%; height: auto; margin: -16px 0 -16px -12px; }
     .btn-primary-hero, .btn-secondary-hero { text-decoration: none; min-height: 48px; }
     .btn-primary-hero:focus-visible, .btn-secondary-hero:focus-visible { outline: 3px solid var(--secondary); outline-offset: 3px; }
 
@@ -2032,12 +2021,6 @@
     @media only screen and (max-width:500px) {
       .navbar {
         padding: 8px 0px;
-        margin-top: 60px;
-
-      }
-
-      .announcement-bar {
-        font-size: 12px;
       }
     }
 
@@ -2055,15 +2038,6 @@ button.navbar-toggler {
 </head>
 
 <body>
-
-  <!-- Announcement Bar -->
-  <div class="announcement-bar">
-    <div class="container">
-      <i class="bi bi-rocket-takeoff-fill"></i>
-      <span data-launch="announcement">KwikLearn is coming soon to Google Play, starting with Mathematics.</span>
-    </div>
-  </div>
-  <!-- Announcement Bar End -->
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
@@ -2114,8 +2088,8 @@ button.navbar-toggler {
         <div class="row align-items-center g-4 g-lg-5">
           <div class="col-lg-6">
             <div class="hero-badge">
-              <i class="bi bi-google-play" aria-hidden="true"></i>
-              <span data-launch="statusLabel">Coming soon to Google Play</span>
+              <i class="bi bi-mortarboard-fill" aria-hidden="true"></i>
+              <span data-site="subjectsStart">Starting with Mathematics</span>
             </div>
 
             <h1 id="hero-title">Smarter BECE &amp; WASSCE Preparation for Ghanaian Students.</h1>
@@ -2123,22 +2097,28 @@ button.navbar-toggler {
             <p class="hero-slogan"><span>Learn.</span> <span>Practise.</span> <span>Improve.</span> <span class="hero-slogan-last">Achieve.</span></p>
 
             <p class="hero-description">
-              Prepare for BECE and WASSCE with Mathematics practice quizzes, exam mode, study notes for selected topics
+              Prepare for BECE and WASSCE with <span data-site="subjects">Mathematics</span> practice quizzes, exam mode, study notes for selected topics
               and progress tracking. Other subjects and features are planned for future releases.
             </p>
 
             <div class="hero-buttons">
               <!-- Wording and destination come from js/home.js (KWIKLEARN_LAUNCH); this is the no-JavaScript pre-launch fallback -->
-              <a href="#features" class="btn-primary-hero" data-cta="primary">
+              <a href="#features" class="btn-primary-hero" data-cta="primary" data-show-in="prelaunch">
                 <i class="bi bi-compass" aria-hidden="true"></i> <span data-cta-label>Explore KwikLearn</span>
               </a>
+              <!-- Public-launch state only: the official, unmodified Google Play badge. No link until js/home.js activates the public state with a verified URL. -->
+              <div class="play-badge" data-show-in="public" hidden>
+                <a data-play-link aria-label="Get KwikLearn on Google Play">
+                  <img src="images/badges/google-play-badge-en.png" alt="Get it on Google Play" width="646" height="250" loading="lazy" decoding="async">
+                </a>
+              </div>
             </div>
-            <p class="beta-note" data-launch="heroNote">KwikLearn is not available to download yet. We will add a Google Play download button here when it launches.</p>
+            <p class="beta-note" data-launch="heroNote">KwikLearn is not available to download yet.</p>
 
             <div class="hero-trust-points">
               <div class="trust-point">
                 <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
-                <span>Mathematics-focused practice</span>
+                <span data-site="subjectsFocus">Mathematics-focused practice</span>
               </div>
               <div class="trust-point">
                 <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
@@ -2286,7 +2266,7 @@ button.navbar-toggler {
           <p>A look at the KwikLearn app experience, starting with Mathematics and expanding to more subjects in future
             releases.
           </p>
-          <p class="illustrative-note" id="appScreensNote">Screens captured on an Android test device with sample data. They are not real learner statistics, and the app currently covers Mathematics only.</p>
+          <p class="illustrative-note" id="appScreensNote">Screens captured on an Android test device with sample data. They are not real learner statistics. The screens show Mathematics only.</p>
         </div>
 
         <div class="row g-4">
@@ -2304,7 +2284,7 @@ button.navbar-toggler {
               </div>
               <div class="feature-content">
                 <h3>Choose Your Subject</h3>
-                <p>Start from the Subjects tab. Mathematics is available first, with more subjects planned for future releases.</p>
+                <p>Start from the Subjects tab. <span data-site="subjects">Mathematics</span> is available first, with more subjects planned for future releases.</p>
               </div>
             </div>
           </div>
@@ -2634,12 +2614,12 @@ button.navbar-toggler {
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
-                    <span data-launch="faqQuestion">When can I download KwikLearn?</span>
+                    Where can I get KwikLearn?
                   </button>
                 </h2>
                 <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                   <div class="accordion-body">
-                    <span data-launch="faqAnswer">KwikLearn is coming soon to Google Play for Android and is not available to download yet. When it launches, this page will show a &ldquo;Get KwikLearn on Google Play&rdquo; button.</span>
+                    <span data-launch="faqAnswer">KwikLearn is built for Android and is not available to download yet. This page will link to the official Google Play listing when it is available.</span>
                   </div>
                 </div>
               </div>
@@ -2685,13 +2665,9 @@ button.navbar-toggler {
     <section id="cta">
       <div class="container">
         <div class="cta-content fade-in">
-          <h2 data-launch="finalHeading">KwikLearn is coming soon to Google Play.</h2>
-          <p>For questions about KwikLearn, partnerships, or school and community enquiries, reach out to us by email or WhatsApp.</p>
+          <h2>Questions about KwikLearn?</h2>
+          <p>For questions about KwikLearn, partnerships, or school and community enquiries, contact us by email or WhatsApp.</p>
           <div class="cta-buttons">
-            <!-- Shown only in the 'public' launch state (js/home.js) -->
-            <a href="#features" class="btn-cta-primary" data-cta="primary" data-show-in="public" hidden>
-              <i class="bi bi-google-play" aria-hidden="true"></i> <span data-cta-label>Explore KwikLearn</span>
-            </a>
             <a href="mailto:info@kwiklearn.app" class="btn-cta-primary">
               <i class="bi bi-envelope-fill"></i> Email Us
             </a>
@@ -2788,6 +2764,7 @@ button.navbar-toggler {
 
       <div class="footer-bottom">
         <p>&copy; 2026 KwikLearn. All rights reserved.</p>
+        <p data-show-in="public" hidden>Google Play and the Google Play logo are trademarks of Google LLC.</p>
       </div>
     </div>
   </footer>
