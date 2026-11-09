@@ -143,6 +143,32 @@
     root.classList.add('hc-ready');
   }
 
-  function ready() { applyCta(); initCarousel(); }
+  /* ==========================================================================
+   * 3) APP SCREENSHOT SLOTS
+   * --------------------------------------------------------------------------
+   * The three pictures marked data-app-slot="dashboard|quiz|progress" currently show
+   * ILLUSTRATIVE mock-ups (not real captures). To switch to genuine Mathematics-beta
+   * captures:
+   *   1. Replace the image files (same names): images/home/app-student-dashboard-560.webp,
+   *      app-practice-quiz-560.webp, app-progress-report-560.webp, and the PNG fallbacks
+   *      student-dashboard.png, practice-quiz-screen.png, progress-report-screen.png.
+   *   2. Set genuine: true below (the note under the Features heading then states the
+   *      screens are genuine captures from a test account).
+   *   3. Set --app-shot-ratio / --app-shot-max-width in the page CSS to match the captures.
+   * Never set genuine: true while any mock-up is still in place.
+   * ========================================================================== */
+  var KWIKLEARN_APP_SCREENS = {
+    genuine: false,
+    illustrativeNote: 'Illustrative app screens with sample data. They are not real learner statistics, and they do not show every subject that is available today.',
+    genuineNote: 'Screens from the current Android beta, captured on a test account with sample data. They are not real learner statistics.'
+  };
+  window.KWIKLEARN_APP_SCREENS = KWIKLEARN_APP_SCREENS;
+
+  function applyAppScreens() {
+    var note = document.getElementById('appScreensNote');
+    if (note) { note.textContent = KWIKLEARN_APP_SCREENS.genuine ? KWIKLEARN_APP_SCREENS.genuineNote : KWIKLEARN_APP_SCREENS.illustrativeNote; }
+  }
+
+  function ready() { applyCta(); applyAppScreens(); initCarousel(); }
   if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', ready); } else { ready(); }
 }());
