@@ -90,6 +90,11 @@
 <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png">
 <link rel="apple-touch-icon" href="./favicon-192.png">
 
+<!-- Preload only the first (LCP) hero image -->
+<link rel="preload" as="image" href="images/home/hero-learn-1100.avif" type="image/avif"
+  imagesrcset="images/home/hero-learn-640.avif 640w, images/home/hero-learn-1100.avif 1100w"
+  imagesizes="(min-width: 992px) 540px, calc(100vw - 44px)" fetchpriority="high">
+
 <!-- Theme Color (Mobile Browser) -->
 <meta name="theme-color" content="#0d6efd">
 
@@ -1713,6 +1718,174 @@
       transform: translateY(0);
     }
 
+        /* ===== Hero v2 + supporting imagery (homepage visual redesign) ===== */
+    .hero-v2 { padding: 40px 0 72px; }
+    .hero-v2 .hero-badge { animation: none; }
+    .hero-v2 h1 {
+      font-size: clamp(2rem, 4.4vw, 3.3rem);
+      line-height: 1.12;
+      margin-bottom: 14px;
+      color: var(--primary-dark);
+    }
+    .hero-slogan {
+      font-size: clamp(1.1rem, 2.3vw, 1.45rem);
+      font-weight: 800;
+      color: var(--primary);
+      margin: 0 0 18px;
+      letter-spacing: -0.01em;
+    }
+    .hero-slogan .hero-slogan-last { color: var(--secondary); }
+    .hero-v2 .hero-description { font-size: 17px; margin-bottom: 26px; }
+    .hero-v2 .hero-buttons { margin-bottom: 14px; }
+    .hero-v2 .beta-note { margin: 0 0 24px; }
+    .btn-primary-hero, .btn-secondary-hero { text-decoration: none; min-height: 48px; }
+    .btn-primary-hero:focus-visible, .btn-secondary-hero:focus-visible { outline: 3px solid var(--secondary); outline-offset: 3px; }
+
+    .hero-carousel {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      padding: 10px;
+      max-width: 600px;
+      margin-inline: auto;
+      position: relative;
+    }
+    .hc-viewport { border-radius: var(--radius-lg); overflow: hidden; }
+    .hc-track {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      overscroll-behavior-x: contain;
+    }
+    .hc-track::-webkit-scrollbar { display: none; }
+    .hc-track:focus-visible { outline: 3px solid var(--primary-light); outline-offset: 2px; }
+    .hc-slide { flex: 0 0 100%; scroll-snap-align: start; position: relative; margin: 0; }
+    .hc-slide picture, .hc-slide img { display: block; width: 100%; }
+    .hc-slide img { aspect-ratio: 16 / 10; height: auto; object-fit: cover; background: #DBE7FF; }
+    .hc-caption {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 48px 16px 14px;
+      color: #FFFFFF;
+      background: linear-gradient(to top, rgba(7, 24, 91, 0.95) 0%, rgba(7, 24, 91, 0.9) 72%, rgba(7, 24, 91, 0) 100%);
+    }
+    .hc-kicker {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #FDE68A;
+      margin-bottom: 4px;
+    }
+    .hc-caption .hc-title, .hc-caption .hc-text { color: #FFFFFF; }
+    .hc-title { font-size: clamp(1rem, 2.2vw, 1.2rem); font-weight: 800; line-height: 1.25; margin: 0 0 2px; }
+    .hc-text { font-size: 14px; line-height: 1.45; margin: 0; }
+    .hc-controls { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 4px 2px; }
+    .hero-carousel:not(.hc-ready) .hc-controls { visibility: hidden; }
+    .hc-btn {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+      background: var(--white);
+      color: var(--primary);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+    }
+    .hc-btn:hover:not(:disabled) { background: var(--primary); color: var(--white); }
+    .hc-btn:disabled { opacity: 0.4; cursor: default; }
+    .hc-btn:focus-visible, .hc-dot:focus-visible { outline: 3px solid var(--secondary); outline-offset: 2px; }
+    .hc-dots { display: flex; gap: 2px; }
+    .hc-dot {
+      width: 44px; height: 44px;
+      padding: 0; border: 0; background: transparent;
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .hc-dot::before {
+      content: '';
+      width: 10px; height: 10px;
+      border-radius: 6px;
+      background: #8FA3D1;
+      transition: width 0.25s ease, background-color 0.25s ease;
+    }
+    .hc-dot[aria-current="true"]::before { width: 26px; background: var(--primary); }
+    .hc-status { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .hc-note { font-size: 12.5px; line-height: 1.4; color: #374151; text-align: center; margin: 2px 8px 6px; }
+
+    /* Supporting photo cards */
+    .photo-card {
+      margin: 0;
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid rgba(30, 58, 138, 0.1);
+    }
+    .photo-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: #DBE7FF; }
+    .photo-card figcaption { font-size: 13px; line-height: 1.5; color: #374151; padding: 12px 18px 14px; }
+    .illustrative-note { font-size: 14px; color: #374151; max-width: 640px; margin: 12px auto 0; text-align: center; }
+
+    /* How it works: photo + stacked steps */
+    .how-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px; align-items: stretch; }
+    .how-grid .photo-card { grid-column: 1; grid-row: 1 / span 3; display: flex; flex-direction: column; }
+    .how-grid .photo-card picture { flex: 1; display: block; }
+    .how-grid .photo-card img { height: 100%; }
+    .how-step { grid-column: 2; }
+    .how-step .step-card { display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 20px; row-gap: 2px; align-items: center; text-align: left; padding: 22px 26px; }
+    .how-step .step-card:hover { transform: translateY(-4px); }
+    .how-step .step-number { grid-column: 1; grid-row: 1 / span 2; width: 56px; height: 56px; margin: 0; font-size: 22px; align-self: center; }
+    .how-step .step-card h3 { grid-column: 2; grid-row: 1; margin: 0; }
+    .how-step .step-card p { grid-column: 2; grid-row: 2; margin: 0; }
+    /* Reserve the screenshot box before the (lazy) image loads so nothing below it moves */
+    .feature-image picture { display: block; width: 100%; max-width: 320px; aspect-ratio: 2 / 3; }
+    .feature-image picture img { display: block; width: 100%; height: 100%; max-height: none; object-fit: contain; }
+    @media (max-width: 991px) {
+      .how-grid { grid-template-columns: 1fr; }
+      .how-grid .photo-card, .how-step { grid-column: 1; grid-row: auto; }
+      .how-grid .photo-card img { height: auto; }
+    }
+    /* Below 992px: label, image, headline, slogan and primary CTA come first, so the CTA is on the first screen */
+    @media (max-width: 991px) {
+      .hero-v2 .row { --bs-gutter-y: 0; }
+      .hero-v2 .row > .col-lg-6:first-child { display: contents; }
+      .hero-v2 .row > .col-lg-6:first-child > * { flex: 0 0 100%; max-width: 100%; padding-inline: calc(var(--bs-gutter-x) * 0.5); }
+      .hero-v2 .row > .col-lg-6:first-child > .hero-badge { flex: 0 0 auto; width: fit-content; margin: 0 0 14px calc(var(--bs-gutter-x) * 0.5); padding-inline: 18px; order: 1; }
+      .hero-v2 .row > .col-lg-6:last-child { order: 2; margin-bottom: 18px; }
+      .hero-v2 h1 { order: 3; margin-bottom: 10px; }
+      .hero-v2 .hero-slogan { order: 4; margin-bottom: 16px; }
+      .hero-v2 .hero-buttons { order: 5; margin-bottom: 14px; }
+      .hero-v2 .hero-description { order: 6; margin-bottom: 14px; }
+      .hero-v2 .beta-note { order: 7; }
+      .hero-v2 .hero-trust-points { order: 8; }
+    }
+    @media (max-width: 767px) {
+      .hero-v2 { padding: 28px 0 56px; }
+      .hero-v2 .hero-description { font-size: 16px; }
+      .hero-carousel { padding: 8px; }
+      .hc-caption { padding: 36px 12px 10px; }
+      .hc-text { font-size: 13px; }
+      .how-step .step-card { padding: 18px 18px; column-gap: 14px; }
+    }
+
+    /* Respect reduced-motion preferences site-wide on this page */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      .fade-in { opacity: 1; transform: none; }
+    }
+
     /* Responsive */
     @media (max-width: 991px) {
       .hero {
@@ -1882,11 +2055,8 @@ button.navbar-toggler {
           </li>
 
         </ul>
-        <a href="https://forms.gle/cU6HZAS9DRoSg6kbA" class="btn btn-beta btn-beta-nav" target="_blank"
-          rel="noopener noreferrer">
-          <!-- <i class="bi bi-person-plus-fill"></i>  -->
-          Request Android Beta Access
-        </a>
+        <a href="https://forms.gle/cU6HZAS9DRoSg6kbA" class="btn btn-beta btn-beta-nav" data-cta="beta" target="_blank"
+          rel="noopener noreferrer"><span data-cta-label>Request Android Beta Access</span></a>
       </div>
     </div>
   </nav>
@@ -1896,107 +2066,123 @@ button.navbar-toggler {
   <main>
 
     <!-- Hero Section -->
-    <section class="hero" style="margin-top: 76px;">
+    <section class="hero hero-v2" style="margin-top: 76px;" aria-labelledby="hero-title">
       <div class="container">
-        <div class="row align-items-center g-5">
+        <div class="row align-items-center g-4 g-lg-5">
           <div class="col-lg-6">
             <div class="hero-badge">
-              <i class="bi bi-stars"></i>
-              Android beta for BECE, WASSCE &amp; beyond
+              <i class="bi bi-gift-fill" aria-hidden="true"></i>
+              Free Mathematics Beta
             </div>
 
-            <h1>Smarter exam prep for <span class="highlight">students, parents &amp; schools.</span></h1>
+            <h1 id="hero-title">Smarter BECE &amp; WASSCE Preparation for Ghanaian Students.</h1>
+
+            <p class="hero-slogan"><span>Learn.</span> <span>Practise.</span> <span>Improve.</span> <span class="hero-slogan-last">Achieve.</span></p>
 
             <p class="hero-description">
-              KwikLearn is an educational learning app that helps students prepare for BECE and WASSCE with study
-              notes, practice quizzes, exam mode, results, progress tracking, and future video lessons. The current
-              Android beta starts with Mathematics beta content, with more subjects coming gradually.
+              Prepare for BECE and WASSCE with Mathematics practice quizzes, exam mode, study notes for selected topics
+              and progress tracking. KwikLearn is currently in limited Android testing.
             </p>
 
             <div class="hero-buttons">
-              <a href="https://forms.gle/cU6HZAS9DRoSg6kbA" class="btn-primary-hero" target="_blank"
+              <!-- Destination and wording come from js/home.js (KWIKLEARN_CTA); this href is the no-JavaScript fallback -->
+              <a href="https://forms.gle/cU6HZAS9DRoSg6kbA" class="btn-primary-hero" data-cta="beta" target="_blank"
                 rel="noopener noreferrer">
-                <i class="bi bi-phone"></i> Request Android Beta Access
+                <i class="bi bi-phone" aria-hidden="true"></i> <span data-cta-label>Request Android Beta Access</span>
               </a>
               <a href="#features" class="btn-secondary-hero">
-                <i class="bi bi-grid-3x3-gap"></i> Explore Features
+                <i class="bi bi-grid-3x3-gap" aria-hidden="true"></i> Explore Features
               </a>
-              <span class="btn-coming-soon">
-                <i class="bi bi-google-play"></i> In Google Play internal testing &middot; not public yet
-              </span>
             </div>
             <p class="beta-note">
-              Android beta access is requested through a waiting list &mdash; it is not an immediate public download.
-              The current Mathematics beta is free.
+              <strong>In Google Play internal testing &middot; not public yet.</strong> Android beta access is requested
+              through a waiting list &mdash; it is not an immediate public download. The current Mathematics beta is free.
             </p>
 
             <div class="hero-trust-points">
               <div class="trust-point">
-                <i class="bi bi-check-circle-fill"></i>
-                <span>Affordable learning support</span>
+                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                <span>Free Mathematics beta</span>
               </div>
               <div class="trust-point">
-                <i class="bi bi-check-circle-fill"></i>
+                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <span>Mobile-first design</span>
               </div>
               <div class="trust-point">
-                <i class="bi bi-check-circle-fill"></i>
+                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <span>Built for Ghanaian learners</span>
               </div>
             </div>
           </div>
 
           <div class="col-lg-6">
-            <div class="hero-card fade-in">
-              <div class="dashboard-preview">
-                <div class="dashboard-header">
-                  <span class="dashboard-title">KwikLearn Student Dashboard</span>
-                  <span class="live-badge"><i class="bi bi-circle-fill text-warning me-1" style="font-size: 8px;"></i>
-                    Illustrative preview</span>
+            <div class="hero-carousel" id="heroCarousel" role="region" aria-roledescription="carousel"
+              aria-label="Learn, Practise, Improve, Achieve (illustrative images)">
+              <div class="hc-viewport">
+                <ul class="hc-track" tabindex="0" aria-label="Use the left and right arrow keys to change slide">
+              <li class="hc-slide" id="hc-slide-1" role="group" aria-roledescription="slide" aria-label="1 of 4: Learn">
+                <picture>
+                  <source type="image/avif" srcset="images/home/hero-learn-640.avif 640w, images/home/hero-learn-1100.avif 1100w" sizes="(min-width: 992px) 540px, calc(100vw - 44px)">
+                  <source type="image/webp" srcset="images/home/hero-learn-640.webp 640w, images/home/hero-learn-1100.webp 1100w" sizes="(min-width: 992px) 540px, calc(100vw - 44px)">
+                  <img src="images/home/hero-learn-1100.webp" width="1100" height="688" alt="Illustration: a Ghanaian teacher guiding students who are using tablets in a classroom" fetchpriority="high" decoding="async">
+                </picture>
+                <div class="hc-caption">
+                  <span class="hc-kicker">Learn</span>
+                  
+                  <p class="hc-text">Study notes for selected Mathematics topics.</p>
                 </div>
-
-                <div class="dashboard-card">
-                  <div class="d-flex justify-content-between align-items-start">
-                    <div>
-                      <small style="opacity: 0.85;">Today&apos;s Revision Goal</small>
-                      <!-- <h5 class="mb-0 mt-1" style="font-size: 18px;color:white">Science Mock Test</h5> -->
-                       <h3 style="font-size: 18px;color:white">
-  Mathematics Exam Mode
-</h3>
-                    </div>
-                    <span class="live-badge" style="font-size: 12px;">20 Questions</span>
-                  </div>
-                  <div class="progress-bar-custom">
-                    <div class="progress-fill" style="width: 72%;"></div>
-                  </div>
-                  <small style="opacity: 0.85;" class="mt-2 d-block">72% completed</small>
+              </li>
+              <li class="hc-slide" id="hc-slide-2" role="group" aria-roledescription="slide" aria-label="2 of 4: Practise" aria-hidden="true">
+                <picture>
+                  <source type="image/avif" data-srcset="images/home/hero-practise-640.avif 640w, images/home/hero-practise-1100.avif 1100w" sizes="(min-width: 992px) 540px, calc(100vw - 44px)">
+                  <source type="image/webp" data-srcset="images/home/hero-practise-640.webp 640w, images/home/hero-practise-1100.webp 1100w" sizes="(min-width: 992px) 540px, calc(100vw - 44px)">
+                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/home/hero-practise-1100.webp" width="1100" height="688" alt="Illustration: a Ghanaian student studying on her own with headphones, a laptop and a tablet" decoding="async">
+                </picture>
+                <div class="hc-caption">
+                  <span class="hc-kicker">Practise</span>
+                  
+                  <p class="hc-text">Practice quizzes and exam mode.</p>
                 </div>
-
-                <div class="dashboard-card">
-                  <div class="stats-row">
-                    <div class="stat-item">
-                      <div class="stat-value">84%</div>
-                      <div class="stat-label">Average Score</div>
-                    </div>
-                    <div class="stat-item">
-                      <div class="stat-value">6</div>
-                      <div class="stat-label">Day Streak</div>
-                    </div>
-                  </div>
+              </li>
+              <li class="hc-slide" id="hc-slide-3" role="group" aria-roledescription="slide" aria-label="3 of 4: Improve" aria-hidden="true">
+                <picture>
+                  <source type="image/avif" data-srcset="images/home/hero-improve-640.avif 640w, images/home/hero-improve-1100.avif 1100w" sizes="(min-width: 992px) 540px, calc(100vw - 44px)">
+                  <source type="image/webp" data-srcset="images/home/hero-improve-640.webp 640w, images/home/hero-improve-1100.webp 1100w" sizes="(min-width: 992px) 540px, calc(100vw - 44px)">
+                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/home/hero-improve-1100.webp" width="1100" height="688" alt="Illustration: an inclusive Ghanaian classroom where a student using a wheelchair works with classmates" decoding="async">
+                </picture>
+                <div class="hc-caption">
+                  <span class="hc-kicker">Improve</span>
+                  
+                  <p class="hc-text">Results and progress tracking.</p>
                 </div>
-
-                <div class="dashboard-card">
-                  <small style="opacity: 0.85;">Subjects</small>
-                  <div class="subject-pills">
-                    <span class="subject-pill">Mathematics</span>
-                    <span class="subject-pill">English coming</span>
-                    <span class="subject-pill">Science coming</span>
-                    <span class="subject-pill">More subjects</span>
-                  </div>
+              </li>
+              <li class="hc-slide" id="hc-slide-4" role="group" aria-roledescription="slide" aria-label="4 of 4: Achieve" aria-hidden="true">
+                <picture>
+                  <source type="image/avif" data-srcset="images/home/hero-achieve-640.avif 640w, images/home/hero-achieve-1100.avif 1100w" sizes="(min-width: 992px) 540px, calc(100vw - 44px)">
+                  <source type="image/webp" data-srcset="images/home/hero-achieve-640.webp 640w, images/home/hero-achieve-1100.webp 1100w" sizes="(min-width: 992px) 540px, calc(100vw - 44px)">
+                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/home/hero-achieve-1100.webp" width="1100" height="688" alt="Illustration: two Ghanaian students seated at a generic academic quiz desk" decoding="async">
+                </picture>
+                <div class="hc-caption">
+                  <span class="hc-kicker">Achieve</span>
+                  <p class="hc-title">Inspiring Ghana&rsquo;s Next Generation of Achievers.</p>
+                  <p class="hc-text">Building a future where learning, opportunity and academic excellence go hand in hand.</p>
                 </div>
-
-                <small class="d-block text-center mt-2" style="opacity: 0.85; font-size: 12px;">Illustrative example only. Figures shown are sample data, not real student statistics.</small>
+              </li>
+                </ul>
               </div>
+              <div class="hc-controls">
+                <button type="button" class="hc-btn hc-prev" aria-label="Previous slide"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
+                <div class="hc-dots" role="group" aria-label="Choose a slide">
+                  <button type="button" class="hc-dot" aria-label="Show slide 1: Learn"></button>
+                  <button type="button" class="hc-dot" aria-label="Show slide 2: Practise"></button>
+                  <button type="button" class="hc-dot" aria-label="Show slide 3: Improve"></button>
+                  <button type="button" class="hc-dot" aria-label="Show slide 4: Achieve"></button>
+                </div>
+                <button type="button" class="hc-btn hc-next" aria-label="Next slide"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+              </div>
+              <p class="hc-status" role="status" aria-live="polite"></p>
+              <p class="hc-note">Illustrative images. They do not show real KwikLearn classrooms, events or users.</p>
+              <noscript><style>.hc-slide:not(:first-child){display:none}.hc-controls{display:none}</style></noscript>
             </div>
           </div>
         </div>
@@ -2035,7 +2221,7 @@ button.navbar-toggler {
             <div class="about-card fade-in">
               <div class="about-icon">03</div>
               <h3>Progress tracking</h3>
-              <p>Students and parents can see improvement over time through simple performance insights.</p>
+              <p>Students can see their results and improvement over time through simple performance insights.</p>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
@@ -2064,14 +2250,18 @@ button.navbar-toggler {
           <p>A look at the Android beta experience in limited early testing, starting with Mathematics content
             and expanding gradually to more subjects.
           </p>
+          <p class="illustrative-note">Illustrative app screens with sample data. They are not real learner statistics, and they do not show every subject that is available today.</p>
         </div>
 
         <div class="row g-4">
           <div class="col-lg-4 col-md-6">
             <div class="feature-card fade-in">
               <div class="feature-image">
-                <img src="student-dashboard.png" alt="KwikLearn student dashboard screen"
-                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <picture>
+                  <source type="image/webp" srcset="images/home/app-student-dashboard-560.webp 560w" sizes="(min-width: 992px) 320px, 70vw">
+                  <img src="student-dashboard.png" alt="KwikLearn student dashboard screen" width="1024" height="1536" loading="lazy" decoding="async"
+                    onerror="var p=this.closest('picture');p.style.display='none';p.nextElementSibling.style.display='flex';">
+                </picture>
                 <div class="feature-placeholder" style="display: none;">
                   <i class="bi bi-speedometer2"></i>
                 </div>
@@ -2086,8 +2276,11 @@ button.navbar-toggler {
           <div class="col-lg-4 col-md-6">
             <div class="feature-card fade-in">
               <div class="feature-image">
-                <img src="practice-quiz-screen.png" alt="KwikLearn practice quiz screen"
-                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <picture>
+                  <source type="image/webp" srcset="images/home/app-practice-quiz-560.webp 560w" sizes="(min-width: 992px) 320px, 70vw">
+                  <img src="practice-quiz-screen.png" alt="KwikLearn practice quiz screen" width="1024" height="1536" loading="lazy" decoding="async"
+                    onerror="var p=this.closest('picture');p.style.display='none';p.nextElementSibling.style.display='flex';">
+                </picture>
                 <div class="feature-placeholder" style="display: none;">
                   <i class="bi bi-question-circle"></i>
                 </div>
@@ -2102,16 +2295,18 @@ button.navbar-toggler {
           <div class="col-lg-4 col-md-6">
             <div class="feature-card fade-in">
               <div class="feature-image">
-                <img src="progress-report-screen.png" alt="KwikLearn progress report screen"
-                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <picture>
+                  <source type="image/webp" srcset="images/home/app-progress-report-560.webp 560w" sizes="(min-width: 992px) 320px, 70vw">
+                  <img src="progress-report-screen.png" alt="KwikLearn progress report screen" width="1024" height="1536" loading="lazy" decoding="async"
+                    onerror="var p=this.closest('picture');p.style.display='none';p.nextElementSibling.style.display='flex';">
+                </picture>
                 <div class="feature-placeholder" style="display: none;">
                   <i class="bi bi-graph-up-arrow"></i>
                 </div>
               </div>
               <div class="feature-content">
                 <h3>Progress Insights</h3>
-                <p>Clear progress tracking to help learners and families understand improvement, strengths, and support
-                  areas.</p>
+                <p>Clear progress tracking to help learners understand improvement, strengths, and support areas.</p>
               </div>
             </div>
           </div>
@@ -2133,7 +2328,7 @@ button.navbar-toggler {
               </span>
               <h2>Built with local relevance and a bigger future in mind.</h2>
               <p>KwikLearn aims to make quality exam preparation more accessible, engaging, and affordable while
-                creating a trusted digital education brand for schools, students, and families. The beta begins with
+                building a trusted digital education brand for students and families. The beta begins with
                 Mathematics while more subjects and features are added gradually.</p>
 
               <ul class="checklist">
@@ -2151,51 +2346,22 @@ button.navbar-toggler {
                 </li>
                 <li>
                   <i class="bi bi-check-circle-fill"></i>
-                  <span>Strong brand potential for schools and communities</span>
+                  <span>Designed with schools and communities in mind for the future</span>
                 </li>
               </ul>
             </div>
           </div>
 
           <div class="col-lg-6">
-            <div class="phone-mockup fade-in">
-              <div class="phone-screen">
-                <div class="phone-header">
-                  <span>KwikLearn</span>
-                  <span style="color: var(--primary);">Student View</span>
-                </div>
-
-                <div class="phone-card">
-                  <strong>Welcome back, Student <span style="font-size: 18px;">&#128075;</span></strong>
-                  <p>Continue your revision and stay on track for your next exam.</p>
-                </div>
-
-                <div class="phone-card">
-                  <strong>Mathematics Practice</strong>
-                  <p>12 questions - Beginner to advanced</p>
-                </div>
-
-                <div class="phone-card">
-                  <strong>Study Notes</strong>
-                  <p>Mathematics notes for guided revision</p>
-                </div>
-
-                <div class="phone-card">
-                  <strong>More Subjects</strong>
-                  <p>English, Science, ICT, and more coming gradually</p>
-                </div>
-
-                <div class="phone-card">
-                  <strong>Progress this week</strong>
-                  <div class="progress-bar-custom" style="background: #DBEAFE; margin-top: 12px;">
-                    <div class="progress-fill" style="width: 78%;"></div>
-                  </div>
-                  <p class="mt-2 mb-0">You are doing better than last week. Keep going!</p>
-                </div>
-
-                <small class="d-block text-center mt-2" style="opacity: 0.85; font-size: 12px;">Illustrative example only. Sample content, not real student data.</small>
-              </div>
-            </div>
+            <figure class="photo-card fade-in">
+              <picture>
+                <source type="image/avif" srcset="images/home/why-family-480.avif 480w, images/home/why-family-800.avif 800w" sizes="(min-width: 992px) 540px, calc(100vw - 32px)">
+                <source type="image/webp" srcset="images/home/why-family-480.webp 480w, images/home/why-family-800.webp 800w" sizes="(min-width: 992px) 540px, calc(100vw - 32px)">
+                <img src="images/home/why-family-800.webp" width="800" height="600" loading="lazy" decoding="async"
+                  alt="Illustration: a Ghanaian parent encouraging a daughter who is studying with a tablet at home">
+              </picture>
+              <figcaption>Illustrative image. Families can encourage learning at home; today&rsquo;s KwikLearn beta is built for students.</figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -2213,26 +2379,35 @@ button.navbar-toggler {
           <p>Simple, guided, and effective learning support for exam preparation.</p>
         </div>
 
-        <div class="row g-4">
-          <div class="col-lg-4">
+        <div class="how-grid">
+          <figure class="photo-card fade-in">
+            <picture>
+              <source type="image/avif" srcset="images/home/how-collaboration-480.avif 480w, images/home/how-collaboration-800.avif 800w" sizes="(min-width: 992px) 440px, calc(100vw - 32px)">
+              <source type="image/webp" srcset="images/home/how-collaboration-480.webp 480w, images/home/how-collaboration-800.webp 800w" sizes="(min-width: 992px) 440px, calc(100vw - 32px)">
+              <img src="images/home/how-collaboration-800.webp" width="800" height="600" loading="lazy" decoding="async"
+                alt="Illustration: Ghanaian students and a teacher working together on a laptop and tablet in a library">
+            </picture>
+            <figcaption>Illustrative image. It does not show a real KwikLearn session.</figcaption>
+          </figure>
+          <div class="how-step">
             <div class="step-card fade-in">
               <div class="step-number">1</div>
-              <h3>Choose your level</h3>
-              <p>Select your class, exam path, or subject area to begin focused learning.</p>
+              <h3>Choose a topic</h3>
+              <p>Pick a Mathematics topic to start focused practice.</p>
             </div>
           </div>
-          <div class="col-lg-4">
+          <div class="how-step">
             <div class="step-card fade-in">
               <div class="step-number">2</div>
               <h3>Practice consistently</h3>
-              <p>Use quizzes, mock tests, and revision materials to strengthen weak areas.</p>
+              <p>Use practice quizzes, exam mode and study notes for selected topics to strengthen weak areas.</p>
             </div>
           </div>
-          <div class="col-lg-4">
+          <div class="how-step">
             <div class="step-card fade-in">
               <div class="step-number">3</div>
               <h3>Track improvement</h3>
-              <p>Monitor scores, progress, and learning habits over time with simple reports.</p>
+              <p>Review your results and track your progress over time.</p>
             </div>
           </div>
         </div>
@@ -2249,9 +2424,9 @@ button.navbar-toggler {
       <div class="container" style="position: relative; z-index: 2;">
         <div class="section-header fade-in">
           <span class="section-badge">
-            <i class="bi bi-shield-check"></i> Trust
+            <i class="bi bi-shield-check"></i> Our Approach
           </span>
-          <h2>Why families and schools can trust KwikLearn</h2>
+          <h2>How we are building KwikLearn</h2>
           <p>KwikLearn is being built with a clear purpose: to make learning support more accessible, practical, and
             meaningful for students.</p>
         </div>
@@ -2272,7 +2447,7 @@ button.navbar-toggler {
                 <i class="bi bi-hand-thumbs-up-fill"></i>
               </div>
               <h3>Student-friendly</h3>
-              <p>KwikLearn aims to be easy to use for students, parents, teachers, and school partners.</p>
+              <p>KwikLearn aims to be simple and easy to use for students preparing for BECE and WASSCE.</p>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
@@ -2328,7 +2503,7 @@ button.navbar-toggler {
                 </li>
                 <li>
                   <i class="bi bi-check-circle-fill"></i>
-                  <span>Committed to supporting students, schools, and families</span>
+                  <span>Aiming to support students, families, and schools over time</span>
                 </li>
               </ul>
             </div>
@@ -2336,8 +2511,11 @@ button.navbar-toggler {
 
           <div class="col-lg-6">
             <div class="vision-image fade-in">
-              <img src="KWIKLEARN BUILDING.png" alt="KwikLearn future vision building concept"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <picture>
+                <source type="image/webp" srcset="images/home/vision-building-960.webp 960w" sizes="(min-width: 992px) 540px, calc(100vw - 32px)">
+                <img src="KWIKLEARN BUILDING.png" alt="KwikLearn future vision building concept" width="1536" height="1024" loading="lazy" decoding="async"
+                  onerror="var p=this.closest('picture');p.style.display='none';p.nextElementSibling.style.display='flex';">
+              </picture>
               <div class="vision-placeholder" style="display: none;">
                 <i class="bi bi-building"></i>
               </div>
@@ -2413,9 +2591,8 @@ button.navbar-toggler {
                 </h2>
                 <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                   <div class="accordion-body">
-                    KwikLearn is designed for students preparing for national exams, parents who want to support their
-                    children&apos;s learning, teachers looking for digital teaching tools, and schools seeking to
-                    enhance their educational offerings.
+                    KwikLearn is designed for students preparing for BECE and WASSCE. The current Android beta starts with
+                    Mathematics. Features for parents, teachers, and schools are planned but are not available yet.
                   </div>
                 </div>
               </div>
@@ -2680,6 +2857,7 @@ button.navbar-toggler {
       );
     });
   </script>
+  <script src="js/home.js"></script>
 </body>
 
 </html>
