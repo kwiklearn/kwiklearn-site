@@ -1877,6 +1877,33 @@
       .how-step .step-card { padding: 18px 18px; column-gap: 14px; }
     }
 
+    /* ===== MOBILE CAROUSEL CAPTION LAYOUT (up to 575px) =====
+       Keeps the photograph exposed: the label and headline sit on a small gradient at the bottom of the image,
+       and the supporting text moves BELOW the image in dark type on white. The HTML is unchanged (same order,
+       same words); this is CSS only. The tweaks to hero padding and carousel spacing keep the beta CTA where it
+       was on a 390x844 screen. */
+    @media (max-width: 575px) {
+      .hc-track { align-items: flex-start; }
+      .hc-slide { display: grid; grid-template-columns: 100%; grid-template-rows: 1fr auto auto auto; }
+      .hc-slide picture { grid-row: 1 / 4; grid-column: 1; }
+      .hc-caption { display: contents; }
+      .hc-slide::after {
+        content: '';
+        grid-row: 2 / 4; grid-column: 1;
+        margin-top: -32px;
+        z-index: 1;
+        pointer-events: none;
+        background: linear-gradient(to top, rgba(7, 24, 91, 0.95) 0%, rgba(7, 24, 91, 0.9) 72%, rgba(7, 24, 91, 0) 100%);
+      }
+      .hc-slide .hc-caption .hc-kicker { grid-row: 2; grid-column: 1; z-index: 2; padding: 0 12px; margin: 0; align-self: end; display: block; }
+      .hc-slide .hc-caption .hc-title { grid-row: 3; grid-column: 1; z-index: 2; padding: 0 12px 10px; margin: 0; }
+      .hc-slide .hc-caption .hc-text { grid-row: 4; grid-column: 1; color: #1F2937; padding: 8px 12px 0; font-size: 14px; line-height: 1.4; }
+      .hero.hero-v2 { padding-top: 16px; }
+      .hero-v2 .row > .col-lg-6:first-child > .hero-badge { margin-bottom: 10px; }
+      .hc-controls { padding: 6px 4px 0; }
+      .hc-note { margin: 0 8px 4px; }
+    }
+
     /* Respect reduced-motion preferences site-wide on this page */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
