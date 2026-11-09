@@ -1490,6 +1490,19 @@
       margin: 0 auto 36px;
     }
 
+    .cta-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 56px; align-items: center; max-width: 1040px; margin: 0 auto; position: relative; z-index: 1; }
+    .cta-split .cta-content { text-align: left; max-width: none; margin: 0; }
+    .cta-split .cta-content p { margin: 0 0 32px; max-width: none; }
+    .cta-split .cta-buttons { justify-content: flex-start; }
+    .cta-photo { max-width: 460px; width: 100%; justify-self: center; }
+    @media (max-width: 991px) {
+      #cta { padding: 72px 0; }
+      .cta-split { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+      .cta-split .cta-content { text-align: center; }
+      .cta-split .cta-content p { margin: 0 auto 28px; max-width: 600px; }
+      .cta-split .cta-buttons { justify-content: center; }
+      .cta-photo { max-width: 420px; }
+    }
     .cta-buttons {
       display: flex;
       flex-wrap: wrap;
@@ -1740,7 +1753,17 @@
       margin-inline: auto;
       position: relative;
     }
-    .hc-viewport { border-radius: var(--radius-lg); overflow: hidden; }
+    .hc-viewport { border-radius: var(--radius-lg); overflow: hidden; position: relative; }
+    /* Pause / play for the automatic rotation (WCAG 2.2.2): a 44px target over the top-right corner of the photo */
+    .hc-playpause {
+      position: absolute; top: 10px; right: 10px; z-index: 3;
+      width: 44px; height: 44px; padding: 0; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 2px solid rgba(255, 255, 255, 0.95); background: rgba(15, 23, 42, 0.62); color: #fff;
+      font-size: 22px; cursor: pointer;
+    }
+    .hc-playpause:hover { background: rgba(15, 23, 42, 0.82); }
+    .hc-playpause:focus-visible { outline: 3px solid var(--secondary); outline-offset: 2px; }
     .hc-track {
       display: flex;
       list-style: none;
@@ -1820,6 +1843,7 @@
     }
     .photo-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: #DBE7FF; }
     .photo-card figcaption { font-size: 13px; line-height: 1.5; color: #374151; padding: 12px 18px 14px; }
+    .faq-photo { position: sticky; top: 104px; }
     .illustrative-note { font-size: 14px; color: #374151; max-width: 640px; margin: 12px auto 0; text-align: center; }
 
     /* How it works: photo + stacked steps */
@@ -2185,6 +2209,7 @@ button.navbar-toggler {
                 </div>
               </li>
                 </ul>
+                <button type="button" class="hc-playpause" aria-label="Pause automatic slide show" hidden><i class="bi bi-pause-fill" aria-hidden="true"></i></button>
               </div>
               <div class="hc-controls">
                 <button type="button" class="hc-btn hc-prev" aria-label="Previous slide"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
@@ -2576,7 +2601,18 @@ button.navbar-toggler {
           <p>Find answers to common questions about KwikLearn.</p>
         </div>
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center g-4 g-xl-5">
+          <div class="col-lg-4 d-none d-lg-block">
+            <figure class="photo-card faq-photo fade-in">
+              <picture>
+                <source type="image/avif" srcset="images/home/faq-inclusive-480.avif 480w, images/home/faq-inclusive-640.avif 640w" sizes="(min-width: 1200px) 360px, 300px">
+                <source type="image/webp" srcset="images/home/faq-inclusive-480.webp 480w, images/home/faq-inclusive-640.webp 640w" sizes="(min-width: 1200px) 360px, 300px">
+                <img src="images/home/faq-inclusive-640.webp" width="640" height="480" loading="lazy" decoding="async"
+                  alt="Illustration: students in a Ghanaian classroom, including a learner who uses a wheelchair, studying together with tablets">
+              </picture>
+              <figcaption>Illustrative image. It does not show a real KwikLearn session.</figcaption>
+            </figure>
+          </div>
           <div class="col-lg-8">
             <div class="accordion" id="faqAccordion">
               <div class="accordion-item fade-in">
@@ -2664,6 +2700,16 @@ button.navbar-toggler {
     <!-- CTA Section -->
     <section id="cta">
       <div class="container">
+        <div class="cta-split">
+        <figure class="photo-card cta-photo fade-in">
+          <picture>
+            <source type="image/avif" srcset="images/home/contact-support-480.avif 480w, images/home/contact-support-640.avif 640w" sizes="(min-width: 992px) 420px, min(420px, calc(100vw - 32px))">
+            <source type="image/webp" srcset="images/home/contact-support-480.webp 480w, images/home/contact-support-640.webp 640w" sizes="(min-width: 992px) 420px, min(420px, calc(100vw - 32px))">
+            <img src="images/home/contact-support-640.webp" width="640" height="480" loading="lazy" decoding="async"
+              alt="Illustration: a teacher helping a student who is learning with a tablet and headphones in a Ghanaian classroom">
+          </picture>
+          <figcaption>Illustrative image. It does not show a real KwikLearn session.</figcaption>
+        </figure>
         <div class="cta-content fade-in">
           <h2>Questions about KwikLearn?</h2>
           <p>For questions about KwikLearn, partnerships, or school and community enquiries, contact us by email or WhatsApp.</p>
@@ -2675,6 +2721,7 @@ button.navbar-toggler {
               <i class="bi bi-whatsapp"></i> Chat on WhatsApp
             </a>
           </div>
+        </div>
         </div>
       </div>
     </section>

@@ -173,8 +173,19 @@
    * - Slides 2-4 carry data-src / data-srcset and are only fetched when the
    *   visitor first interacts with the carousel (saves mobile data).
    * - Scroll-snap track: native touch swipe. Buttons, dots and arrow keys
-   *   scroll the track. No auto-rotation.
+   *   scroll the track. Automatic rotation every AUTOPLAY_MS, with a Pause button;
+   *   see the notes above initCarousel for what pauses or stops it.
    * ========================================================================== */
+  /* Automatic rotation: every AUTOPLAY_MS the carousel moves to the next slide (and wraps to the first).
+   * It never runs for visitors who ask for reduced motion or Data Saver, and it stops or pauses when:
+   *   - the pointer is over the carousel, or keyboard focus is inside it (pauses; resumes when they leave)
+   *   - the visitor uses it: arrows, dots, keys, or a swipe or drag (stops until they press Play)
+   *   - they press the Pause button (stops until they press Play)
+   *   - the tab is hidden or the carousel is scrolled out of view (pauses)
+   * The next slide's image is fetched only shortly before it is needed, and the first advance
+   * waits until the page has fully loaded, so the first slide and the page load are unaffected. */
+  var AUTOPLAY_MS = 5500;
+
   function initCarousel() {
     var root = document.getElementById('heroCarousel');
     if (!root) { return; }
@@ -184,25 +195,42 @@
     var prev = root.querySelector('.hc-prev');
     var next = root.querySelector('.hc-next');
     var status = root.querySelector('.hc-status');
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var playBtn = root.querySelector('.hc-playpause');
+    var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    var reduce = !!(mq && mq.matches);
+    var saveData = !!(navigator.connection && navigator.connection.saveData);
     var current = 0;
     var loaded = false;
+    var loadedSlides = {};
+
+    // autoplay state
+    var autoAllowed = !reduce && !saveData && slides.length > 1;
+    var userStopped = false, hoverPause = false, focusPause = false, inView = true, pageLoaded = false;
+    var timer = null;
+    var progUntil = 0;   // scrolls caused by the script itself (not by the visitor) happen before this time
+    function markProg(ms) { progUntil = Date.now() + ms; }
+
+    function loadSlide(i) {
+      if (loadedSlides[i] || !slides[i]) { return; }
+      loadedSlides[i] = true;
+      var pics = slides[i].querySelectorAll('[data-srcset],[data-src]');
+      for (var p = 0; p < pics.length; p++) {
+        var el = pics[p];
+        if (el.getAttribute('data-srcset')) { el.setAttribute('srcset', el.getAttribute('data-srcset')); el.removeAttribute('data-srcset'); }
+        if (el.getAttribute('data-src')) { el.setAttribute('src', el.getAttribute('data-src')); el.removeAttribute('data-src'); }
+      }
+    }
 
     function loadRest() {
       if (loaded) { return; }
       loaded = true;
-      var pics = root.querySelectorAll('[data-srcset],[data-src]');
-      for (var i = 0; i < pics.length; i++) {
-        var el = pics[i];
-        if (el.getAttribute('data-srcset')) {
-          el.setAttribute('srcset', el.getAttribute('data-srcset'));
-          el.removeAttribute('data-srcset');
-        }
-        if (el.getAttribute('data-src')) {
-          el.setAttribute('src', el.getAttribute('data-src'));
-          el.removeAttribute('data-src');
-        }
-      }
+      for (var i = 0; i < slides.length; i++) { loadSlide(i); }
+    }
+
+    function slideReady(i) {
+      var img = slides[i] && slides[i].querySelector('img');
+      // unloaded slides hold a 1x1 placeholder, so a real photo must have been requested and be wider than 1px
+      return !!img && !!loadedSlides[i] && !img.getAttribute('data-src') && img.complete && img.naturalWidth > 1;
     }
 
     function setActive(i) {
@@ -219,16 +247,63 @@
       if (status) { status.textContent = 'Slide ' + (current + 1) + ' of ' + slides.length; }
     }
 
-    function goTo(i) {
-      loadRest();
+    function goTo(i, instant) {
       i = Math.max(0, Math.min(slides.length - 1, i));
-      track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: reduce ? 'auto' : 'smooth' });
+      markProg(1200);
+      track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: (reduce || instant) ? 'auto' : 'smooth' });
       setActive(i);
+    }
+
+    /* ---- automatic rotation ---- */
+    function running() { return autoAllowed && !userStopped && !hoverPause && !focusPause && inView && pageLoaded && !document.hidden; }
+
+    function syncUi() {
+      var auto = autoAllowed && !userStopped;
+      if (playBtn) {
+        playBtn.hidden = !autoAllowed;
+        playBtn.setAttribute('aria-label', auto ? 'Pause automatic slide show' : 'Start automatic slide show');
+        var icon = playBtn.querySelector('i');
+        if (icon) { icon.className = 'bi ' + (auto ? 'bi-pause-fill' : 'bi-play-fill'); }
+      }
+      // Announce slide changes politely only when the visitor is moving slides; stay quiet while rotating on its own
+      if (status) { status.setAttribute('aria-live', auto ? 'off' : 'polite'); }
+      root.classList.toggle('hc-auto', auto);
+    }
+
+    function clearTimer() { if (timer) { window.clearTimeout(timer); timer = null; } }
+
+    function schedule(delay) {
+      clearTimer();
+      if (running()) { timer = window.setTimeout(tick, delay || AUTOPLAY_MS); }
+    }
+
+    function tick() {
+      timer = null;
+      if (!running()) { return; }
+      var target = current + 1 >= slides.length ? 0 : current + 1;
+      loadSlide(target);
+      if (!slideReady(target)) { schedule(700); return; }   // never show a blank slide on a slow connection
+      goTo(target, target === 0);
+      loadSlide((target + 1) % slides.length);               // fetch the slide after, ready for next time
+      schedule();
+    }
+
+    function stopByUser() {
+      if (!autoAllowed || userStopped) { return; }
+      userStopped = true; clearTimer(); syncUi();
+    }
+
+    if (playBtn) {
+      playBtn.addEventListener('click', function () {
+        if (userStopped) { userStopped = false; hoverPause = false; focusPause = false; syncUi(); loadSlide((current + 1) % slides.length); schedule(); }
+        else { stopByUser(); }
+      });
     }
 
     var ticking = false;
     track.addEventListener('scroll', function () {
-      loadRest();
+      // a scroll the script did not cause (trackpad, drag, native swipe) is the visitor using the carousel
+      if (Date.now() > progUntil) { loadRest(); stopByUser(); }
       if (ticking) { return; }
       ticking = true;
       window.requestAnimationFrame(function () {
@@ -239,27 +314,70 @@
       });
     }, { passive: true });
 
-    if (prev) { prev.addEventListener('click', function () { goTo(current - 1); }); }
-    if (next) { next.addEventListener('click', function () { goTo(current + 1); }); }
-    dots.forEach(function (d, i) { d.addEventListener('click', function () { goTo(i); }); });
+    // manual controls load every slide and stop the automatic rotation
+    if (prev) { prev.addEventListener('click', function () { loadRest(); stopByUser(); goTo(current - 1); }); }
+    if (next) { next.addEventListener('click', function () { loadRest(); stopByUser(); goTo(current + 1); }); }
+    dots.forEach(function (d, i) { d.addEventListener('click', function () { loadRest(); stopByUser(); goTo(i); }); });
 
     track.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
-      else if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
-      else if (e.key === 'Home') { e.preventDefault(); goTo(0); }
-      else if (e.key === 'End') { e.preventDefault(); goTo(slides.length - 1); }
+      var k = e.key, handled = true;
+      if (k === 'ArrowRight') { loadRest(); stopByUser(); goTo(current + 1); }
+      else if (k === 'ArrowLeft') { loadRest(); stopByUser(); goTo(current - 1); }
+      else if (k === 'Home') { loadRest(); stopByUser(); goTo(0); }
+      else if (k === 'End') { loadRest(); stopByUser(); goTo(slides.length - 1); }
+      else { handled = false; }
+      if (handled) { e.preventDefault(); }
     });
+
+    // swipe or drag: touch and pen start a stop; a mouse press on the track too
+    track.addEventListener('touchstart', function () { loadRest(); stopByUser(); }, { passive: true });
+    track.addEventListener('pointerdown', function () { loadRest(); stopByUser(); }, { passive: true });
+
+    // hover and focus pause (and resume when the visitor leaves)
+    root.addEventListener('mouseenter', function () { hoverPause = true; clearTimer(); });
+    root.addEventListener('mouseleave', function () { hoverPause = false; schedule(); });
+    root.addEventListener('focusin', function () { focusPause = true; clearTimer(); });
+    root.addEventListener('focusout', function (e) {
+      if (e.relatedTarget && root.contains(e.relatedTarget)) { return; }
+      focusPause = false; schedule();
+    });
+
+    document.addEventListener('visibilitychange', function () { if (document.hidden) { clearTimer(); } else { schedule(); } });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        inView = entries[0].isIntersecting;
+        if (inView) { schedule(); } else { clearTimer(); }
+      }, { threshold: 0.25 }).observe(root);
+    }
+    if (mq && mq.addEventListener) {
+      mq.addEventListener('change', function () {
+        reduce = mq.matches;
+        autoAllowed = !reduce && !saveData && slides.length > 1;
+        if (!autoAllowed) { clearTimer(); }
+        syncUi(); schedule();
+      });
+    }
 
     ['pointerdown', 'touchstart', 'mouseenter', 'focusin', 'keydown'].forEach(function (ev) {
       root.addEventListener(ev, loadRest, { once: true, passive: true });
     });
 
     window.addEventListener('resize', function () {
+      markProg(400);
       track.scrollTo({ left: slides[current].offsetLeft - track.offsetLeft, behavior: 'auto' });
     });
 
     setActive(0);
     root.classList.add('hc-ready');
+    syncUi();
+
+    // start after the page has fully loaded, so the first screen and the load are never delayed
+    function afterLoad() {
+      pageLoaded = true;
+      if (autoAllowed) { loadSlide(1); schedule(); }
+    }
+    if (document.readyState === 'complete') { window.setTimeout(afterLoad, 300); }
+    else { window.addEventListener('load', function () { window.setTimeout(afterLoad, 300); }, { once: true }); }
   }
 
   /* ==========================================================================
