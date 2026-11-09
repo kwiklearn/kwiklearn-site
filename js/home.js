@@ -211,21 +211,17 @@
   /* ==========================================================================
    * 3) APP SCREENSHOT SLOTS
    * --------------------------------------------------------------------------
-   * The three pictures marked data-app-slot="dashboard|quiz|progress" currently show
-   * ILLUSTRATIVE mock-ups (not real captures). To switch to genuine Mathematics-beta
-   * captures:
-   *   1. Replace the image files (same names): images/home/app-student-dashboard-560.webp,
-   *      app-practice-quiz-560.webp, app-progress-report-560.webp, and the PNG fallbacks
-   *      student-dashboard.png, practice-quiz-screen.png, progress-report-screen.png.
-   *   2. Set genuine: true below (the note under the Features heading then states the
-   *      screens are genuine captures from a test account).
-   *   3. Set --app-shot-ratio / --app-shot-max-width in the page CSS to match the captures.
-   * Never set genuine: true while any mock-up is still in place.
+   * The three pictures marked data-app-slot="dashboard|quiz|progress" show GENUINE Android
+   * captures (Subjects, Quizzes, Progress; Mathematics only), cropped to remove the status bar:
+   * images/home/app-subjects-560, app-quizzes-560, app-progress-560 (.webp with .jpg fallback).
+   * If a capture is ever replaced by anything that is not a genuine screen, set genuine: false
+   * (the note under the Features heading then says the screens are illustrative).
+   * Geometry: --app-shot-ratio / --app-shot-max-width in the page CSS.
    * ========================================================================== */
   var KWIKLEARN_APP_SCREENS = {
-    genuine: false,
+    genuine: true,
     illustrativeNote: 'Illustrative app screens with sample data. They are not real learner statistics, and they do not show every subject that is available today.',
-    genuineNote: 'Screens from the current Android beta, captured on a test account with sample data. They are not real learner statistics.'
+    genuineNote: 'Screens captured on an Android test device with sample data. They are not real learner statistics, and the app currently covers Mathematics only.'
   };
   window.KWIKLEARN_APP_SCREENS = KWIKLEARN_APP_SCREENS;
 

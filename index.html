@@ -1845,9 +1845,9 @@
     .how-step .step-card h3 { grid-column: 2; grid-row: 1; margin: 0; }
     .how-step .step-card p { grid-column: 2; grid-row: 2; margin: 0; }
     /* Reserve the screenshot box before the (lazy) image loads so nothing below it moves */
-    /* App screenshot slots. Geometry is adjustable: when genuine phone captures (about 9:20) replace the mock-ups,
-       set --app-shot-ratio: 9 / 20 and --app-shot-max-width: 240px on :root. See js/home.js (KWIKLEARN_APP_SCREENS). */
-    .feature-image picture { display: block; width: 100%; max-width: var(--app-shot-max-width, 320px); aspect-ratio: var(--app-shot-ratio, 2 / 3); }
+    /* App screenshot slots: genuine Android captures (cropped to 940 x 1820, shown at 560 x 1084). See js/home.js (KWIKLEARN_APP_SCREENS). */
+    :root { --app-shot-ratio: 940 / 1820; --app-shot-max-width: 280px; }
+    .feature-image picture { display: block; width: 100%; max-width: var(--app-shot-max-width, 320px); aspect-ratio: var(--app-shot-ratio, 2 / 3); border-radius: 18px; overflow: hidden; box-shadow: 0 6px 24px rgba(15, 23, 42, 0.14), 0 0 0 1px rgba(15, 23, 42, 0.08); }
     .feature-image picture img { display: block; width: 100%; height: 100%; max-height: none; object-fit: contain; }
     @media (max-width: 991px) {
       .how-grid { grid-template-columns: 1fr; }
@@ -2286,7 +2286,7 @@ button.navbar-toggler {
           <p>A look at the KwikLearn app experience, starting with Mathematics and expanding to more subjects in future
             releases.
           </p>
-          <p class="illustrative-note" id="appScreensNote">Illustrative app screens with sample data. They are not real learner statistics, and they do not show every subject that is available today.</p>
+          <p class="illustrative-note" id="appScreensNote">Screens captured on an Android test device with sample data. They are not real learner statistics, and the app currently covers Mathematics only.</p>
         </div>
 
         <div class="row g-4">
@@ -2294,8 +2294,8 @@ button.navbar-toggler {
             <div class="feature-card fade-in">
               <div class="feature-image">
                 <picture data-app-slot="dashboard">
-                  <source type="image/webp" srcset="images/home/app-student-dashboard-560.webp 560w" sizes="(min-width: 992px) 320px, 70vw">
-                  <img src="student-dashboard.png" alt="KwikLearn student dashboard screen" width="1024" height="1536" loading="lazy" decoding="async"
+                  <source type="image/webp" srcset="images/home/app-subjects-560.webp 560w" sizes="(min-width: 992px) 280px, 70vw">
+                  <img src="images/home/app-subjects-560.jpg" alt="KwikLearn app Subjects screen: Mathematics is listed as available now, with a note that the early version covers four Mathematics topics" width="560" height="1084" loading="lazy" decoding="async"
                     onerror="var p=this.closest('picture');p.style.display='none';p.nextElementSibling.style.display='flex';">
                 </picture>
                 <div class="feature-placeholder" style="display: none;">
@@ -2303,9 +2303,8 @@ button.navbar-toggler {
                 </div>
               </div>
               <div class="feature-content">
-                <h3>Student Dashboard</h3>
-                <p>Quick access to subjects, learning activity, performance summary, and ongoing progress in one place.
-                </p>
+                <h3>Choose Your Subject</h3>
+                <p>Start from the Subjects tab. Mathematics is available first, with more subjects planned for future releases.</p>
               </div>
             </div>
           </div>
@@ -2313,8 +2312,8 @@ button.navbar-toggler {
             <div class="feature-card fade-in">
               <div class="feature-image">
                 <picture data-app-slot="quiz">
-                  <source type="image/webp" srcset="images/home/app-practice-quiz-560.webp 560w" sizes="(min-width: 992px) 320px, 70vw">
-                  <img src="practice-quiz-screen.png" alt="KwikLearn practice quiz screen" width="1024" height="1536" loading="lazy" decoding="async"
+                  <source type="image/webp" srcset="images/home/app-quizzes-560.webp 560w" sizes="(min-width: 992px) 280px, 70vw">
+                  <img src="images/home/app-quizzes-560.jpg" alt="KwikLearn app Quizzes screen: Practice by topic, listing the Mathematics topics Factors and Multiples, Standard Form, Decimals and Triangles" width="560" height="1084" loading="lazy" decoding="async"
                     onerror="var p=this.closest('picture');p.style.display='none';p.nextElementSibling.style.display='flex';">
                 </picture>
                 <div class="feature-placeholder" style="display: none;">
@@ -2322,9 +2321,8 @@ button.navbar-toggler {
                 </div>
               </div>
               <div class="feature-content">
-                <h3>Practice Quizzes &amp; Exam Mode</h3>
-                <p>Practice quizzes and exam mode help learners study, answer questions, review results, and improve
-                  over time.</p>
+                <h3>Practice by Topic</h3>
+                <p>Pick a Mathematics topic and practise with quiz questions to keep your progress moving.</p>
               </div>
             </div>
           </div>
@@ -2332,8 +2330,8 @@ button.navbar-toggler {
             <div class="feature-card fade-in">
               <div class="feature-image">
                 <picture data-app-slot="progress">
-                  <source type="image/webp" srcset="images/home/app-progress-report-560.webp 560w" sizes="(min-width: 992px) 320px, 70vw">
-                  <img src="progress-report-screen.png" alt="KwikLearn progress report screen" width="1024" height="1536" loading="lazy" decoding="async"
+                  <source type="image/webp" srcset="images/home/app-progress-560.webp 560w" sizes="(min-width: 992px) 280px, 70vw">
+                  <img src="images/home/app-progress-560.jpg" alt="KwikLearn app Progress screen: quizzes taken, average score, questions answered, a Mistake Book and recent quizzes" width="560" height="1084" loading="lazy" decoding="async"
                     onerror="var p=this.closest('picture');p.style.display='none';p.nextElementSibling.style.display='flex';">
                 </picture>
                 <div class="feature-placeholder" style="display: none;">
@@ -2341,8 +2339,8 @@ button.navbar-toggler {
                 </div>
               </div>
               <div class="feature-content">
-                <h3>Progress Insights</h3>
-                <p>Clear progress tracking to help learners understand improvement, strengths, and support areas.</p>
+                <h3>Progress &amp; Mistake Book</h3>
+                <p>See your quizzes, average score and questions answered, and revisit the questions that need review.</p>
               </div>
             </div>
           </div>
