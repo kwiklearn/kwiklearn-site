@@ -1,8 +1,10 @@
 /*
  * KwikLearn homepage behaviour
  * ----------------------------------------------------------------------------
- * 1) Centralised beta-access call to action
+ * 1) Launch-state configuration: ONE place that controls the primary call to
+ *    action, the status label and every launch-dependent line of homepage copy
  * 2) User-controlled hero carousel (no autoplay)
+ * 3) App screenshot slots
  *
  * No framework. Works with the existing Bootstrap / jQuery page.
  */
@@ -10,32 +12,91 @@
   'use strict';
 
   /* ==========================================================================
-   * 1) CENTRALISED CTA
+   * 1) LAUNCH STATE  (the single place to change the call to action)
    * --------------------------------------------------------------------------
-   * Every element marked data-cta="beta" takes its destination and wording from
-   * this one object. To move from the waiting list to an official Google Play
-   * listing later, change ONLY this object, e.g.
+   * THE ONLY SWITCH IS  state  BELOW.
    *
-   *   label:    'Get it on Google Play',
-   *   href:     'https://play.google.com/store/apps/details?id=<package-id>',
-   *   external: true
+   *   'prelaunch' (default)  Status label "Coming soon to Google Play". The primary
+   *                          button is "Explore KwikLearn" and scrolls to the
+   *                          Features section. There is NO link to Google Play and
+   *                          no claim that the app can be downloaded.
+   *   'public'               The primary button is “Get KwikLearn on Google Play” and
+   *                          links to the public Google Play listing.
    *
-   * Do not point this at Google Play until the app is publicly available.
-   * The HTML keeps the same waiting-list link as a no-JavaScript fallback.
+   * TO GO PUBLIC (only after the owner confirms the app is publicly available):
+   *   1. Open the live Google Play listing in a browser and copy its URL, in the form
+   *        https://play.google.com/store/apps/details?id=<application id>
+   *      Paste it into  public.button.href  below. Do not guess it.
+   *   2. Review the  public  wording below (owner approval).
+   *   3. Set  state: 'public'.
+   *
+   * SAFETY: if state is 'public' but public.button.href is empty or is not a Google
+   * Play listing URL, the page stays in 'prelaunch' and writes a console warning,
+   * so a broken or invented link can never go live.
+   *
+   * The HTML itself contains the pre-launch wording as the no-JavaScript fallback.
    * ========================================================================== */
-  var KWIKLEARN_CTA = {
-    label: 'Request Android Beta Access',
-    href: 'https://forms.gle/cU6HZAS9DRoSg6kbA',
-    external: true
-  };
-  window.KWIKLEARN_CTA = KWIKLEARN_CTA;
+  var KWIKLEARN_LAUNCH = {
+    state: 'prelaunch',   // <<< THE ONLY SWITCH: 'prelaunch' or 'public'
 
-  function applyCta() {
-    var links = document.querySelectorAll('[data-cta="beta"]');
+    prelaunch: {
+      statusLabel: 'Coming soon to Google Play',
+      button: { label: 'Explore KwikLearn', href: '#features', external: false },
+      announcement: 'KwikLearn is coming soon to Google Play, starting with Mathematics.',
+      heroNote: 'KwikLearn is not available to download yet. We will add a Google Play download button here when it launches.',
+      finalHeading: 'KwikLearn is coming soon to Google Play.',
+      faqQuestion: 'When can I download KwikLearn?',
+      faqAnswer: 'KwikLearn is coming soon to Google Play for Android and is not available to download yet. When it launches, this page will show a “Get KwikLearn on Google Play” button.'
+    },
+
+    // Prepared but INACTIVE. Owner to approve the wording and supply the verified listing URL.
+    public: {
+      statusLabel: 'Available on Google Play',
+      button: {
+        label: 'Get KwikLearn on Google Play',
+        href: '',          // <<< OWNER: paste the VERIFIED public Google Play listing URL here (do not guess)
+        external: true
+      },
+      announcement: 'KwikLearn is now on Google Play, starting with Mathematics.',
+      heroNote: 'Available for Android on Google Play in Ghana.',
+      finalHeading: 'Get KwikLearn on Google Play.',
+      faqQuestion: 'How can I download KwikLearn?',
+      faqAnswer: 'KwikLearn is available on Google Play for Android. Use the “Get KwikLearn on Google Play” button on this page.'
+    }
+  };
+  window.KWIKLEARN_LAUNCH = KWIKLEARN_LAUNCH;
+
+  var PLAY_LISTING = /^https:\/\/play\.google\.com\/store\/apps\/details\?id=[A-Za-z][A-Za-z0-9_]*(\.[A-Za-z][A-Za-z0-9_]*)+(&[A-Za-z0-9_=%.\-]*)*$/;
+
+  function activeState() {
+    if (KWIKLEARN_LAUNCH.state === 'public') {
+      var url = KWIKLEARN_LAUNCH['public'].button.href;
+      if (PLAY_LISTING.test(url)) { return 'public'; }
+      if (window.console && console.warn) {
+        console.warn('KwikLearn: launch state is "public" but no valid Google Play listing URL is set; staying in "prelaunch".');
+      }
+    }
+    return 'prelaunch';
+  }
+
+  function applyLaunch() {
+    var name = activeState();
+    var s = KWIKLEARN_LAUNCH[name];
+    document.documentElement.setAttribute('data-launch-state', name);
+
+    // Text slots: <el data-launch="statusLabel|announcement|heroNote|finalHeading|faqQuestion|faqAnswer">
+    var keys = ['statusLabel', 'announcement', 'heroNote', 'finalHeading', 'faqQuestion', 'faqAnswer'];
+    for (var k = 0; k < keys.length; k++) {
+      var els = document.querySelectorAll('[data-launch="' + keys[k] + '"]');
+      for (var e = 0; e < els.length; e++) { els[e].textContent = s[keys[k]]; }
+    }
+
+    // Primary call to action: <a data-cta="primary"> with an optional <span data-cta-label>
+    var links = document.querySelectorAll('[data-cta="primary"]');
     for (var i = 0; i < links.length; i++) {
       var a = links[i];
-      a.setAttribute('href', KWIKLEARN_CTA.href);
-      if (KWIKLEARN_CTA.external) {
+      a.setAttribute('href', s.button.href);
+      if (s.button.external) {
         a.setAttribute('target', '_blank');
         a.setAttribute('rel', 'noopener noreferrer');
       } else {
@@ -43,8 +104,12 @@
         a.removeAttribute('rel');
       }
       var label = a.querySelector('[data-cta-label]');
-      if (label) { label.textContent = KWIKLEARN_CTA.label; }
+      if (label) { label.textContent = s.button.label; }
     }
+
+    // Elements that exist in one state only: <el data-show-in="public">
+    var only = document.querySelectorAll('[data-show-in]');
+    for (var o = 0; o < only.length; o++) { only[o].hidden = only[o].getAttribute('data-show-in') !== name; }
   }
 
   /* ==========================================================================
@@ -169,6 +234,6 @@
     if (note) { note.textContent = KWIKLEARN_APP_SCREENS.genuine ? KWIKLEARN_APP_SCREENS.genuineNote : KWIKLEARN_APP_SCREENS.illustrativeNote; }
   }
 
-  function ready() { applyCta(); applyAppScreens(); initCarousel(); }
+  function ready() { applyLaunch(); applyAppScreens(); initCarousel(); }
   if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', ready); } else { ready(); }
 }());

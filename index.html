@@ -1880,7 +1880,7 @@
     /* ===== MOBILE CAROUSEL CAPTION LAYOUT (up to 575px) =====
        Keeps the photograph exposed: the label and headline sit on a small gradient at the bottom of the image,
        and the supporting text moves BELOW the image in dark type on white. The HTML is unchanged (same order,
-       same words); this is CSS only. The tweaks to hero padding and carousel spacing keep the beta CTA where it
+       same words); this is CSS only. The tweaks to hero padding and carousel spacing keep the primary CTA where it
        was on a 390x844 screen. */
     @media (max-width: 575px) {
       .hc-track { align-items: flex-start; }
@@ -1900,8 +1900,23 @@
       .hc-slide .hc-caption .hc-text { grid-row: 4; grid-column: 1; color: #1F2937; padding: 8px 12px 0; font-size: 14px; line-height: 1.4; }
       .hero.hero-v2 { padding-top: 16px; }
       .hero-v2 .row > .col-lg-6:first-child > .hero-badge { margin-bottom: 10px; }
-      .hc-controls { padding: 6px 4px 0; }
+            .hc-controls { padding: 6px 4px 0; }
       .hc-note { margin: 0 8px 4px; }
+      /* Text first: status label, headline, slogan, primary CTA, intro, note, THEN the carousel */
+      .hero-v2 .row > .col-lg-6:first-child > .hero-badge { order: 1; }
+      .hero-v2 h1 { order: 2; }
+      .hero-v2 .hero-slogan { order: 3; }
+      .hero-v2 .hero-buttons { order: 4; }
+      .hero-v2 .hero-description { order: 5; }
+      .hero-v2 .beta-note { order: 6; }
+      .hero-v2 .row > .col-lg-6:last-child { order: 7; margin: 6px 0 0; }
+      .hero-v2 .hero-trust-points { order: 8; margin-top: 18px; }
+    }
+
+    /* Very small phones (320 to 360px): the control row (two arrows + four dots) must still fit, so every control stays at least 44px wide */
+    @media (max-width: 360px) {
+      .hc-controls { gap: 4px; padding-left: 0; padding-right: 0; }
+      .hc-dots { gap: 0; }
     }
 
     /* Respect reduced-motion preferences site-wide on this page */
@@ -2045,7 +2060,7 @@ button.navbar-toggler {
   <div class="announcement-bar">
     <div class="container">
       <i class="bi bi-rocket-takeoff-fill"></i>
-      KwikLearn Android beta is in limited early testing, starting with Mathematics.
+      <span data-launch="announcement">KwikLearn is coming soon to Google Play, starting with Mathematics.</span>
     </div>
   </div>
   <!-- Announcement Bar End -->
@@ -2084,8 +2099,7 @@ button.navbar-toggler {
           </li>
 
         </ul>
-        <a href="https://forms.gle/cU6HZAS9DRoSg6kbA" class="btn btn-beta btn-beta-nav" data-cta="beta" target="_blank"
-          rel="noopener noreferrer"><span data-cta-label>Request Android Beta Access</span></a>
+        <a href="#features" class="btn btn-beta btn-beta-nav" data-cta="primary"><span data-cta-label>Explore KwikLearn</span></a>
       </div>
     </div>
   </nav>
@@ -2100,8 +2114,8 @@ button.navbar-toggler {
         <div class="row align-items-center g-4 g-lg-5">
           <div class="col-lg-6">
             <div class="hero-badge">
-              <i class="bi bi-gift-fill" aria-hidden="true"></i>
-              Free Mathematics Beta
+              <i class="bi bi-google-play" aria-hidden="true"></i>
+              <span data-launch="statusLabel">Coming soon to Google Play</span>
             </div>
 
             <h1 id="hero-title">Smarter BECE &amp; WASSCE Preparation for Ghanaian Students.</h1>
@@ -2110,28 +2124,21 @@ button.navbar-toggler {
 
             <p class="hero-description">
               Prepare for BECE and WASSCE with Mathematics practice quizzes, exam mode, study notes for selected topics
-              and progress tracking. KwikLearn is currently in limited Android testing.
+              and progress tracking. Other subjects and features are planned for future releases.
             </p>
 
             <div class="hero-buttons">
-              <!-- Destination and wording come from js/home.js (KWIKLEARN_CTA); this href is the no-JavaScript fallback -->
-              <a href="https://forms.gle/cU6HZAS9DRoSg6kbA" class="btn-primary-hero" data-cta="beta" target="_blank"
-                rel="noopener noreferrer">
-                <i class="bi bi-phone" aria-hidden="true"></i> <span data-cta-label>Request Android Beta Access</span>
-              </a>
-              <a href="#features" class="btn-secondary-hero">
-                <i class="bi bi-grid-3x3-gap" aria-hidden="true"></i> Explore Features
+              <!-- Wording and destination come from js/home.js (KWIKLEARN_LAUNCH); this is the no-JavaScript pre-launch fallback -->
+              <a href="#features" class="btn-primary-hero" data-cta="primary">
+                <i class="bi bi-compass" aria-hidden="true"></i> <span data-cta-label>Explore KwikLearn</span>
               </a>
             </div>
-            <p class="beta-note">
-              <strong>In Google Play internal testing &middot; not public yet.</strong> Android beta access is requested
-              through a waiting list &mdash; it is not an immediate public download. The current Mathematics beta is free.
-            </p>
+            <p class="beta-note" data-launch="heroNote">KwikLearn is not available to download yet. We will add a Google Play download button here when it launches.</p>
 
             <div class="hero-trust-points">
               <div class="trust-point">
                 <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
-                <span>Free Mathematics beta</span>
+                <span>Mathematics-focused practice</span>
               </div>
               <div class="trust-point">
                 <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
@@ -2227,8 +2234,8 @@ button.navbar-toggler {
             <i class="bi bi-info-circle"></i> About Us
           </span>
           <h2>What is KwikLearn?</h2>
-          <p>KwikLearn Android beta helps students prepare for BECE and WASSCE with study notes, practice quizzes, exam
-            mode, results, progress tracking, and Mathematics beta content.</p>
+          <p>KwikLearn helps students prepare for BECE and WASSCE with study notes, practice quizzes, exam mode, results
+            and progress tracking, starting with Mathematics.</p>
         </div>
 
         <div class="row g-4">
@@ -2276,8 +2283,8 @@ button.navbar-toggler {
             <i class="bi bi-grid-3x3-gap-fill"></i> Features
           </span>
           <h2>A preview of the KwikLearn experience</h2>
-          <p>A look at the Android beta experience in limited early testing, starting with Mathematics content
-            and expanding gradually to more subjects.
+          <p>A look at the KwikLearn app experience, starting with Mathematics and expanding to more subjects in future
+            releases.
           </p>
           <p class="illustrative-note" id="appScreensNote">Illustrative app screens with sample data. They are not real learner statistics, and they do not show every subject that is available today.</p>
         </div>
@@ -2357,8 +2364,7 @@ button.navbar-toggler {
               </span>
               <h2>Built with local relevance and a bigger future in mind.</h2>
               <p>KwikLearn aims to make quality exam preparation more accessible, engaging, and affordable while
-                building a trusted digital education brand for students and families. The beta begins with
-                Mathematics while more subjects and features are added gradually.</p>
+                building a trusted digital education brand for students and families. KwikLearn starts with Mathematics, with more subjects and features planned for future releases.</p>
 
               <ul class="checklist">
                 <li>
@@ -2389,7 +2395,7 @@ button.navbar-toggler {
                 <img src="images/home/why-family-800.webp" width="800" height="600" loading="lazy" decoding="async"
                   alt="Illustration: a Ghanaian parent encouraging a daughter who is studying with a tablet at home">
               </picture>
-              <figcaption>Illustrative image. Families can encourage learning at home; today&rsquo;s KwikLearn beta is built for students.</figcaption>
+              <figcaption>Illustrative image. Families can encourage learning at home; today&rsquo;s KwikLearn app is built for students.</figcaption>
             </figure>
           </div>
         </div>
@@ -2605,8 +2611,8 @@ button.navbar-toggler {
                 <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                   <div class="accordion-body">
                     KwikLearn is an educational learning app that helps students prepare for BECE and WASSCE with study
-                    notes, practice quizzes, exam mode, results, progress tracking, and future video lessons. The current
-                    Android beta includes Mathematics beta content, with more subjects coming gradually.
+                    notes, practice quizzes, exam mode, results and progress tracking, starting with Mathematics. Video
+                    lessons and other subjects are planned for future releases.
                   </div>
                 </div>
               </div>
@@ -2620,7 +2626,7 @@ button.navbar-toggler {
                 </h2>
                 <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                   <div class="accordion-body">
-                    KwikLearn is designed for students preparing for BECE and WASSCE. The current Android beta starts with
+                    KwikLearn is designed for students preparing for BECE and WASSCE. It starts with
                     Mathematics. Features for parents, teachers, and schools are planned but are not available yet.
                   </div>
                 </div>
@@ -2630,15 +2636,12 @@ button.navbar-toggler {
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
-                    How can I try the Android beta?
+                    <span data-launch="faqQuestion">When can I download KwikLearn?</span>
                   </button>
                 </h2>
                 <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                   <div class="accordion-body">
-                    KwikLearn Android beta is in limited early testing, starting with Mathematics. It is in Google Play
-                    internal testing and is not publicly available on Google Play yet. Access is requested through a
-                    waiting list using the &ldquo;Request Android Beta Access&rdquo; button; it is not an immediate
-                    public download.
+                    <span data-launch="faqAnswer">KwikLearn is coming soon to Google Play for Android and is not available to download yet. When it launches, this page will show a &ldquo;Get KwikLearn on Google Play&rdquo; button.</span>
                   </div>
                 </div>
               </div>
@@ -2652,8 +2655,9 @@ button.navbar-toggler {
                 </h2>
                 <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                   <div class="accordion-body">
-                    The current Android Mathematics beta is free. KwikLearn aims to stay affordable and accessible, and
-                    some services may become paid in future. Any pricing would be clearly communicated before purchase.
+                    KwikLearn is currently free to use, and this version of the app does not accept payments (see our Terms of
+                    Service). KwikLearn aims to stay affordable and accessible, and some services may become paid in future.
+                    Any pricing would be clearly communicated before purchase.
                   </div>
                 </div>
               </div>
@@ -2683,9 +2687,13 @@ button.navbar-toggler {
     <section id="cta">
       <div class="container">
         <div class="cta-content fade-in">
-          <h2>Be among the first to know when KwikLearn launches.</h2>
-          <p>For inquiries, partnerships, or early access, reach out to us by email or WhatsApp.</p>
+          <h2 data-launch="finalHeading">KwikLearn is coming soon to Google Play.</h2>
+          <p>For questions about KwikLearn, partnerships, or school and community enquiries, reach out to us by email or WhatsApp.</p>
           <div class="cta-buttons">
+            <!-- Shown only in the 'public' launch state (js/home.js) -->
+            <a href="#features" class="btn-cta-primary" data-cta="primary" data-show-in="public" hidden>
+              <i class="bi bi-google-play" aria-hidden="true"></i> <span data-cta-label>Explore KwikLearn</span>
+            </a>
             <a href="mailto:info@kwiklearn.app" class="btn-cta-primary">
               <i class="bi bi-envelope-fill"></i> Email Us
             </a>
