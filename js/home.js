@@ -20,11 +20,11 @@
    *                official Google Play badge, and by nothing else. Because the listing
    *                address does not change when the app is updated, publishing a new app
    *                version needs NO edit here. Change it only if the application id changes.
-   * subjects       Subjects the app covers today. Edit when a subject launches.
-   *   available        shown in the hero label, description, trust point and the
-   *                    "choose your subject" card (homepage text slots data-site=...).
-   *   shownInScreens   what the three app screenshots actually show. Update it only
-   *                    when the screenshots are replaced.
+   * subjects.shownInScreens   what the three app screenshots actually show (used only in the
+   *                    screenshot note). Update it only when the screenshots are replaced.
+   *                    Subject availability is deliberately NOT stored here: permanent copy
+   *                    points visitors to the Subjects section of the app, so launching a
+   *                    subject needs no website edit.
    *
    * NOT controlled from here (static HTML, read by search engines and by visitors
    * without JavaScript, so review them by hand when this changes): meta description,
@@ -35,7 +35,6 @@
   var KWIKLEARN_SITE = {
     playStoreUrl: 'https://play.google.com/store/apps/details?id=com.kwiklearn.app',   // official public listing (verified)
     subjects: {
-      available: ['Mathematics'],
       shownInScreens: ['Mathematics']
     }
   };
@@ -96,19 +95,7 @@
   }
 
   function applySite() {
-    var list = joinList(KWIKLEARN_SITE.subjects.available);
-    var shown = joinList(KWIKLEARN_SITE.subjects.shownInScreens);
-    var text = {
-      subjects: list,
-      subjectsStart: 'Starting with ' + list,
-      subjectsFocus: KWIKLEARN_SITE.subjects.available.length === 1 ? list + '-focused practice' : list + ' practice'
-    };
-    var els = document.querySelectorAll('[data-site]');
-    for (var i = 0; i < els.length; i++) {
-      var key = els[i].getAttribute('data-site');
-      if (Object.prototype.hasOwnProperty.call(text, key)) { els[i].textContent = text[key]; }
-    }
-    KWIKLEARN_APP_SCREENS.shownSubjects = shown;
+    KWIKLEARN_APP_SCREENS.shownSubjects = joinList(KWIKLEARN_SITE.subjects.shownInScreens);
   }
 
   function applyLaunch() {
