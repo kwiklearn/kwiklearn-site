@@ -178,12 +178,15 @@
    * ========================================================================== */
   /* Automatic rotation: every AUTOPLAY_MS the carousel moves to the next slide (and wraps to the first).
    * It never runs for visitors who ask for reduced motion or Data Saver, and it stops or pauses when:
-   *   - the pointer is over the carousel, or keyboard focus is inside it (pauses; resumes when they leave)
+   *   - the pointer is over the carousel, or keyboard focus is inside it (pauses while that is true, read from
+   *     the live state, so pressing Play does not override it; resumes when both have left)
    *   - the visitor uses it: arrows, dots, keys, or a swipe or drag (stops until they press Play)
    *   - they press the Pause button (stops until they press Play)
    *   - the tab is hidden or the carousel is scrolled out of view (pauses)
-   * The next slide's image is fetched only shortly before it is needed, and the first advance
-   * waits until the page has fully loaded, so the first slide and the page load are unaffected. */
+   * Images: slide 1 is the only eager image. Nothing else is downloaded because of hover or focus. The automatic
+   * rotation fetches the next slide one step ahead, after the page has loaded. Manual navigation fetches only the
+   * slides it needs (the range being scrolled across, or the neighbours at the start of a swipe).
+   * Reduced motion and Data Saver therefore download nothing extra until the visitor navigates. */
   var AUTOPLAY_MS = 5500;
 
   function initCarousel() {
@@ -200,12 +203,11 @@
     var reduce = !!(mq && mq.matches);
     var saveData = !!(navigator.connection && navigator.connection.saveData);
     var current = 0;
-    var loaded = false;
     var loadedSlides = {};
 
     // autoplay state
     var autoAllowed = !reduce && !saveData && slides.length > 1;
-    var userStopped = false, hoverPause = false, focusPause = false, inView = true, pageLoaded = false;
+    var userStopped = false, inView = true, pageLoaded = false;
     var timer = null;
     var progUntil = 0;   // scrolls caused by the script itself (not by the visitor) happen before this time
     function markProg(ms) { progUntil = Date.now() + ms; }
@@ -221,11 +223,13 @@
       }
     }
 
-    function loadRest() {
-      if (loaded) { return; }
-      loaded = true;
-      for (var i = 0; i < slides.length; i++) { loadSlide(i); }
+    // fetch only the slides from a to b (inclusive): the ones a navigation will scroll across
+    function loadRange(a, b) {
+      var lo = Math.max(0, Math.min(a, b)), hi = Math.min(slides.length - 1, Math.max(a, b));
+      for (var i = lo; i <= hi; i++) { loadSlide(i); }
     }
+    // before a swipe or drag the destination is unknown, so fetch the two neighbours
+    function loadNeighbours() { loadRange(current - 1, current + 1); }
 
     function slideReady(i) {
       var img = slides[i] && slides[i].querySelector('img');
@@ -249,13 +253,16 @@
 
     function goTo(i, instant) {
       i = Math.max(0, Math.min(slides.length - 1, i));
+      loadRange(current, i);
       markProg(1200);
       track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: (reduce || instant) ? 'auto' : 'smooth' });
       setActive(i);
     }
 
     /* ---- automatic rotation ---- */
-    function running() { return autoAllowed && !userStopped && !hoverPause && !focusPause && inView && pageLoaded && !document.hidden; }
+    // true while the pointer is over the carousel or focus is inside it, read live so it can never go stale
+    function held() { return root.matches(':hover') || root.contains(document.activeElement); }
+    function running() { return autoAllowed && !userStopped && !held() && inView && pageLoaded && !document.hidden; }
 
     function syncUi() {
       var auto = autoAllowed && !userStopped;
@@ -295,7 +302,7 @@
 
     if (playBtn) {
       playBtn.addEventListener('click', function () {
-        if (userStopped) { userStopped = false; hoverPause = false; focusPause = false; syncUi(); loadSlide((current + 1) % slides.length); schedule(); }
+        if (userStopped) { userStopped = false; syncUi(); loadSlide((current + 1) % slides.length); schedule(); }
         else { stopByUser(); }
       });
     }
@@ -303,7 +310,7 @@
     var ticking = false;
     track.addEventListener('scroll', function () {
       // a scroll the script did not cause (trackpad, drag, native swipe) is the visitor using the carousel
-      if (Date.now() > progUntil) { loadRest(); stopByUser(); }
+      if (Date.now() > progUntil) { loadNeighbours(); stopByUser(); }
       if (ticking) { return; }
       ticking = true;
       window.requestAnimationFrame(function () {
@@ -315,31 +322,31 @@
     }, { passive: true });
 
     // manual controls load every slide and stop the automatic rotation
-    if (prev) { prev.addEventListener('click', function () { loadRest(); stopByUser(); goTo(current - 1); }); }
-    if (next) { next.addEventListener('click', function () { loadRest(); stopByUser(); goTo(current + 1); }); }
-    dots.forEach(function (d, i) { d.addEventListener('click', function () { loadRest(); stopByUser(); goTo(i); }); });
+    if (prev) { prev.addEventListener('click', function () { stopByUser(); goTo(current - 1); }); }
+    if (next) { next.addEventListener('click', function () { stopByUser(); goTo(current + 1); }); }
+    dots.forEach(function (d, i) { d.addEventListener('click', function () { stopByUser(); goTo(i); }); });
 
     track.addEventListener('keydown', function (e) {
       var k = e.key, handled = true;
-      if (k === 'ArrowRight') { loadRest(); stopByUser(); goTo(current + 1); }
-      else if (k === 'ArrowLeft') { loadRest(); stopByUser(); goTo(current - 1); }
-      else if (k === 'Home') { loadRest(); stopByUser(); goTo(0); }
-      else if (k === 'End') { loadRest(); stopByUser(); goTo(slides.length - 1); }
+      if (k === 'ArrowRight') { stopByUser(); goTo(current + 1); }
+      else if (k === 'ArrowLeft') { stopByUser(); goTo(current - 1); }
+      else if (k === 'Home') { stopByUser(); goTo(0); }
+      else if (k === 'End') { stopByUser(); goTo(slides.length - 1); }
       else { handled = false; }
       if (handled) { e.preventDefault(); }
     });
 
     // swipe or drag: touch and pen start a stop; a mouse press on the track too
-    track.addEventListener('touchstart', function () { loadRest(); stopByUser(); }, { passive: true });
-    track.addEventListener('pointerdown', function () { loadRest(); stopByUser(); }, { passive: true });
+    track.addEventListener('touchstart', function () { loadNeighbours(); stopByUser(); }, { passive: true });
+    track.addEventListener('pointerdown', function () { loadNeighbours(); stopByUser(); }, { passive: true });
 
     // hover and focus pause (and resume when the visitor leaves)
-    root.addEventListener('mouseenter', function () { hoverPause = true; clearTimer(); });
-    root.addEventListener('mouseleave', function () { hoverPause = false; schedule(); });
-    root.addEventListener('focusin', function () { focusPause = true; clearTimer(); });
+    root.addEventListener('mouseenter', clearTimer);
+    root.addEventListener('mouseleave', function () { schedule(); });
+    root.addEventListener('focusin', clearTimer);
     root.addEventListener('focusout', function (e) {
       if (e.relatedTarget && root.contains(e.relatedTarget)) { return; }
-      focusPause = false; schedule();
+      schedule();
     });
 
     document.addEventListener('visibilitychange', function () { if (document.hidden) { clearTimer(); } else { schedule(); } });
@@ -357,10 +364,6 @@
         syncUi(); schedule();
       });
     }
-
-    ['pointerdown', 'touchstart', 'mouseenter', 'focusin', 'keydown'].forEach(function (ev) {
-      root.addEventListener(ev, loadRest, { once: true, passive: true });
-    });
 
     window.addEventListener('resize', function () {
       markProg(400);
