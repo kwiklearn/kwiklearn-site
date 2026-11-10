@@ -697,6 +697,11 @@
       margin-right: auto;
     }
 
+    .about-visuals { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 960px; margin: 0 auto 56px; }
+    .about-photo { margin: 0; background: #fff; border-radius: 24px; overflow: hidden; border: 1px solid rgba(30, 58, 138, 0.1); box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12); }
+    .about-photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: #DBE7FF; }
+    .about-photo figcaption { font-size: 13px; line-height: 1.5; color: #374151; padding: 12px 18px 14px; text-align: left; }
+    @media (max-width: 767px) { .about-visuals { grid-template-columns: minmax(0, 1fr); gap: 20px; margin-bottom: 40px; } }
     .btn-cta {
       background: var(--secondary);
       color: var(--white);
@@ -991,6 +996,26 @@ button.navbar-toggler {
         </span>
         <h2>About <span class="text-highlight">KwikLearn</span></h2>
         <p>KwikLearn is a Ghana-focused learning app for BECE and WASSCE preparation, starting with Mathematics. It offers practice quizzes, exam mode, study notes for selected topics, and results and progress tracking. Other subjects and features are planned for future releases.</p>
+      </div>
+
+      <!-- Approved illustrative images (provenance recorded in the review notes) -->
+      <div class="about-visuals fade-in">
+          <figure class="about-photo">
+            <picture>
+              <source type="image/avif" srcset="/images/home/how-collaboration-480.avif 480w, /images/home/how-collaboration-800.avif 800w" sizes="(min-width: 768px) 460px, calc(100vw - 32px)">
+              <source type="image/webp" srcset="/images/home/how-collaboration-480.webp 480w, /images/home/how-collaboration-800.webp 800w" sizes="(min-width: 768px) 460px, calc(100vw - 32px)">
+              <img src="/images/home/how-collaboration-800.webp" width="800" height="600" loading="lazy" decoding="async" alt="Illustration: students and a teacher gathered around laptops and tablets in a bright Ghanaian library">
+            </picture>
+            <figcaption>Illustrative image. It does not show a real KwikLearn session.</figcaption>
+          </figure>
+          <figure class="about-photo">
+            <picture>
+              <source type="image/avif" srcset="/images/home/why-family-480.avif 480w, /images/home/why-family-800.avif 800w" sizes="(min-width: 768px) 460px, calc(100vw - 32px)">
+              <source type="image/webp" srcset="/images/home/why-family-480.webp 480w, /images/home/why-family-800.webp 800w" sizes="(min-width: 768px) 460px, calc(100vw - 32px)">
+              <img src="/images/home/why-family-800.webp" width="800" height="600" loading="lazy" decoding="async" alt="Illustration: a Ghanaian parent encouraging a daughter who is studying with a tablet at home">
+            </picture>
+            <figcaption>Illustrative image. Families can encourage learning at home; today&rsquo;s KwikLearn app is built for students.</figcaption>
+          </figure>
       </div>
 
       <!-- Feature Cards Grid -->
