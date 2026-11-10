@@ -256,6 +256,10 @@
       box-shadow: 0 4px 14px rgba(249, 115, 22, 0.3);
     }
 
+    /* the longer download label must stay on one line; slightly smaller between 992 and 1199px so the navbar still fits */
+    @media (min-width: 361px) { .btn-beta-nav { white-space: nowrap; } }   /* at 320px the label may wrap inside the full-width menu button */
+    @media (min-width: 992px) and (max-width: 1199px) { .btn-beta-nav { padding: 10px 16px; font-size: 14px; } }
+
     .btn-beta:hover {
       background: var(--secondary-dark);
       color: var(--white);
@@ -1737,9 +1741,10 @@
     .hero-v2 .hero-description { font-size: 17px; margin-bottom: 26px; }
     .hero-v2 .hero-buttons { margin-bottom: 14px; }
     .hero-v2 .beta-note { margin: 0 0 24px; }
-    /* Official Google Play badge (public state only). Artwork is used unmodified; its own transparent margin is the required clear space. */
+    /* Official Google Play badge. The artwork is used unmodified. Its own transparent margin (24% of the badge height) is Google's required clear space,
+       so no negative margins are used. At 220px wide the visible badge is 192 x 57px (Google's minimum is 40px high). */
     .play-badge a { display: inline-block; line-height: 0; }
-    .play-badge img { display: block; width: 190px; max-width: 100%; height: auto; margin: -16px 0 -16px -12px; }
+    .play-badge img { display: block; width: 220px; max-width: 100%; height: auto; }
     .btn-primary-hero, .btn-secondary-hero { text-decoration: none; min-height: 48px; }
     .btn-primary-hero:focus-visible, .btn-secondary-hero:focus-visible { outline: 3px solid var(--secondary); outline-offset: 3px; }
 
@@ -2097,7 +2102,7 @@ button.navbar-toggler {
           </li>
 
         </ul>
-        <a href="#features" class="btn btn-beta btn-beta-nav" data-cta="primary"><span data-cta-label>Explore KwikLearn</span></a>
+        <a href="https://play.google.com/store/apps/details?id=com.kwiklearn.app" target="_blank" rel="noopener noreferrer" class="btn btn-beta btn-beta-nav" data-cta="primary" aria-label="Get KwikLearn on Google Play (opens in a new tab)"><span data-cta-label>Get KwikLearn on Google Play</span></a>
       </div>
     </div>
   </nav>
@@ -2127,17 +2132,17 @@ button.navbar-toggler {
 
             <div class="hero-buttons">
               <!-- Wording and destination come from js/home.js (KWIKLEARN_LAUNCH); this is the no-JavaScript pre-launch fallback -->
-              <a href="#features" class="btn-primary-hero" data-cta="primary" data-show-in="prelaunch">
+              <a href="#features" class="btn-primary-hero" data-cta="primary" data-show-in="prelaunch" hidden>
                 <i class="bi bi-compass" aria-hidden="true"></i> <span data-cta-label>Explore KwikLearn</span>
               </a>
-              <!-- Public-launch state only: the official, unmodified Google Play badge. No link until js/home.js activates the public state with a verified URL. -->
-              <div class="play-badge" data-show-in="public" hidden>
-                <a data-play-link aria-label="Get KwikLearn on Google Play">
-                  <img src="images/badges/google-play-badge-en.png" alt="Get it on Google Play" width="646" height="250" loading="lazy" decoding="async">
+              <!-- Official, unmodified Google Play badge. The href is the no-JavaScript fallback and must equal KWIKLEARN_SITE.playStoreUrl in js/home.js. -->
+              <div class="play-badge" data-show-in="public">
+                <a data-play-link href="https://play.google.com/store/apps/details?id=com.kwiklearn.app" target="_blank" rel="noopener noreferrer" aria-label="Get KwikLearn on Google Play (opens in a new tab)">
+                  <img src="images/badges/google-play-badge-en.png" alt="Get it on Google Play" width="646" height="250" decoding="async">
                 </a>
               </div>
             </div>
-            <p class="beta-note" data-launch="heroNote">KwikLearn is not available to download yet.</p>
+            <p class="beta-note" data-launch="heroNote" hidden></p>
 
             <div class="hero-trust-points">
               <div class="trust-point">
@@ -2655,7 +2660,7 @@ button.navbar-toggler {
                 </h2>
                 <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                   <div class="accordion-body">
-                    <span data-launch="faqAnswer">KwikLearn is built for Android and is not available to download yet. This page will link to the official Google Play listing when it is available.</span>
+                    <span data-launch="faqAnswer">KwikLearn is available for Android on Google Play. Use the Google Play badge at the top of this page to get the app.</span>
                   </div>
                 </div>
               </div>
@@ -2811,7 +2816,7 @@ button.navbar-toggler {
 
       <div class="footer-bottom">
         <p>&copy; 2026 KwikLearn. All rights reserved.</p>
-        <p data-show-in="public" hidden>Google Play and the Google Play logo are trademarks of Google LLC.</p>
+        <p data-show-in="public">Google Play and the Google Play logo are trademarks of Google LLC.</p>
       </div>
     </div>
   </footer>

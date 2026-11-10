@@ -15,12 +15,11 @@
   /* ==========================================================================
    * 1a) SITE FACTS  (the single place for facts that appear in several spots)
    * --------------------------------------------------------------------------
-   * playStoreUrl   The OFFICIAL public Google Play listing URL. Empty until the
-   *                owner confirms the app is publicly available. Paste the
-   *                address copied from the live listing, in the form
-   *                  https://play.google.com/store/apps/details?id=<application id>
-   *                Do not guess it. It is used by the public-launch button and the
-   *                official Google Play badge, and by nothing else.
+   * playStoreUrl   The OFFICIAL public Google Play listing URL, verified on 10 Nov 2026
+   *                (KwikLearn Technologies Ltd). It is used by the navbar button and the
+   *                official Google Play badge, and by nothing else. Because the listing
+   *                address does not change when the app is updated, publishing a new app
+   *                version needs NO edit here. Change it only if the application id changes.
    * subjects       Subjects the app covers today. Edit when a subject launches.
    *   available        shown in the hero label, description, trust point and the
    *                    "choose your subject" card (homepage text slots data-site=...).
@@ -30,10 +29,11 @@
    * NOT controlled from here (static HTML, read by search engines and by visitors
    * without JavaScript, so review them by hand when this changes): meta description,
    * keywords, og:/twitter: descriptions, structured data, the About page, FAQ answers,
-   * and the wording of the hero description fallback.
+   * and the no-JavaScript fallback in index.html, which carries the SAME listing URL
+   * as playStoreUrl (keep the two identical).
    * ========================================================================== */
   var KWIKLEARN_SITE = {
-    playStoreUrl: '',   // <<< OWNER: the VERIFIED public Google Play listing URL (do not guess)
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.kwiklearn.app',   // official public listing (verified)
     subjects: {
       available: ['Mathematics'],
       shownInScreens: ['Mathematics']
@@ -47,45 +47,37 @@
   }
 
   /* ==========================================================================
-   * 1b) LAUNCH STATE  (the single place to change the call to action)
+   * 1b) DOWNLOAD STATE
    * --------------------------------------------------------------------------
-   * THE ONLY SWITCH IS  state  BELOW.
-   *
-   *   'prelaunch' (default)  The primary button is "Explore KwikLearn" and scrolls to
-   *                          the Features section. There is NO link to Google Play and
-   *                          no claim that the app can be downloaded.
-   *   'public'               The hero shows the official "Get it on Google Play" badge
-   *                          and the navbar button reads "Get KwikLearn on Google Play";
-   *                          both link to KWIKLEARN_SITE.playStoreUrl.
-   *
-   * TO GO PUBLIC (only after the owner confirms the app is publicly available):
-   *   1. Set KWIKLEARN_SITE.playStoreUrl (above) to the verified listing URL.
-   *   2. Review the  public  wording below (owner approval).
-   *   3. Set  state: 'public'.
-   *   4. Review the static SEO fields listed in the review notes (12-launch-state-guide).
+   *   'public' (LIVE)   The hero shows the official "Get it on Google Play" badge and the
+   *                     navbar button reads "Get KwikLearn on Google Play"; both open
+   *                     KWIKLEARN_SITE.playStoreUrl in a new tab.
+   *   'prelaunch'       Safety fallback only. The page uses it automatically if the
+   *                     listing URL is ever empty or malformed: the primary button reads
+   *                     "Explore KwikLearn" and scrolls to Features, and there is no link
+   *                     to Google Play. Nothing in this state claims the app is unavailable.
    *
    * SAFETY: if state is 'public' but playStoreUrl is empty or is not a Google Play
-   * listing URL, the page stays in 'prelaunch' and writes a console warning, so a
-   * broken or invented link can never go live.
+   * listing URL, the page falls back to 'prelaunch' and writes a console warning, so a
+   * broken link can never go live.
    *
    * Only wording that must differ between the two states lives here. Everything else
-   * on the page is permanent (evergreen) copy. The HTML contains the pre-launch wording
-   * as the no-JavaScript fallback.
+   * on the page is permanent (evergreen) copy. index.html carries the 'public' wording
+   * and link as the no-JavaScript fallback.
    * ========================================================================== */
   var KWIKLEARN_LAUNCH = {
-    state: 'prelaunch',   // <<< THE ONLY SWITCH: 'prelaunch' or 'public'
+    state: 'public',   // 'public' (live) or 'prelaunch' (fallback behaviour)
 
     prelaunch: {
       button: { label: 'Explore KwikLearn', href: '#features', external: false },
-      heroNote: 'KwikLearn is not available to download yet.',
-      faqAnswer: 'KwikLearn is built for Android and is not available to download yet. This page will link to the official Google Play listing when it is available.'
+      heroNote: '',
+      faqAnswer: 'KwikLearn is an Android app available on Google Play. Search for KwikLearn on Google Play to get it.'
     },
 
-    // Prepared but INACTIVE. Owner to approve the wording and supply the verified listing URL.
     public: {
       button: { label: 'Get KwikLearn on Google Play', href: KWIKLEARN_SITE.playStoreUrl, external: true },
       heroNote: '',
-      faqAnswer: 'KwikLearn is available for Android on Google Play. Use the Google Play badge on this page to get the app.'
+      faqAnswer: 'KwikLearn is available for Android on Google Play. Use the Google Play badge at the top of this page to get the app.'
     }
   };
   window.KWIKLEARN_LAUNCH = KWIKLEARN_LAUNCH;
@@ -145,6 +137,7 @@
       }
       var label = a.querySelector('[data-cta-label]');
       if (label) { label.textContent = s.button.label; }
+      if (s.button.external) { a.setAttribute('aria-label', s.button.label + ' (opens in a new tab)'); } else { a.removeAttribute('aria-label'); }
     }
 
     // Official Google Play badge links (only ever visible in the public state)
@@ -154,6 +147,7 @@
         badges[b].setAttribute('href', KWIKLEARN_SITE.playStoreUrl);
         badges[b].setAttribute('target', '_blank');
         badges[b].setAttribute('rel', 'noopener noreferrer');
+        badges[b].setAttribute('aria-label', 'Get KwikLearn on Google Play (opens in a new tab)');
       } else {
         badges[b].removeAttribute('href');
         badges[b].removeAttribute('target');
