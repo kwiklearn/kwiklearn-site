@@ -21,8 +21,9 @@
    *                address does not change when the app is updated, publishing a new app
    *                version needs NO edit here. Change it only if the application id changes.
    * subjects       Subjects the app covers today. Edit when a subject launches.
-   *   available        shown in the hero label, description, trust point and the
-   *                    "choose your subject" card (homepage text slots data-site=...).
+   *   available        shown only in the caption under the Subjects screenshot (homepage text
+   *                    slot data-site="subjects"). Permanent copy elsewhere is subject-neutral
+   *                    and points visitors to the Subjects section of the app.
    *   shownInScreens   what the three app screenshots actually show. Update it only
    *                    when the screenshots are replaced.
    *
@@ -99,9 +100,7 @@
     var list = joinList(KWIKLEARN_SITE.subjects.available);
     var shown = joinList(KWIKLEARN_SITE.subjects.shownInScreens);
     var text = {
-      subjects: list,
-      subjectsStart: 'Starting with ' + list,
-      subjectsFocus: KWIKLEARN_SITE.subjects.available.length === 1 ? list + '-focused practice' : list + ' practice'
+      subjects: list
     };
     var els = document.querySelectorAll('[data-site]');
     for (var i = 0; i < els.length; i++) {
