@@ -109,3 +109,23 @@ Write for Ghana first. Use Ghanaian spelling conventions (British English: "prac
 ## 13. When to update this file
 
 Update it whenever a feature launches, a verified partnership exists, the contact policy changes, or a claim in section 10 becomes true. Change the "Available now" list only after confirming the feature in the live app.
+
+## 14. Evidence register (verified 2026-11-24)
+
+Internal reference. It records what the project evidence shows and does NOT authorise any public claim beyond section 9.
+
+**Published app (public Google Play listing, read 2026-11-24, updated on Play 11 Nov 2026):** described as "a Ghanaian exam-practice app designed to help students prepare for BECE and WASSCE, starting with Mathematics", with "additional educational content and features planned as the platform grows". It states it is independent of WAEC and any government body. Because of this, public copy must keep Mathematics-accurate wording where a specific subject is named and otherwise point to the Subjects section in the app. The live Play text still frames KwikLearn as exam-practice only: update it with `BRAND_CONTENT_PACK.md` section 1 (needs Play Console access).
+
+**Evidence of work in progress (source repository, not confirmed as released):**
+
+| Item | Evidence | Public wording allowed |
+|---|---|---|
+| AI Tutor | The app home screen shows a "KwikLearn Tutor, AI Tutor - Coming Soon" card and a Tutor entry-point component. It is a placeholder, not a working tutor. | "AI tutor is planned" only if mirroring the in-app label. Never "available". |
+| Daily Challenge | Device-only progress is already described in the privacy policy; further work on feature branches. | Do not advertise until the owner confirms the released scope. |
+| Monthly champions / rewards | Unmerged feature branches only. | None. Treat as unreleased. |
+| Quick Check diagnostic, study-note visuals | Merged on the app's main branch; release status not confirmed. | None until confirmed in the live app. |
+| Payments / subscriptions | Deliberately switched off ("free v1, payments disabled"); Terms and FAQ say the app is currently free and takes no payments. | "Currently free"; no pricing claims. |
+| Additional subjects (English, Science, Social Studies, ICT, RME, French, WASSCE Core Mathematics, WASSCE English) | Content folders exist in the source. Availability in the live app is set per topic by approved content and is not verified. | None. Say "check the Subjects section in the app". |
+| School dashboards, institutional subscriptions, partnerships | No evidence found in any repository. | None. Never claim. |
+
+The "under development" bucket in section 9 stays empty until the owner names items to announce. This register only supports internal planning and the "we aim to" wording.
